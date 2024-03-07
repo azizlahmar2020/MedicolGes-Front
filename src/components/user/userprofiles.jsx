@@ -11,7 +11,7 @@ function UserProfiles(){
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/users/showUsers')
+        axios.get('http://localhost:3001/users/showUsers')
             .then(result => setUsers(result.data))
             .catch(err => console.log(err));
     }, []);
@@ -40,7 +40,7 @@ function UserProfiles(){
                     {users.map(user => (
                         <div className="col-sm-6 col-lg-4 mb-4 candidate-list" key={user._id}>
                             <div className="candidate-list-image">
-                                {user.profileImage && <img src={`http://localhost:3000/profiles/${user.profileImage}`} alt="Profile" />}
+                                {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" />}
                             </div>
                             <div className="candidate-list-details">
                                 <div className="candidate-list-info">

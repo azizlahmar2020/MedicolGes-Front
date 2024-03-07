@@ -11,7 +11,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post('http://localhost:3000/auth/login', { email, password });
+            const result = await axios.post('http://localhost:3001/auth/login', { email, password });
             console.log(result);
             if (result && result.data && result.data.token) {
                 sessionStorage.setItem('token', result.data.token);
