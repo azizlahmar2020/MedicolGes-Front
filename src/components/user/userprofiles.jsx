@@ -23,7 +23,21 @@ function UserProfiles(){
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     };
+    const [sessionId, setSessionId] = useState('');
 
+
+    useEffect(() => {
+        const fetchSessionId = async () => {
+          try {
+            const response = await axios.get('http://localhost:3001/auth/getIdMyProfile');
+            setSessionId(response.data.sessionId);
+          } catch (error) {
+            console.error('Error fetching session ID:', error);
+          }
+        };
+    
+        fetchSessionId();
+      }, []);
     
     return (
         <div>
@@ -60,7 +74,7 @@ function UserProfiles(){
                                         
                                         <button className="chat-button">
   {/* Utilisez la balise Link pour créer un lien vers "/ChatBox" */}
-  <Link to={`/ChatBox/${user.sessionId}/${user._id}`} className="btn btn-link">
+  <Link to={`/ChatBox/${'65e9c8448058e341eff2111e'}/${user._id}`} className="btn btn-link">
     <FontAwesomeIcon icon={faComment} />
     Start Chat
   </Link>
