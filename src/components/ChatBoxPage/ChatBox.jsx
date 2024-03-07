@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import axios from 'axios';
 import io from "socket.io-client";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,19 +7,22 @@ import { faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
 
 import Chat from '../Chat/chat';
 import './ChatBox.css';
+import { useParams } from 'react-router-dom';
 
 const socket = io.connect("http://localhost:3001", {
   transports: ['websocket'],
 });
 
-export default function ChatBox({ username, room }) {
+export default function ChatBox() {
+  const { idsession, iduserselection } = useParams();
+
   const [roomData, setRoomData] = useState({
     roomId: "",
     showChat: false,
   });
 
-  const [user1Id, setUser1Id] = useState("");
-  const [user2Id, setUser2Id] = useState("");
+  const [user1Id, setUser1Id] = useState(idsession);
+  const [user2Id, setUser2Id] = useState(iduserselection);
 
   const [userRooms, setUserRooms] = useState([]);
 
@@ -149,26 +153,22 @@ export default function ChatBox({ username, room }) {
               <label>User 2 ID: <input type="text" value={user2Id} onChange={(e) => setUser2Id(e.target.value)} /></label>
               <button onClick={joinRoom}>Join A Room</button>
               <div>
-              <div className='Liste'>
-          <h4>Utilisateurs avec lesquels vous avez discuté :</h4>
-          <ul>
-  {userRooms.map((userId, index) => (
-    <li key={index} className="user-list-item" onClick={() => joinRoomWithUser(userId)}>
-      <img src={`../../../public/ChatImage/-person_90382.png`} alt="user" className="user-image" />
-      {userId}
-    </li>
-  ))}
-</ul>
-
-         
-        </div>
-
+                <div className='Liste'>
+                  <h4>Utilisateurs avec lesquels vous avez discuté :</h4>
+                  <ul>
+                    {userRooms.map((userId, index) => (
+                      <li key={index} className="user-list-item" onClick={() => joinRoomWithUser(userId)}>
+                        <img src={`../../../public/ChatImage/-person_90382.png`} alt="user" className="user-image" />
+                        {userId}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              
             </div>
           </div>
         </div>
-        
+       
         <div className='colooo6 col-md-6'>
           <div className='contenu'>
             <div className='chat-container'>
@@ -177,7 +177,6 @@ export default function ChatBox({ username, room }) {
           </div>
         </div>
         <div className='coloo2 col-md-2'>Liste d'amis !!</div>
-        
       </div>
     </>
   );

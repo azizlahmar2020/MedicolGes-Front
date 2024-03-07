@@ -46,7 +46,7 @@ function App() {
         <Route path='/index' element={<Index />} />  {/* Add this line for the HomeProject */}
         <Route path='/homesub' element={<HomeSub />} />  {/* Add this line for the HomeProject */}
         <Route path='/homeparticipant' element={<HomeParticipant />} />  {/* Add this line for the HomeProject */}
-        <Route path='/ChatBox' element={<ChatBox/>}></Route>
+        <Route path='/ChatBox/:idsession/:iduserselection' element={<ChatBox/>}></Route>
 
 
       </Routes>

@@ -7,6 +7,8 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
+import ChatBox from "../ChatBoxPage/ChatBox";
+import { Link } from 'react-router-dom';
 function UserProfiles(){
     const [users, setUsers] = useState([]);
 
@@ -55,10 +57,15 @@ function UserProfiles(){
                                             <li><i className="fas fa-user-cog pr-1"></i>{user.role}</li>
                                             
                                         </ul>
+                                        
                                         <button className="chat-button">
-  <FontAwesomeIcon icon={faComment} />
-  Start Chat
+  {/* Utilisez la balise Link pour créer un lien vers "/ChatBox" */}
+  <Link to={`/ChatBox/${user.sessionId}/${user._id}`} className="btn btn-link">
+    <FontAwesomeIcon icon={faComment} />
+    Start Chat
+  </Link>
 </button>
+
 
                                     </div>
                                 </div>
