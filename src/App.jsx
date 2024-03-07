@@ -19,6 +19,8 @@ import ShowProject from './components/project/showProject';
 import Index from './components/template/index'
 import HomeSub from './components/template/homeSubadmin'
 import HomeParticipant from './components/template/homeParticipant'
+import ChatBox from './components/ChatBoxPage/ChatBox'
+
 
 function App() {
 
@@ -44,6 +46,8 @@ function App() {
         <Route path='/index' element={<Index />} />  {/* Add this line for the HomeProject */}
         <Route path='/homesub' element={<HomeSub />} />  {/* Add this line for the HomeProject */}
         <Route path='/homeparticipant' element={<HomeParticipant />} />  {/* Add this line for the HomeProject */}
+        <Route path='/ChatBox' element={<ChatBox/>}></Route>
+
 
       </Routes>
     </BrowserRouter>
