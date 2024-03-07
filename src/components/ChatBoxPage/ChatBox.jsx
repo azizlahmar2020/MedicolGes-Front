@@ -136,7 +136,7 @@ export default function ChatBox({ username, room }) {
   return (
     <>
       <div className='row'>
-        <div className='col-md-3'>
+        <div className='coloo3 col-md-3'>
           <div className='header'>
             <div className='search-container'>
               <FontAwesomeIcon icon={faSearch} className='search-icon' />
@@ -169,14 +169,14 @@ export default function ChatBox({ username, room }) {
           </div>
         </div>
         
-        <div className='col-md-6'>
+        <div className='colooo6 col-md-6'>
           <div className='contenu'>
             <div className='chat-container'>
               <Chat socket={socket} username={user1Id} room={roomData.roomId} />
             </div>
           </div>
         </div>
-        <div className='col-md-2'>Liste d'amis !!</div>
+        <div className='coloo2 col-md-2'>Liste d'amis !!</div>
         
       </div>
     </>
