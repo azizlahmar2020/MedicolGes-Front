@@ -1,0 +1,25 @@
+/* homeProject.css */
+
+/* Add margin-bottom to the row with class mb-5 */
+/* Style the welcome-text class */
+.welcome-text {
+    color: #007bff; /* Blue text color */
+}
+
+/* Apply styles to the buttons */
+.btn-blue {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn-transparent-blue {
+    background-color: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+}
+
+.btn-transparent-blue:hover {
+    background-color: #007bff;
+    color: #fff;
+}
