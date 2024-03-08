@@ -1,192 +1,175 @@
-// Import necessary modules and components
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { FaCog, FaSignature, FaAlignJustify, FaUser, FaIndustry } from 'react-icons/fa';  // Import relevant icons
+import React, { useEffect } from "react";
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';  // Import ToastContainer and toast
-import 'react-toastify/dist/ReactToastify.css';  // Import the default styles for react-toastify
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import { Link } from "react-router-dom";
-import { FaArrowLeft } from 'react-icons/fa';
-import Footer from "/src/components/template/footer";
-import NavbarSub from '../template/navbarSubadmin';
-
-const defaultTheme = createTheme();
+import 'react-toastify/dist/ReactToastify.css'; // Import the react-toastify CSS file
 
 const CreateProjectt = () => {
-  const navigate = useNavigate();  // Initialize useNavigate
+  useEffect(() => {
+      const script = document.createElement('script');
+      script.src = './src/assets/js1/jquery.min.js';
+      script.async = true;
+      document.body.appendChild(script);
+
+      script.onload = () => {
+          $('.form-control').each(function () {
+              floatedLabel($(this));
+          });
+
+          $('.form-control').on('input', function () {
+              floatedLabel($(this));
+          });
+
+          function floatedLabel(input) {
+              var $field = input.closest('.form-group');
+              if (input.val()) {
+                  $field.addClass('input-not-empty');
+              } else {
+                  $field.removeClass('input-not-empty');
+              }
+          }
+      };
+
+      return () => {
+          document.body.removeChild(script);
+      };
+  }, []);
+
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
-    nom: '',
-    desc: '',
-    responsable: '',
-    domaine: '',
+      nom: '',
+      desc: '',
+      responsable: '',
+      domaine: '',
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+      setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+      e.preventDefault();
 
-    // Basic form validation
-    if (!formData.nom || !formData.desc || !formData.responsable || !formData.domaine) {
-      toast.error('Please fill in all fields!', {
-        position: 'top-center',
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      return;
-    }
+      if (!formData.nom || !formData.desc || !formData.responsable || !formData.domaine) {
+          toast.error('Please fill in all fields!', {
+              position: 'top-right',
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+          });
+          return;
+      }
 
-    try {
-      // Send a POST request to create a new project
-      const response = await axios.post('http://localhost:3000/projects/createProjectt', formData);
+      try {
+          const response = await axios.post('http://localhost:3001/projects/createProjectt', formData);
 
-      // Log the created project details
-      console.log('Created Project:', response.data.project);
+          console.log('Created Project:', response.data.project);
 
-      // Show a success message using react-toastify
-      toast.success('Project created successfully!', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+          toast.success('Project created successfully!', {
+              position: 'top-right',
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+          });
 
-      // Navigate to the project details page
-      navigate(`/showProject/${response.data.project._id}`);
+          navigate(`/showProject/${response.data.project._id}`);
 
-    } catch (error) {
-      console.error('Error creating project:', error);
-    }
+      } catch (error) {
+          console.error('Error creating project:', error);
+      }
   };
 
-  return (
-    <div>
-      <NavbarSub/>
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <FaCog />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Create Project
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="nom"
-                  label="Name"
-                  name="nom"
-                  autoComplete="off"
-                  value={formData.nom}
-                  onChange={handleChange}
-                  InputProps={{
-                    startAdornment: (
-                      <FaSignature style={{ marginRight: '8px' }} />
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="desc"
-                  label="Description"
-                  name="desc"
-                  multiline
-                  rows={4}
-                  autoComplete="off"
-                  value={formData.desc}
-                  onChange={handleChange}
-                  InputProps={{
-                    startAdornment: (
-                      <FaAlignJustify style={{ marginRight: '8px' }} />
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="responsable"
-                  label="Responsable"
-                  name="responsable"
-                  autoComplete="off"
-                  value={formData.responsable}
-                  onChange={handleChange}
-                  InputProps={{
-                    startAdornment: (
-                      <FaUser style={{ marginRight: '8px' }} />
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="domaine"
-                  label="Domaine"
-                  name="domaine"
-                  autoComplete="off"
-                  value={formData.domaine}
-                  onChange={handleChange}
-                  InputProps={{
-                    startAdornment: (
-                      <FaIndustry style={{ marginRight: '8px' }} />
-                    ),
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Create Project
-            </Button>
-          </Box>
-        </Box>
-        {/* React-toastify container */}
-        <ToastContainer position="top-right" autoClose={3000} />
-      </Container>
-    </ThemeProvider>
-    <Footer/>
-    </div>
-  );
+    return (
+        <div>
+            {/* Add meta tags and external CSS links */}
+            <meta charSet="utf-8" />
+            <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>Booking Form HTML Template</title>
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet" />
+            <link type="text/css" rel="stylesheet" href="./src/assets/cssproject/bootstrap.min.css" />
+            <link type="text/css" rel="stylesheet" href="./src/assets/cssproject/style.css" />
+            <link rel="stylesheet" type="text/css" href="./src/assets/style.css" />
+
+            <div id="booking" className="section" style={{backgroundImage: `url('./src/assets/img/signup-bg.jpg')`}}>
+
+                <div className="section-center" >
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-5">
+                                <div className="booking-cta">
+                                <h1 style={{ color: '#1A76D1' }}>CREATE YOUR PROJECT</h1>
+                                    <p>Medical research plays a crucial role in improving patient care. By conducting research projects, we contribute to the collective effort of finding solutions to complex medical challenges.</p>
+                                </div>
+                            </div>
+                            <div className="col-md-6 col-md-offset-1">
+                                <div className="booking-form">
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="form-group">
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                name="nom"
+                                                placeholder="Name"
+                                                value={formData.nom}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <input
+                                                className="form-control"
+                                                type="tel"
+                                                name="responsable"
+                                                placeholder="Responsable"
+                                                value={formData.responsable}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                name="domaine"
+                                                placeholder="Domaine"
+                                                value={formData.domaine}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                name="desc"
+                                                placeholder="Description"
+                                                value={formData.desc}
+                                                onChange={handleChange}
+                                                style={{ height: '120px' }}
+                                            />
+                                        </div>
+
+                                        <div className="form-btn">
+                                        <button className="submit-btn" type="submit" style={{ backgroundColor: '#1A76D1', color: 'white', transition: 'background-color 0.3s', cursor: 'pointer' }}>
+  Create Project
+</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* React-toastify container */}
+            <ToastContainer position="top-right" autoClose={3000} />
+        </div>
+    );
 };
 
 export default CreateProjectt;

@@ -34,7 +34,7 @@ function Signup() {
         formData.append('profileImage', profileImage); // Append the selected profile image to the form data
 
         try {
-            const result = await axios.post(`http://localhost:3000/auth/register/${role}`, formData, {
+            const result = await axios.post(`http://localhost:3001/auth/register/${role}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

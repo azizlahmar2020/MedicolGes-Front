@@ -1,6 +1,6 @@
 /* chatbox.css */
 
-.row {
+.row_chat {
   display: flex;
   position:fixed;
   border-radius: 15px;
@@ -20,9 +20,9 @@
 
 }
 
-.col-md-3,
-.col-md-6,
-.col-md-2 {
+.coloo3,
+.colooo6,
+.coloo2 {
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
 
   padding: 10px;
@@ -30,23 +30,23 @@
   border-radius: 50px;
 }
 
-.col-md-3 {
+.coloo3 {
   width: 20%;
   background-color: #f3f3f3;
 }
 
-.col-md-6 {
+.colooo6 {
   width: 60%;
 }
 
-.col-md-2 {
+.coloo2 {
   width: 20%;
   background-color: #f3f3f3;
   z-index: 1;
 }
 
 
-.header {
+.header_Chat {
   padding: 10px;
   box-sizing: border-box;
   border-radius: 15px;

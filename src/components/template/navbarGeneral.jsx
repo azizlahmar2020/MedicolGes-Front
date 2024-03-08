@@ -10,8 +10,12 @@ const Navbar = () => {
                     <div className="row">
                         <div className="col-lg-3 col-md-3 col-12">
                             <div className="logo">
-                                <a href="index.html"><img src="./src/assets/img/logo.png" alt="#"/></a>
+                                <a href="index.html"><img src="./src/assets/img/m.png" alt="#"/></a>
                             </div>
+                            <div className="logom">
+                                <a href="index.html"><img src="./src/assets/img/medicol.png" alt="#"/></a>
+                            </div>
+
                             <div className="mobile-nav"></div>
                         </div>
                         <div className="col-lg-7 col-md-9 col-12">
@@ -22,17 +26,21 @@ const Navbar = () => {
                                            
                                         </li>
                                         
-                                        <li><a href="#">Pages <i className="icofont-rounded-down"></i></a>
+                                        <li><a href="#">Projects <i className="icofont-rounded-down"></i></a>
                                             <ul className="dropdown">
-                                                <li><a href="404.html">404 Error</a></li>
+                                                <li><a href="404.html">Browse project</a></li>
+                                                <li><a href="404.html">Ask for participation</a></li>
+
                                             </ul>
                                         </li>
-                                        <li><a href="#">Blogs <i className="icofont-rounded-down"></i></a>
+                                        <li><a href="#">Forms <i className="icofont-rounded-down"></i></a>
                                             <ul className="dropdown">
-                                                <li><a href="blog-single.html">Blog Details</a></li>
+                                                <li><a href="blog-single.html">Browse Forms</a></li>
+                                                <li><a href="blog-single.html">Answer a form</a></li>
+
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="contact.html">Feedback</a></li>
                                         <li><a href="/homepage">Sign up</a></li>
                                         <li><a href="/login">Sign in</a></li>
 

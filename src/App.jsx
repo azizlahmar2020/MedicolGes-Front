@@ -20,6 +20,7 @@ import Index from './components/template/index'
 import HomeSub from './components/template/homeSubadmin'
 import HomeParticipant from './components/template/homeParticipant'
 import ChatBox from './components/ChatBoxPage/ChatBox'
+import ProjectsFront from './components/project/projectsFront'
 
 
 function App() {
@@ -46,7 +47,9 @@ function App() {
         <Route path='/index' element={<Index />} />  {/* Add this line for the HomeProject */}
         <Route path='/homesub' element={<HomeSub />} />  {/* Add this line for the HomeProject */}
         <Route path='/homeparticipant' element={<HomeParticipant />} />  {/* Add this line for the HomeProject */}
-        <Route path='/ChatBox' element={<ChatBox/>}></Route>
+        <Route path='/ChatBox/:idsession/:iduserselection' element={<ChatBox/>}></Route>
+        <Route path='/createProjectt' element={<CreateProjectt />} />  {/* Add this line for the HomeProject */}
+        <Route path='/projectfront' element={<ProjectsFront />} />  {/* Add this line for the HomeProject */}
 
 
       </Routes>
