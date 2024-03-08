@@ -38,7 +38,21 @@ function UserProfiles(){
             .catch(err => console.log(err));
     };
     
+    const [sessionId, setSessionId] = useState('');
 
+
+    useEffect(() => {
+        const fetchSessionId = async () => {
+          try {
+            const response = await axios.get('http://localhost:3001/auth/getIdMyProfile');
+            setSessionId(response.data.sessionId);
+          } catch (error) {
+            console.error('Error fetching session ID:', error);
+          }
+        };
+    
+        fetchSessionId();
+      }, []);
     
     return (
         <div>
@@ -58,6 +72,7 @@ function UserProfiles(){
                         <div className="col-sm-6 col-lg-6 mb-4 candidate-list" key={user._id}>
                             <div className="candidate-list-image">
                                 {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '300px', height: '100px', borderRadius: '50%' }} />}
+
                             </div>
                             <div className="candidate-list-details">
                                 <div className="candidate-list-info">
@@ -73,10 +88,14 @@ function UserProfiles(){
                                             
                                         </ul>
                                         
-                                        <button className="chat-button" onClick={() => handleStartChat(user._id)}>
-        <FontAwesomeIcon icon={faComment} />
-        Start Chat
-    </button>
+
+                                        <button className="chat-button">
+  {/* Utilisez la balise Link pour créer un lien vers "/ChatBox" */}
+  <Link to={`/ChatBox/${'65e9c8448058e341eff2111e'}/${user._id}`} className="btn btn-link">
+    <FontAwesomeIcon icon={faComment} />
+    Start Chat
+  </Link>
+</button>
 
 
                                     </div>

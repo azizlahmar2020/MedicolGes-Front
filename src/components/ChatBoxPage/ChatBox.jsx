@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import axios from 'axios';
 import io from "socket.io-client";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
-
 import Chat from '../Chat/chat';
 import './ChatBox.css';
 import { useParams } from 'react-router-dom';
@@ -56,10 +54,33 @@ export default function ChatBox() {
   };
 
   useEffect(() => {
-    if (roomData.showChat) {
-      getRoomsForUser(user1Id);
-    }
-  }, [roomData.showChat, user1Id]);
+    // Fonction pour joindre la salle automatiquement
+    const joinRoom = async () => {
+      try {
+        const existingRoomId = await getExistingRoomId(user1Id, user2Id);
+
+        if (existingRoomId) {
+          socket.emit("join_room", { roomId: existingRoomId });
+          setRoomData({ roomId: existingRoomId, showChat: true });
+          getRoomsForUser(user1Id);
+        } else {
+          const newRoomData = await createRoom(user1Id, user2Id);
+          if (newRoomData && newRoomData.roomId) {
+            socket.emit("join_room", { roomId: newRoomData.roomId });
+            setRoomData({ roomId: newRoomData.roomId, showChat: true });
+            getRoomsForUser(user1Id);
+          } else {
+            throw new Error("Error creating or joining a new room");
+          }
+        }
+      } catch (error) {
+        console.error("Error joining room:", error.message);
+      }
+    };
+
+    // Appeler joinRoom automatiquement au chargement du composant
+    joinRoom();
+  }, []); // Dépendance vide, donc il ne se déclenchera qu'une fois au chargement
 
   const getExistingRoomId = async (userId1, userId2) => {
     try {
@@ -88,29 +109,6 @@ export default function ChatBox() {
     } catch (error) {
       console.error("Error creating new room:", error.message);
       return null;
-    }
-  };
-
-  const joinRoom = async () => {
-    try {
-      const existingRoomId = await getExistingRoomId(user1Id, user2Id);
-
-      if (existingRoomId) {
-        socket.emit("join_room", { roomId: existingRoomId });
-        setRoomData({ roomId: existingRoomId, showChat: true });
-        getRoomsForUser(user1Id);
-      } else {
-        const newRoomData = await createRoom(user1Id, user2Id);
-        if (newRoomData && newRoomData.roomId) {
-          socket.emit("join_room", { roomId: newRoomData.roomId });
-          setRoomData({ roomId: newRoomData.roomId, showChat: true });
-          getRoomsForUser(user1Id);
-        } else {
-          throw new Error("Error creating or joining a new room");
-        }
-      }
-    } catch (error) {
-      console.error("Error joining room:", error.message);
     }
   };
 
@@ -148,10 +146,6 @@ export default function ChatBox() {
               <FontAwesomeIcon icon={faSync} className='loop-icon' />
             </div>
             <div className="joinChatContainer">
-              <h3>Join A Chat</h3>
-              <label>User 1 ID: <input type="text" value={user1Id} onChange={(e) => setUser1Id(e.target.value)} /></label>
-              <label>User 2 ID: <input type="text" value={user2Id} onChange={(e) => setUser2Id(e.target.value)} /></label>
-              <button onClick={joinRoom}>Join A Room</button>
               <div>
                 <div className='Liste'>
                   <h4>Utilisateurs avec lesquels vous avez discuté :</h4>
@@ -168,7 +162,7 @@ export default function ChatBox() {
             </div>
           </div>
         </div>
-       
+
         <div className='colooo6 col-md-6'>
           <div className='contenu'>
             <div className='chat-container'>
