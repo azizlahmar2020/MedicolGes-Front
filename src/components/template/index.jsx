@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./navbarGeneral";
 import Footer from "./footer";
-function Index() {
+import Navbar from "./navbarGeneral";
+function HomeSub() {
   return (
     <div>
 	<link rel="stylesheet" type="text/css" href="assets/style.css" />
@@ -34,8 +34,8 @@ function Index() {
                     <div className="row">
                         <div className="col-lg-7">
                             <div className="text">
-                                <h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
+                            <h1>We Provide <span>Medicol</span> Services That You Can <span>Trust!</span></h1>
+                                <p>We provide medical services that you can trust! Our team is dedicated to conducting thorough medical research to improve patient care and find innovative solutions to healthcare challenges.</p>
                                 <div className="button">
                                     <a href="#" className="btn">Get Appointment</a>
                                     <a href="#" className="btn primary">Conatct Now</a>
@@ -113,7 +113,12 @@ function Index() {
                     <div className="section-title">
                         <h2>We Are Always Ready to Help You & Your Family</h2>
                         <img src="./src/assets/img/section-img.png" alt="#"/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                        <p>We are dedicated to providing comprehensive support and assistance to you and your family whenever you need it.
+
+
+
+
+</p>
                     </div>
                 </div>
             </div>
@@ -124,7 +129,7 @@ function Index() {
                             <i className="icofont icofont-ambulance-cross"></i>
                         </div>
                         <h3>Emergency Help</h3>
-                        <p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+                        <p>In times of crisis or urgent need, we offer immediate assistance and support to address any emergency situation.</p>
                     </div>
                 </div>
                 <div className="col-lg-4 col-12">
@@ -133,7 +138,8 @@ function Index() {
                             <i className="icofont icofont-medical-sign-alt"></i>
                         </div>
                         <h3>Enriched Pharmecy</h3>
-                        <p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+                        <p>Our pharmacy is dedicated to providing a comprehensive range of high-quality medications and healthcare products, ensuring your well-being and satisfaction.
+</p>
                     </div>
                 </div>
                 <div className="col-lg-4 col-12">
@@ -142,7 +148,12 @@ function Index() {
                             <i className="icofont icofont-stethoscope"></i>
                         </div>
                         <h3>Medical Treatment</h3>
-                        <p>Lorem ipsum sit, consectetur adipiscing elit. Maecenas mi quam vulputate.</p>
+                        <p>We offer advanced medical treatments tailored to your specific needs, ensuring effective care and optimal recovery for every patient.
+
+
+
+
+</p>
                     </div>
                 </div>
             </div>
@@ -207,9 +218,9 @@ function Index() {
                 <div className="col-lg-6 col-12">
                     <div className="choose-left">
                         <h3>Who We Are</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pharetra antege vel est lobortis, a commodo magna rhoncus. In quis nisi non emet quam pharetra commodo. </p>
-                        <p>className aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-                        <div className="row">
+                       <p> We are CodeWizard, a dedicated team comprising four Tunisian students driven by a shared mission to enhance healthcare services in Algeria. Our collective goal is to leverage innovative
+                         technologies and strategic solutions to improve access, efficiency, and quality within the healthcare sector. Through our expertise and commitment, we strive to positively impact the lives of individuals and communities by 
+                        fostering advancements in medical care and promoting overall well-being. </p>                       <div className="row">
                             <div className="col-lg-6">
                                 <ul className="list">
                                     <li><i className="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
@@ -692,4 +703,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default HomeSub;
