@@ -6,6 +6,7 @@ import { faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
 import Chat from '../Chat/chat';
 import './ChatBox.css';
 import { useParams } from 'react-router-dom';
+import NavbarSub from '../template/navbarSubadmin'
 
 const socket = io.connect("http://localhost:3001", {
   transports: ['websocket'],
@@ -137,7 +138,8 @@ export default function ChatBox() {
 
   return (
     <>
-      <div className='row'>
+    <NavbarSub/>
+      <div className='chatpage row'>
         <div className='coloo3 col-md-3'>
           <div className='header'>
             <div className='search-container'>

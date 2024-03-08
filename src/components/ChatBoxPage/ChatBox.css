@@ -2,17 +2,23 @@
 
 .row_chat {
   display: flex;
-  position:fixed;
+  position:fixed !important;
   border-radius: 15px;
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
 
   width: 105% !important;
 }
+.chatpage{
+  margin-left: 9px;
+  position: fixed;
+  width: 100%;
+  height: 70% !important;
+}
 .chat-container{
   margin-top: -22px;
   display: flex;
   flex-direction: column;
-  height: 70% !important;
+  height: 60% ;
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
