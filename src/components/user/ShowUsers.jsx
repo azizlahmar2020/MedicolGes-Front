@@ -8,14 +8,14 @@ function ShowUsers(){
     const [users, setUsers]= useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/users/showUsers')
+        axios.get('http://localhost:3000/users/showUsers')
             .then(result => setUsers(result.data))
             .catch(err => console.log(err));
     }, []);
 
     const deleteUser = (userId) => {
         // Send a DELETE request to the backend API endpoint for deleting the user
-        axios.delete(`http://localhost:3001/users/deleteUser/${userId}`)
+        axios.delete(`http://localhost:3000/users/deleteUser/${userId}`)
             .then(response => {
                 // Filter out the deleted user from the local state
                 setUsers(users.filter(user => user._id !== userId));
@@ -32,7 +32,7 @@ function ShowUsers(){
         
         const newRole = "coordinator";
       
-        axios.put(`http://localhost:3001/users/updateUserRole/${userId}`, { newRole })
+        axios.put(`http://localhost:3000/users/updateUserRole/${userId}`, { newRole })
           .then(response => {
             // Update the role in the local state (users array)
             const updatedUsers = users.map(user =>
@@ -68,7 +68,7 @@ function ShowUsers(){
                                     <tr key={user._id}>
                                         <td>
                                             {/* Display profile image if available */}
-                                            {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
+                                            {user.profileImage && <img src={`http://localhost:3000/profiles/${user.profileImage}`} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
                                         </td>
                                         <td>{user.name}</td>
                                         <td>{user.lastname}</td>

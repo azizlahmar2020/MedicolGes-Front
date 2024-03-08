@@ -11,7 +11,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post('http://localhost:3001/auth/login', { email, password });
+            const result = await axios.post('http://localhost:3000/auth/login', { email, password });
             console.log(result);
             if (result && result.data && result.data.token) {
                 sessionStorage.setItem('token', result.data.token);
@@ -39,7 +39,7 @@ function Login() {
                                             <input type="password" name="password" id="password" className="form-control" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                                         </div>
                                         <div className="form-group">
-                                        <button type="submit" className="btn btn-success btn-block" style={{ backgroundColor: '#1A76D1' }}>Login</button>
+                                            <button type="submit" className="btn btn-success btn-block">Login</button>
                                         </div>
                                     </form>
                                     <div className="mt-3">

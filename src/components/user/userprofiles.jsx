@@ -7,14 +7,11 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
-import ChatBox from "../ChatBoxPage/ChatBox";
-import { Link } from 'react-router-dom';
-
 function UserProfiles(){
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/users/showUsers')
+        axios.get('http://localhost:3000/users/showUsers')
             .then(result => setUsers(result.data))
             .catch(err => console.log(err));
     }, []);
@@ -24,20 +21,6 @@ function UserProfiles(){
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     };
-    const handleStartChat = (userId) => {
-        axios.get(`http://localhost:3001/auth/getIdMyProfile`)
-            .then(response => {
-                // Log the entire response for debugging
-                console.log("Server response:", response);
-                console.log("Data received:", response.data);
-                // Attempt to access the sessionId for further debugging
-                const sessionId = response.data.userSession ? response.data.userSession.sessionId : 'DefaultSessionId';
-                console.log("Session ID:", sessionId);
-                navigate(`/ChatBox/${sessionId}/${userId}`);
-            })
-            .catch(err => console.log(err));
-    };
-    
 
     
     return (
@@ -48,16 +31,16 @@ function UserProfiles(){
             <div className="row">
                 {/* Showing Candidates */}
                 <div className="row mb-4">
-    <div className="col-12 text-center">
-        <h6 className="mb-0" style={{ color: '#1A76D1',fontSize: '24px' }}>We have a total of {users.length} Candidates</h6>
-    </div>
-</div>
+                    <div className="col-12">
+                        <h6 className="mb-0">Showing {users.length} Candidates</h6>
+                    </div>
+                </div>
                 {/* Candidate Cards */}
                 <div className="row">
                     {users.map(user => (
-                        <div className="col-sm-6 col-lg-6 mb-4 candidate-list" key={user._id}>
+                        <div className="col-sm-6 col-lg-4 mb-4 candidate-list" key={user._id}>
                             <div className="candidate-list-image">
-                                {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '300px', height: '100px', borderRadius: '50%' }} />}
+                                {user.profileImage && <img src={`http://localhost:3000/profiles/${user.profileImage}`} alt="Profile" />}
                             </div>
                             <div className="candidate-list-details">
                                 <div className="candidate-list-info">
@@ -72,12 +55,10 @@ function UserProfiles(){
                                             <li><i className="fas fa-user-cog pr-1"></i>{user.role}</li>
                                             
                                         </ul>
-                                        
-                                        <button className="chat-button" onClick={() => handleStartChat(user._id)}>
-        <FontAwesomeIcon icon={faComment} />
-        Start Chat
-    </button>
-
+                                        <button className="chat-button">
+  <FontAwesomeIcon icon={faComment} />
+  Start Chat
+</button>
 
                                     </div>
                                 </div>

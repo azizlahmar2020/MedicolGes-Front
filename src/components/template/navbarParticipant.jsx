@@ -9,11 +9,8 @@ const NavbarParticipant = () => {
                 <div className="inner">
                     <div className="row">
                         <div className="col-lg-3 col-md-3 col-12">
-                        <div className="logo">
-                                <a href="index.html"><img src="./src/assets/img/m.png" alt="#"/></a>
-                            </div>
-                            <div className="logom">
-                                <a href="index.html"><img src="./src/assets/img/medicol.png" alt="#"/></a>
+                            <div className="logo">
+                                <a href="index.html"><img src="./src/assets/img/logo.png" alt="#"/></a>
                             </div>
                             <div className="mobile-nav"></div>
                         </div>

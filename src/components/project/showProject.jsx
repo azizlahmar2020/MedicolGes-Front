@@ -13,7 +13,7 @@ const ShowProject = () => {
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
-                const result = await axios.get(`http://localhost:3001/projects/getProject/${projectId}`);
+                const result = await axios.get(`http://localhost:3000/projects/getProject/${projectId}`);
                 setProjectDetails(result.data);
                 setLoading(false);
             } catch (err) {

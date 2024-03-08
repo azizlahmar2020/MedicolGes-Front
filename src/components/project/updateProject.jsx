@@ -20,7 +20,7 @@ function UpdateProject() {
 
     useEffect(() => {
         // Fetch project details for the specified projectId
-        axios.get(`http://localhost:3001/projects/getProject/${projectId}`)
+        axios.get(`http://localhost:3000/projects/getProject/${projectId}`)
             .then(result => setProject(result.data))
             .catch(err => console.log(err));
     }, [projectId]);
@@ -28,13 +28,13 @@ function UpdateProject() {
     const handleUpdate = async () => {
         try {
             // Send a PUT request to update the project
-            const result = await axios.put(`http://localhost:3001/projects/updateProject/${projectId}`, project);
+            const result = await axios.put(`http://localhost:3000/projects/updateProject/${projectId}`, project);
             console.log("Project updated successfully:", result.data);
 
             // Show a success message using react-toastify
             toast.success(`${result.data.nom}'s project officially updated!`, {
                 position: 'top-right',
-                autoClose: 3001,
+                autoClose: 3000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -54,13 +54,13 @@ function UpdateProject() {
     const handleDelete = async () => {
         try {
             // Send a DELETE request to delete the project
-            const result = await axios.delete(`http://localhost:3001/projects/deleteProject/${projectId}`);
+            const result = await axios.delete(`http://localhost:3000/projects/deleteProject/${projectId}`);
             console.log("Project deleted successfully:", result.data.message);
 
             // Show a success message using react-toastify
             toast.success(`${result.data.nom}'s project officially deleted!`, {
                 position: 'top-right',
-                autoClose: 3001,
+                autoClose: 3000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -113,7 +113,7 @@ function UpdateProject() {
                             <button type="button" className="btn btn-danger ms-2" onClick={handleDelete}><FaTrash /> Delete Project</button>
                         </form>
                         {/* React-toastify container */}
-                        <ToastContainer position="top-right" autoClose={3001} />
+                        <ToastContainer position="top-right" autoClose={3000} />
                     </div>
                 </div>
             </div>

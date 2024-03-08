@@ -29,7 +29,7 @@ function MyProfile() {
                         Authorization: `Bearer ${token}`,
                     });
 
-                    const response = await axios.get('http://localhost:3001/auth/myprofile', {
+                    const response = await axios.get('http://localhost:3000/auth/myprofile', {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },
@@ -75,7 +75,7 @@ function MyProfile() {
                             <div className="card">
                                 <div className="card-body">
                                     <div className="d-flex flex-column align-items-center text-center">
-                                        {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '300px', height: '300px', borderRadius: '50%' }} />}
+                                        {user.profileImage && <img src={`http://localhost:3000/profiles/${user.profileImage}`} alt="Profile" style={{ width: '300px', height: '300px', borderRadius: '50%' }} />}
                                         <div className="mt-3">
                                             <h4>{user.name} {user.lastname}</h4>
                                             <p className="text-secondary mb-1">{user.role}</p>

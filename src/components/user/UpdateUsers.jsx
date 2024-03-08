@@ -15,7 +15,7 @@ function UpdateUser() {
     
     useEffect(() => {
         // Fetch user data to pre-fill the form
-        axios.get(`http://localhost:3001/users/getUser/${id}`)
+        axios.get(`http://localhost:3000/users/getUser/${id}`)
             .then(result => {
                 const userData = result.data;
                 setName(userData.name || "");
@@ -44,7 +44,7 @@ function UpdateUser() {
             formData.append('profileImage', profileImage); // Append the profile image
             
             // Send a PUT request to update the user data
-            const updateUserResponse = await axios.put(`http://localhost:3001/users/updateUser/${id}`, formData, {
+            const updateUserResponse = await axios.put(`http://localhost:3000/users/updateUser/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

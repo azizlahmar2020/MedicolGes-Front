@@ -17,7 +17,7 @@ function ShowProjects() {
 
     const fetchData = async () => {
         try {
-            const result = await axios.get('http://localhost:3001/projects/showProjects');
+            const result = await axios.get('http://localhost:3000/projects/showProjects');
             setProjects(result.data);
         } catch (err) {
             console.log(err);
@@ -26,7 +26,7 @@ function ShowProjects() {
     
     const handleDelete = async (projectId, projectName) => {
         try {
-            await axios.delete(`http://localhost:3001/projects/deleteProject/${projectId}`);
+            await axios.delete(`http://localhost:3000/projects/deleteProject/${projectId}`);
 
             // Show a success message using react-toastify
             toast.success(`${projectName}'s project successfully deleted!`, {
