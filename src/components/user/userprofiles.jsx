@@ -9,6 +9,7 @@ import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
 import ChatBox from "../ChatBoxPage/ChatBox";
 import { Link } from 'react-router-dom';
+
 function UserProfiles(){
     const [users, setUsers] = useState([]);
 
@@ -23,6 +24,20 @@ function UserProfiles(){
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     };
+    const handleStartChat = (userId) => {
+        axios.get(`http://localhost:3001/auth/getIdMyProfile`)
+            .then(response => {
+                // Log the entire response for debugging
+                console.log("Server response:", response);
+                console.log("Data received:", response.data);
+                // Attempt to access the sessionId for further debugging
+                const sessionId = response.data.userSession ? response.data.userSession.sessionId : 'DefaultSessionId';
+                console.log("Session ID:", sessionId);
+                navigate(`/ChatBox/${sessionId}/${userId}`);
+            })
+            .catch(err => console.log(err));
+    };
+    
     const [sessionId, setSessionId] = useState('');
 
 
@@ -47,16 +62,17 @@ function UserProfiles(){
             <div className="row">
                 {/* Showing Candidates */}
                 <div className="row mb-4">
-                    <div className="col-12">
-                        <h6 className="mb-0">Showing {users.length} Candidates</h6>
-                    </div>
-                </div>
+    <div className="col-12 text-center">
+        <h6 className="mb-0" style={{ color: '#1A76D1',fontSize: '24px' }}>We have a total of {users.length} Candidates</h6>
+    </div>
+</div>
                 {/* Candidate Cards */}
                 <div className="row">
                     {users.map(user => (
-                        <div className="col-sm-6 col-lg-4 mb-4 candidate-list" key={user._id}>
+                        <div className="col-sm-6 col-lg-6 mb-4 candidate-list" key={user._id}>
                             <div className="candidate-list-image">
-                                {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" />}
+                                {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '300px', height: '100px', borderRadius: '50%' }} />}
+
                             </div>
                             <div className="candidate-list-details">
                                 <div className="candidate-list-info">
@@ -72,6 +88,7 @@ function UserProfiles(){
                                             
                                         </ul>
                                         
+
                                         <button className="chat-button">
   {/* Utilisez la balise Link pour créer un lien vers "/ChatBox" */}
   <Link to={`/ChatBox/${'65e9c8448058e341eff2111e'}/${user._id}`} className="btn btn-link">

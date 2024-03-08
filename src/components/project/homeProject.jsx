@@ -14,18 +14,18 @@ const HomeProject = () => {
             <div className="row justify-content-center align-items-center">
                 <div className="col-md-6 mb-5">
                     {/* Content on the left */}
-                    <h1 className="mb-2 welcome-text">Welcome to Project Management</h1>
+                    <h1 className="mb-2 welcome-text" style={{marginTop: '80px'}}>Welcome to Project Management</h1>
                     <p className="lead mb-5">
                         Explore and manage your projects with ease. Discover how project creations in MediColGes contribute to enriching medical research and advancing healthcare solutions.
                     </p>
                     <div className="mt-4">
-                        <Link to="/createProjectt" className="btn btn-blue me-2">Create a New Project</Link>
-                        <Link to="/showProjects" className="btn btn-transparent-blue">Take a Look at Your Previous Projects</Link>
-                    </div>
+    <Link to="/createProjectt" className="btn btn-blue me-2" style={{ color: 'white', padding: '12px 24px', fontSize: '16px' }}>Create a New Project</Link>
+    <Link to="/projectfront" className="btn btn-transparent-blue" style={{ padding: '12px 24px', fontSize: '16px' }}>Take a Look at Your Previous Projects</Link>
+</div>
                 </div>
                 <div className="col-md-6">
                     {/* Image on the right */}
-                    <img src='/images/19867.jpg' alt="Medical Research Image" className="img-fluid" />
+                    <img src='./src/assets/img/project.png' alt="Medical Research Image" className="img-fluid" />
                 </div>
             </div>
 <div>
@@ -45,7 +45,7 @@ const HomeProject = () => {
                     Enhance project efficiency by creating custom forms tailored to your specific project needs. These custom forms can streamline data collection, improve collaboration among team members, and ultimately contribute to the success of your projects.
                     </p>
                     <div className="mt-4">
-                        <Link to="/formBuilder" className="btn btn-blue me-2">Explore Custom Forms</Link>
+                    <Link to="/formBuilder" className="btn btn-blue me-2" style={{ color: 'white', padding: '12px 24px', fontSize: '16px' }}>Explore Custom Forms</Link>
                         {/* Add another Link if needed */}
                     </div>
                 </div>

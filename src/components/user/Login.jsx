@@ -39,7 +39,7 @@ function Login() {
                                             <input type="password" name="password" id="password" className="form-control" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                                         </div>
                                         <div className="form-group">
-                                            <button type="submit" className="btn btn-success btn-block">Login</button>
+                                        <button type="submit" className="btn btn-success btn-block" style={{ backgroundColor: '#1A76D1' }}>Login</button>
                                         </div>
                                     </form>
                                     <div className="mt-3">
