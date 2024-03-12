@@ -2,106 +2,193 @@
 
 .row_chat {
   display: flex;
-  position:fixed !important;
+  position: fixed !important;
   border-radius: 15px;
+  background-color: #ffffff; /* White background */
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
-
-  width: 105% !important;
+  width: 100% !important;
 }
-.chatpage{
+
+.chatpage {
+  background-color: #ffffff; /* White background */
   margin-left: 9px;
   position: fixed;
+  
   width: 100%;
-  height: 70% !important;
+  height: 100% !important;
 }
-.chat-container{
+
+/* ChatBox.css */
+
+/* ChatBox.css */
+
+.unread {
+  position: relative;
+}
+
+.unread::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  transform: translate(50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+.chat-container {
   margin-top: -22px;
   display: flex;
   flex-direction: column;
-  height: 60% ;
+  height: 60%;
   width: 100%;
   padding: 10px;
-  box-sizing: border-box;
-  box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
-
+  border-radius: 30px;
 }
 
-.coloo3,
-.colooo6,
-.coloo2 {
-  box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
-
-  padding: 10px;
-  box-sizing: border-box;
-  border-radius: 50px;
-}
 
 .coloo3 {
   width: 20%;
-  background-color: #f3f3f3;
-}
+  border-radius: 15px;
+  margin-bottom: 5%;
+  background: linear-gradient(0deg, #a2bdd2 0%, #1d759a 100%);}
+
+
+
 
 .colooo6 {
   width: 60%;
+
 }
 
 .coloo2 {
-  width: 20%;
-  background-color: #f3f3f3;
+  width: 19%;
+  border-top: #555;
+  margin-bottom: 5%;
   z-index: 1;
+  border-radius: 15px;
+  margin-right: -40px;
+  /*background-color: #e9e8e8;*/
+  background: linear-gradient(0deg, #a2bdd2 0%, #1d759a 100%);}
+
+
+.username{
+  font-size: 30px;
+  align-items: center !important;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color:#ffffff
 }
 
-
 .header_Chat {
+  
   padding: 10px;
   box-sizing: border-box;
   border-radius: 15px;
+
   z-index: 1;
 }
 
-.search{
-margin-left: 20px;
-height: 50px;
+.search {
+  margin-left: 6%;
+  margin-top: 10%;
+  height: 50px;
   text-align: center;
   justify-content: center;
   width: 90%;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border: none;
-  background: #6d9eab;
-border-radius: 20px;
-box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
-
+  border-radius: 20px;
+  box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
 }
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 40px; /* Ajustez selon la position souhaitée */
+  top: 71%;
+  color: #555; /* Couleur de l'icône */
+}
+
+/* Styliser le placeholder */
+
 
 .user-list-item {
   display: block;
-  width: 100%;
+  width: 80%;
+  position: relative;
+  height: 70px;
   padding: 10px;
   margin-bottom: 5px;
-  background-color: #e0e0e0; /* Couleur de fond du rectangle */
-  border: 1px solid #ccc; /* Bordure du rectangle */
-  border-radius: 5px; /* Coins arrondis du rectangle */
-  cursor: pointer; /* Curseur de la souris au survol */
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .user-list-item:hover {
-  background-color: #d0d0d0; /* Couleur de fond au survol du rectangle */
+  background-color: #d0d0d0;
 }
 
-.Liste{
-  width: 100%;
+.conv{
+  margin-top: 8px;
+  margin-left: 10%;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  justify-items: center;
+  align-items: center !important;
+}
+.Liste {
+  width: 90%;
+  margin-top:10%;
+  left: 10px;
+  overflow: hidden;
   height: 100%;
-  border: 1px solid #ccc;
+  margin-left: 6%;
   border-radius: 20px;
-  background-color: #C8DAE3;
-} 
-.user-image{
+  background-color: #ffffff;
+}
+
+.user-image {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 10px;
 }
 
-.user-list-item{
-  width: 80%;
 
+
+/* Media Queries for responsiveness */
+@media only screen and (max-width: 600px) {
+  .row_chat {
+    flex-direction: column;
+  }
+
+  .chat-container,
+  .coloo3,
+  .colooo6,
+  .coloo2 {
+    width: 100%;
+    border: none;
+    margin-bottom: 5% !important;
+
+
+  }
+  
+ 
 }
