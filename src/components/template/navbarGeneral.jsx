@@ -41,8 +41,8 @@ const Navbar = () => {
                                             </ul>
                                         </li>
                                         <li><a href="contact.html">Feedback</a></li>
-                                        <li><a href="/homepage">Sign up</a></li>
-                                        <li><a href="/login">Sign in</a></li>
+                                        <li><a href="/aboutus">About Us</a></li>
+                                        <li><a href="/homepage">Help</a></li>
 
                                     </ul>
                                 </nav>
@@ -50,7 +50,7 @@ const Navbar = () => {
                         </div>
                         <div className="col-lg-2 col-12">
                             <div className="get-quote">
-                                <a href="appointment.html" className="btn">Book Appointment</a>
+                                <a href="appointment.html" className="btn" style={{backgroundColor:'#1A76D1',marginTop:'10px', fontSize:'18px'}}>Book Appointment</a>
                             </div>
                         </div>
                     </div>

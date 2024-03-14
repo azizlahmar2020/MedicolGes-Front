@@ -3,6 +3,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css'; // Import the react-toastify CSS file
+import '../../assets/style.css'
 
 const CreateProjectt = () => {
   useEffect(() => {
@@ -154,7 +155,7 @@ const CreateProjectt = () => {
                                         </div>
 
                                         <div className="form-btn">
-                                        <button className="submit-btn" type="submit" style={{ backgroundColor: '#1A76D1', color: 'white', transition: 'background-color 0.3s', cursor: 'pointer' }}>
+                                        <button className="project-btn" type="submit">
   Create Project
 </button>
                                         </div>
