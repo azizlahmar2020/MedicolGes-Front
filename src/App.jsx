@@ -5,7 +5,6 @@ import Signup from './components/user/Signup'
 import { Provider } from 'react-redux'; // Import the Provider component
 
 import {BrowserRouter, Routes, Route, Form} from 'react-router-dom'
-import Signup from './components/user/Signup'
 import AboutUs from './components/pages/aboutus'; // Import the AboutUs component
 import {store  } from './components/store/config'; // Import the entire config object
 
