@@ -37,8 +37,8 @@ function HomeSub() {
                             <h1>We Provide <span>Medicol</span> Services That You Can <span>Trust!</span></h1>
                                 <p>We provide medical services that you can trust! Our team is dedicated to conducting thorough medical research to improve patient care and find innovative solutions to healthcare challenges.</p>
                                 <div className="button">
-                                    <a href="#" className="btn">Get Appointment</a>
-                                    <a href="#" className="btn primary">Conatct Now</a>
+                                <a href="#" className="btn" style={{ fontSize: '25px', height:'50px', width:'270px', padding:'3px' }}>Get started</a>
+<a href="#" className="btn primary" style={{ fontSize: '22px' , height:'50px', width:'170px', padding:'5px' }}>Login</a>
                                 </div>
                             </div>
                         </div>
@@ -223,16 +223,14 @@ function HomeSub() {
                         fostering advancements in medical care and promoting overall well-being. </p>                       <div className="row">
                             <div className="col-lg-6">
                                 <ul className="list">
-                                    <li><i className="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
-                                    <li><i className="fa fa-caret-right"></i>Duis massa massa.</li>
-                                    <li><i className="fa fa-caret-right"></i>Aliquam feugiat interdum.</li>
+                                    <li><i className="fa fa-caret-right"></i>Sarra Sahli</li>
+                                    <li><i className="fa fa-caret-right"></i>Rayen Jouida</li>
                                 </ul>
                             </div>
                             <div className="col-lg-6">
                                 <ul className="list">
-                                    <li><i className="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
-                                    <li><i className="fa fa-caret-right"></i>Duis massa massa.</li>
-                                    <li><i className="fa fa-caret-right"></i>Aliquam feugiat interdum.</li>
+                                    <li><i className="fa fa-caret-right"></i>Aziz Lahmer </li>
+                                    <li><i className="fa fa-caret-right"></i>Aziz Azizi</li>
                                 </ul>
                             </div>
                         </div>
@@ -390,7 +388,7 @@ function HomeSub() {
             <div className="row">
                 <div className="col-lg-12">
                     <div className="section-title">
-                        <h2>We Provide You The Best Treatment In Resonable Price</h2>
+<h2>We Provide You The Best Treatment In Resonable Price</h2>
                         <img src="./src/assets/img/section-img.png" alt="#"/>
                         <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
                     </div>

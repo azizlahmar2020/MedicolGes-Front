@@ -153,7 +153,6 @@ function Chat({ socket, username, room }) {
                     </div>
                     <div className="message-meta">
                       <p id="time">{messageContent.time}</p>
-                      <p id="author">{messageContent.author}</p>
                     </div>
                   </div>
                 )}

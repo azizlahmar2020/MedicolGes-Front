@@ -45,7 +45,7 @@ const HomeProject = () => {
                     Enhance project efficiency by creating custom forms tailored to your specific project needs. These custom forms can streamline data collection, improve collaboration among team members, and ultimately contribute to the success of your projects.
                     </p>
                     <div className="mt-4">
-                    <Link to="/formBuilder" className="btn btn-blue me-2" style={{ color: 'white', padding: '12px 24px', fontSize: '16px' }}>Explore Custom Forms</Link>
+                    <Link to="/list-form" className="btn btn-blue me-2" style={{ color: 'white', padding: '12px 24px', fontSize: '16px' }}>Explore Custom Forms</Link>
                         {/* Add another Link if needed */}
                     </div>
                 </div>

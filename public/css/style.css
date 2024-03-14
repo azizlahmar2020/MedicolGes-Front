@@ -127,7 +127,11 @@ a:focus, a:active {
   -webkit-transition: all 300ms ease 0s;
   -o-transition: all 300ms ease 0s;
   -ms-transition: all 300ms ease 0s; }
-
+  .eye-icon {
+    margin-left: -24px; /* Adjust the value to your preference */
+    cursor: pointer;
+	margin-top: 5px;
+}
 input, select, textarea {
   outline: none;
   appearance: unset !important;

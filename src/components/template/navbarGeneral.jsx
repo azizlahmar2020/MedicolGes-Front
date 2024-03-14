@@ -26,31 +26,30 @@ const Navbar = () => {
                                            
                                         </li>
                                         
-                                        <li><a href="#">Projects <i className="icofont-rounded-down"></i></a>
-                                            <ul className="dropdown">
-                                                <li><a href="404.html">Browse project</a></li>
-                                                <li><a href="404.html">Ask for participation</a></li>
+                                        <li><a href="#" style={{ fontSize: '18px' }}>Projects <i className="icofont-rounded-down"></i></a>
+    <ul className="dropdown">
+        <li><a href="404.html">Browse project</a></li>
+        <li><a href="404.html">Ask for participation</a></li>
+    </ul>
+</li>
 
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Forms <i className="icofont-rounded-down"></i></a>
-                                            <ul className="dropdown">
-                                                <li><a href="blog-single.html">Browse Forms</a></li>
-                                                <li><a href="blog-single.html">Answer a form</a></li>
+<li><a href="#" style={{ fontSize: '18px' }}>Forms <i className="icofont-rounded-down"></i></a>
+    <ul className="dropdown">
+        <li><a href="blog-single.html">Browse Forms</a></li>
+        <li><a href="blog-single.html">Answer a form</a></li>
+    </ul>
+</li>
 
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Feedback</a></li>
-                                        <li><a href="/homepage">Sign up</a></li>
-                                        <li><a href="/login">Sign in</a></li>
-
+<li><a href="/feedback" style={{ fontSize: '18px' }}>Feedback</a></li>
+<li><a href="/homepage" style={{ fontSize: '18px' }}>Sign up</a></li>
+<li><a href="/login" style={{ fontSize: '18px' }}>Sign in</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <div className="col-lg-2 col-12">
                             <div className="get-quote">
-                                <a href="appointment.html" className="btn">Book Appointment</a>
+                            <a href="appointment.html" className="btn" style={{ backgroundColor: '#1A76D1', marginTop :'7px' , fontSize: '18px' , height:'40px', width:'180px', padding:'5px' }}>Book Appointment</a>
                             </div>
                         </div>
                     </div>

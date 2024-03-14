@@ -3,14 +3,47 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import Dashboard from "../backend/Dashboard";
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
+import axiosInstance from '../../axiosInstance'; // Import the customized Axios instance
 
 function ShowUsers(){
     const [users, setUsers]= useState([]);
+    const [sessionId, setSessionId] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:3001/users/showUsers')
-            .then(result => setUsers(result.data))
-            .catch(err => console.log(err));
+        const fetchSessionId = async () => {
+            try {
+                const token = sessionStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Token not found in sessionStorage');
+                }
+                
+                // Fetch the users and session ID
+                const response = await axiosInstance.get('/users/showUsers');
+                console.log('Response:', response); // Log the entire response
+                
+                if (response.data && response.data.sessionId) {
+                    setSessionId(response.data.sessionId);
+                } else {
+                    throw new Error('Session ID not found in response data');
+                }
+            } catch (error) {
+                console.error('Error fetching session ID:', error);
+            }
+        };
+        
+        fetchSessionId();
+    }, []);
+
+    useEffect(() => {
+        axiosInstance.get('/users/showUsers')
+            .then(result => {
+                if (result.data && Array.isArray(result.data.users)) {
+                    setUsers(result.data.users);
+                } else {
+                    throw new Error('Invalid user data received');
+                }
+            })
+            .catch(err => console.error('Error fetching users:', err));
     }, []);
 
     const deleteUser = (userId) => {

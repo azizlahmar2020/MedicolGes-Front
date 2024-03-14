@@ -1,4 +1,3 @@
-/* chat.css */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 
 
@@ -6,7 +5,7 @@
 .chat-window {
   margin-top: 5px;
   width: 100%;
-  height: 100;
+  height: 100% ;
   position: fixed;
   border: 1px solid #ccc;
   justify-content: right;
@@ -16,8 +15,9 @@
  
   bottom: 1.4%;
 
-  background-color: #A6D7ED;
-}
+/*  background-color: #A6D7ED;
+*/
+background: linear-gradient(0deg, #a2bdd2 0%, #1d759a 100%);}
 
 /* Styles pour l'en-tête */
 .chat-header {
@@ -67,6 +67,9 @@
   width: 100%;
   padding: 15px;
   border-radius: 15px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color:#f3f3f3
+  
   
 }
 
@@ -81,7 +84,7 @@
 
 /* Styles pour l'image du message */
 .message-content img {
-  width: 100%;
+  width: auto;
   height: auto;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 
@@ -200,7 +203,7 @@ border-radius: 20px 0px 20px 0px  ;
 /* Styles pour un message émis */
 #you .message-content {
   background-color: #23405b ;
-  color: white;
+  color: white !important;
   border-radius: 15px 15px 15px 0; 
   padding: 9px;
   padding-bottom: 2px;
@@ -305,21 +308,21 @@ border-radius: 20px 0px 20px 0px  ;
  /* Utilisez simplement 'padding' pour définir toutes les valeurs */
 padding: 40px;
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
   border-radius: 20px; /* Ajustez la valeur selon vos préférences */
 }
 
 .chat-window .chat-body {
-  height: calc(450px - (45px + 70px));
   border-radius: 15px;
   background-color: #E7F2F7 !important;
-  box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.2);
-
+  box-shadow: -1px -12px 70px 0px #ffffff; 
+  filter: drop-shadow(10px 5px 77px  #b2c1e3);
   position: relative;
 }
 .chat-window .chat-body .message-container {
   width: 100%;
   height: 100%;
+  
   overflow-y: scroll;
   overflow-x: hidden;
 }
