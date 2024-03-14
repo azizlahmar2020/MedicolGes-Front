@@ -66,6 +66,7 @@ box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
 
 }
 
+<<<<<<< Updated upstream
 .user-list-item {
   display: block;
   width: 100%;
@@ -99,3 +100,30 @@ box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
   width: 80%;
 
 }
+=======
+
+
+/* Styliser le placeholder */
+
+
+
+/* Media Queries for responsiveness */
+@media only screen and (max-width: 600px) {
+  .row_chat {
+    flex-direction: column;
+  }
+
+  .chat-container,
+  .coloo3,
+  .colooo6,
+  .coloo2 {
+    width: 100%;
+    border: none;
+    margin-bottom: 5% !important;
+
+
+  }
+  
+ 
+}
+>>>>>>> Stashed changes

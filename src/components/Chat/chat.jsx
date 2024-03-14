@@ -5,12 +5,29 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import EmojiPicker from 'emoji-picker-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CameraFill } from 'react-bootstrap-icons';
+<<<<<<< Updated upstream
+=======
+import Modal from 'react-modal';
+import axios from "axios";
+>>>>>>> Stashed changes
 
-function Chat({ socket, username, room }) {
+function Chat({ socket, username, room ,user2 }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+<<<<<<< Updated upstream
+=======
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [userData, setUserData] = useState(null);
+
+  // Fonction pour remplacer les URL dans le texte par des liens HTML
+  const replaceURLsWithLinks = (text) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, (url) => `<a href="${url}" target="_blank">${url}</a>`);
+  };
+>>>>>>> Stashed changes
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -89,13 +106,14 @@ function Chat({ socket, username, room }) {
   useEffect(() => {
     const receiveMessage = (data) => {
       setMessageList((list) => [...list, data]);
-
+      console.log("message jee !!", data)
       const chatBody = document.getElementById("chat-body");
       chatBody.scrollTop = chatBody.scrollHeight;
     };
 
     if (socket) {
       socket.on("receive_message", receiveMessage);
+
       socket.on("typing", (data) => {
         if (data.author !== username) {
           setIsTyping(true);
@@ -127,13 +145,45 @@ function Chat({ socket, username, room }) {
   };
 
 
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/users/getUser/${user2}`);
+        if (response.status === 200) {
+          setUserData(response.data); 
+          console.log(response.data)// Stocke les données de l'utilisateur dans l'état
+        } else {
+          throw new Error("Error fetching user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
+      }
+    };
+
+    fetchUser();
+  }, [username]);
+
   return (
     <>
       
       <div className="chat-window">
+<<<<<<< Updated upstream
         <div className="chat-header">
           <p>User index</p>
         </div>
+=======
+      <div className="chat-header">
+  {userData && (
+    <div className="user-info">
+      <img src={`http://localhost:3001/profiles/${userData.profileImage}`} alt="Profile" className="profile-image" />
+      <p className="username">{userData.name} {userData.lastname}</p>
+    </div>
+  )}
+</div>
+
+
+>>>>>>> Stashed changes
         <div id="chat-body" className="chat-body">
           <ScrollToBottom className="message-container">
             {messageList.map((messageContent, index) => (
@@ -146,7 +196,7 @@ function Chat({ socket, username, room }) {
                   <div>
                     <div className="message-content">
                       {messageContent.message ? (
-                        <p>{messageContent.message}</p>
+                        <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }}></p>
                       ) : (
                         <img src={messageContent.image} style={{ width: '500px', height: '500px' }} alt="Received Image" />
                       )}

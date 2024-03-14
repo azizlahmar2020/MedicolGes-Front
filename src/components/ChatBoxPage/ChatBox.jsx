@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import io from "socket.io-client";
+<<<<<<< Updated upstream
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
+=======
+>>>>>>> Stashed changes
 
 import Chat from '../Chat/chat';
 import './ChatBox.css';
@@ -135,6 +138,7 @@ export default function ChatBox({ username, room }) {
 
   return (
     <>
+<<<<<<< Updated upstream
       <div className='row'>
         <div className='col-md-3'>
           <div className='header'>
@@ -143,6 +147,13 @@ export default function ChatBox({ username, room }) {
               <input className='search' placeholder='Search' />
               <FontAwesomeIcon icon={faSync} className='loop-icon' />
             </div>
+=======
+      <NavbarSub />
+      <div className='chatpage row'>
+        <div className='coloo3 col-md-3'>
+          <div className='header-test'>
+           
+>>>>>>> Stashed changes
             <div className="joinChatContainer">
               <h3>Join A Chat</h3>
               <label>User 1 ID: <input type="text" value={user1Id} onChange={(e) => setUser1Id(e.target.value)} /></label>
@@ -172,7 +183,7 @@ export default function ChatBox({ username, room }) {
         <div className='col-md-6'>
           <div className='contenu'>
             <div className='chat-container'>
-              <Chat socket={socket} username={user1Id} room={roomData.roomId} />
+              <Chat socket={socket} username={user1Id} room={roomData.roomId} user2={user2Id} />
             </div>
           </div>
         </div>
