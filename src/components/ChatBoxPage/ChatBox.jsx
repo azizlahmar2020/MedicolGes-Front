@@ -1,29 +1,36 @@
+// ChatBox.js
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import io from "socket.io-client";
-<<<<<<< Updated upstream
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
-=======
->>>>>>> Stashed changes
+import { Popup } from 'react-chat-elements'
+import { ChatItem } from 'react-chat-elements'
 
+import io from "socket.io-client";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Chat from '../Chat/chat';
 import './ChatBox.css';
+import { useParams } from 'react-router-dom';
+import NavbarSub from '../template/navbarSubadmin';
+import ChatList from '../ChatList/chatList';
 
 const socket = io.connect("http://localhost:3001", {
   transports: ['websocket'],
 });
 
-export default function ChatBox({ username, room }) {
+export default function ChatBox() {
+  const { idsession, iduserselection } = useParams();
+
   const [roomData, setRoomData] = useState({
     roomId: "",
     showChat: false,
   });
 
-  const [user1Id, setUser1Id] = useState("");
-  const [user2Id, setUser2Id] = useState("");
+  const [user1Id, setUser1Id] = useState(idsession);
+  const [user2Id, setUser2Id] = useState(iduserselection);
 
   const [userRooms, setUserRooms] = useState([]);
+  const [unreadConversations, setUnreadConversations] = useState([]);
 
   const getUsersNames = async (userIds) => {
     try {
@@ -55,10 +62,33 @@ export default function ChatBox({ username, room }) {
   };
 
   useEffect(() => {
-    if (roomData.showChat) {
-      getRoomsForUser(user1Id);
-    }
-  }, [roomData.showChat, user1Id]);
+    // Fonction pour joindre la salle automatiquement
+    const joinRoom = async () => {
+      try {
+        const existingRoomId = await getExistingRoomId(user1Id, user2Id);
+
+        if (existingRoomId) {
+          socket.emit("join_room", { roomId: existingRoomId });
+          setRoomData({ roomId: existingRoomId, showChat: true });
+          getRoomsForUser(user1Id);
+        } else {
+          const newRoomData = await createRoom(user1Id, user2Id);
+          if (newRoomData && newRoomData.roomId) {
+            socket.emit("join_room", { roomId: newRoomData.roomId });
+            setRoomData({ roomId: newRoomData.roomId, showChat: true });
+            getRoomsForUser(user1Id);
+          } else {
+            throw new Error("Error creating or joining a new room");
+          }
+        }
+      } catch (error) {
+        console.error("Error joining room:", error.message);
+      }
+    };
+
+    // Appeler joinRoom automatiquement au chargement du composant
+    joinRoom();
+  }, [user1Id, user2Id]); // Ajout des dépendances user1Id et user2Id
 
   const getExistingRoomId = async (userId1, userId2) => {
     try {
@@ -90,29 +120,6 @@ export default function ChatBox({ username, room }) {
     }
   };
 
-  const joinRoom = async () => {
-    try {
-      const existingRoomId = await getExistingRoomId(user1Id, user2Id);
-
-      if (existingRoomId) {
-        socket.emit("join_room", { roomId: existingRoomId });
-        setRoomData({ roomId: existingRoomId, showChat: true });
-        getRoomsForUser(user1Id);
-      } else {
-        const newRoomData = await createRoom(user1Id, user2Id);
-        if (newRoomData && newRoomData.roomId) {
-          socket.emit("join_room", { roomId: newRoomData.roomId });
-          setRoomData({ roomId: newRoomData.roomId, showChat: true });
-          getRoomsForUser(user1Id);
-        } else {
-          throw new Error("Error creating or joining a new room");
-        }
-      }
-    } catch (error) {
-      console.error("Error joining room:", error.message);
-    }
-  };
-
   const joinRoomWithUser = async (selectedUserId) => {
     try {
       const existingRoomId = await getExistingRoomId(user1Id, selectedUserId);
@@ -136,59 +143,58 @@ export default function ChatBox({ username, room }) {
     }
   };
 
+  const handleNewMessage = (roomId) => {
+    if (!unreadConversations.includes(roomId)) {
+      setUnreadConversations((prevUnread) => [...prevUnread, roomId]);
+    }
+  };
+
+  useEffect(() => {
+    // Écoutez l'événement 'new_message' pour gérer les nouveaux messages
+    socket.on('new_message', ({ roomId }) => {
+      handleNewMessage(roomId);
+    });
+
+    return () => {
+      // Nettoyez l'écouteur lors du démontage du composant
+      socket.off('new_message');
+    };
+  }, [unreadConversations]);
+
   return (
     <>
-<<<<<<< Updated upstream
-      <div className='row'>
-        <div className='col-md-3'>
-          <div className='header'>
-            <div className='search-container'>
-              <FontAwesomeIcon icon={faSearch} className='search-icon' />
-              <input className='search' placeholder='Search' />
-              <FontAwesomeIcon icon={faSync} className='loop-icon' />
-            </div>
-=======
       <NavbarSub />
       <div className='chatpage row'>
         <div className='coloo3 col-md-3'>
           <div className='header-test'>
-           
->>>>>>> Stashed changes
-            <div className="joinChatContainer">
-              <h3>Join A Chat</h3>
-              <label>User 1 ID: <input type="text" value={user1Id} onChange={(e) => setUser1Id(e.target.value)} /></label>
-              <label>User 2 ID: <input type="text" value={user2Id} onChange={(e) => setUser2Id(e.target.value)} /></label>
-              <button onClick={joinRoom}>Join A Room</button>
-              <div>
-              <div className='Liste'>
-          <h4>Utilisateurs avec lesquels vous avez discuté :</h4>
-          <ul>
-  {userRooms.map((userId, index) => (
-    <li key={index} className="user-list-item" onClick={() => joinRoomWithUser(userId)}>
-      <img src={`../../../public/ChatImage/-person_90382.png`} alt="user" className="user-image" />
-      {userId}
-    </li>
-  ))}
-</ul>
-
-         
-        </div>
-
+            <div className='search-container'>
+              <div className='search-wrapper'>
+                <input className='search' placeholder='Search' />
+                <FontAwesomeIcon icon={faSearch} className='search-icon' />
               </div>
-              
+            </div>
+            <div className="joinChatContainer">
+              <div>
+                <ChatList
+                  userRooms={userRooms}
+                  joinRoomWithUser={joinRoomWithUser}
+                  unreadConversations={unreadConversations}
+                />
+              </div>
             </div>
           </div>
         </div>
-        
-        <div className='col-md-6'>
+
+        <div className='colooo6 col-md-6'>
           <div className='contenu'>
             <div className='chat-container'>
-              <Chat socket={socket} username={user1Id} room={roomData.roomId} user2={user2Id} />
+              <Chat socket={socket} username={user1Id} room={roomData.roomId} />
             </div>
           </div>
         </div>
-        <div className='col-md-2'>Liste d'amis !!</div>
-        
+        <div className='coloo2 col-md-2'>
+          
+        </div>
       </div>
     </>
   );
