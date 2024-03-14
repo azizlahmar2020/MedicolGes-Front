@@ -1,28 +1,21 @@
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-import Signup from './components/user/Signup'
 import { Provider } from 'react-redux'; // Import the Provider component
-
-import {BrowserRouter, Routes, Route, Form} from 'react-router-dom'
-import AboutUs from './components/pages/aboutus'; // Import the AboutUs component
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {store  } from './components/store/config'; // Import the entire config object
-
-
+import Submissions from './components/feedback/submission';
+import Signup from './components/user/Signup'
 import Login from './components/user/Login'
 import Dashboard from './components/backend/Dashboard'
 import HomePage from './components/user/HomePage'
 import ShowUsers from './components/user/ShowUsers'
 import UpdateUsers from './components/user/UpdateUsers'
 import UserProfiles from './components/user/userprofiles'
-
-import FormBuilderComponent from './components/form/FormBuilder';
-import FormList from './components/form/FormList'
 import MyProfile from './components/user/MyProfile'
 import ShowProjects from './components/project/showProjects';
 import CreateProjectt from './components/project/createProjectt';
-import UpdateProject from './components/project/updateProject';  // Import the UpdateProject component
-import HomeProject from './components/project/homeProject';  // Import the HomeProject component
+import UpdateProject from './components/project/updateProject';  
+import HomeProject from './components/project/homeProject';  
 import ShowProject from './components/project/showProject';
 import Index from './components/template/index'
 import HomeSub from './components/template/homeSubadmin'
@@ -32,7 +25,8 @@ import ProjectsFront from './components/project/projectsFront'
 import CreateForm from './components/pages/FormCreationPage/CreateForm'
 import ListForm from './components/pages/FormListingPage/FormListing'
 import FormResponse from './components/pages/FormResponsePage/FormResponse';
-
+import FeedbackForm from './components/feedback/form';
+import './components/feedback/custom.css'
 function App() {
   return (
     <Provider store={store}> {/* Wrap your entire app with the Provider */}
@@ -61,12 +55,13 @@ function App() {
           <Route path='/create-form' element={<CreateForm />} /> 
           <Route path='/list-form' element={<ListForm />} /> 
           <Route path='/form-response/:id' element={<FormResponse />} /> 
-          <Route path='/aboutus' element={<AboutUs />} />
+          <Route path="/feedback" element={<FeedbackForm />} />
+          <Route path="/submissions" element={<Submissions />} />
+            <Route path="/submission/:id" element={<Submissions />} />
 
         </Routes>
       </BrowserRouter>
     </Provider>
-
   )
 }
 

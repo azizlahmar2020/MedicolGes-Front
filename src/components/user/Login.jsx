@@ -31,7 +31,7 @@ function Login() {
 
     return (
         <section className="login">
-            <link rel="stylesheet" type="text/css" href="/css/style.css" />
+            <link rel="stylesheet" type="text/css" href="../../../public/css/style.css" />
             <div className="container text-center" style={{ marginTop: "200px" }}>
                 <div className="row justify-content-center">
                     <div className="col-lg-8">

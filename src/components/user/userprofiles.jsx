@@ -9,51 +9,53 @@ import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
 import ChatBox from "../ChatBoxPage/ChatBox";
 import { Link } from 'react-router-dom';
+import axiosInstance from '../../axiosInstance'; // Import the customized Axios instance
 
-function UserProfiles(){
+function UserProfiles() {
     const [users, setUsers] = useState([]);
+    const [sessionId, setSessionId] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:3001/users/showUsers')
-            .then(result => setUsers(result.data))
-            .catch(err => console.log(err));
+        const fetchSessionId = async () => {
+            try {
+                const token = sessionStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Token not found in sessionStorage');
+                }
+                
+                // Fetch the users and session ID
+                const response = await axiosInstance.get('/users/showUsers');
+                console.log('Response:', response); // Log the entire response
+                
+                if (response.data && response.data.sessionId) {
+                    setSessionId(response.data.sessionId);
+                } else {
+                    throw new Error('Session ID not found in response data');
+                }
+            } catch (error) {
+                console.error('Error fetching session ID:', error);
+            }
+        };
+        
+        fetchSessionId();
     }, []);
 
-    // Function to format birthdate
+    useEffect(() => {
+        axiosInstance.get('/users/showUsers')
+            .then(result => {
+                if (result.data && Array.isArray(result.data.users)) {
+                    setUsers(result.data.users);
+                } else {
+                    throw new Error('Invalid user data received');
+                }
+            })
+            .catch(err => console.error('Error fetching users:', err));
+    }, []);
+
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     };
-    const handleStartChat = (userId) => {
-        axios.get(`http://localhost:3001/auth/getIdMyProfile`)
-            .then(response => {
-                // Log the entire response for debugging
-                console.log("Server response:", response);
-                console.log("Data received:", response.data);
-                // Attempt to access the sessionId for further debugging
-                const sessionId = response.data.userSession ? response.data.userSession.sessionId : 'DefaultSessionId';
-                console.log("Session ID:", sessionId);
-                navigate(`/ChatBox/${sessionId}/${userId}`);
-            })
-            .catch(err => console.log(err));
-    };
-    
-    const [sessionId, setSessionId] = useState('');
-
-
-    useEffect(() => {
-        const fetchSessionId = async () => {
-          try {
-            const response = await axios.get('http://localhost:3001/auth/getIdMyProfile');
-            setSessionId(response.data.sessionId);
-          } catch (error) {
-            console.error('Error fetching session ID:', error);
-          }
-        };
-    
-        fetchSessionId();
-      }, []);
-    
     return (
         <div>
         <NavbarSub/>
@@ -90,12 +92,12 @@ function UserProfiles(){
                                         
 
                                         <button className="chat-button">
-  {/* Utilisez la balise Link pour créer un lien vers "/ChatBox" */}
-  <Link to={`/ChatBox/${'65e9c8448058e341eff2111e'}/${user._id}`} className="btn btn-link">
-    <FontAwesomeIcon icon={faComment} />
-    Start Chat
-  </Link>
-</button>
+                        {/* Utilisez la balise Link pour créer un lien vers "/ChatBox" */}
+                        <Link to={`/ChatBox/${sessionId}/${user._id}`} className="btn btn-link">
+                            <FontAwesomeIcon icon={faComment} />
+                            Start Chat
+                        </Link>
+                    </button>
 
 
                                     </div>

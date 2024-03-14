@@ -3,7 +3,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css'; // Import the react-toastify CSS file
-import '../../assets/style.css'
 
 const CreateProjectt = () => {
   useEffect(() => {
@@ -65,9 +64,17 @@ const CreateProjectt = () => {
       }
 
       try {
-          const response = await axios.post('http://localhost:3001/projects/createProjectt', formData);
-
-          console.log('Created Project:', response.data.project);
+        const token = sessionStorage.getItem('token'); // Retrieve token from sessionStorage
+        const axiosConfig = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+  
+        const response = await axios.post('http://localhost:3001/projects/createProjectt', formData, axiosConfig);
+  
+        console.log('Created Project:', response.data.project);
+  
 
           toast.success('Project created successfully!', {
               position: 'top-right',
@@ -155,7 +162,7 @@ const CreateProjectt = () => {
                                         </div>
 
                                         <div className="form-btn">
-                                        <button className="project-btn" type="submit">
+                                        <button className="submit-btn" type="submit" style={{ backgroundColor: '#1A76D1', color: 'white', transition: 'background-color 0.3s', cursor: 'pointer' }}>
   Create Project
 </button>
                                         </div>
