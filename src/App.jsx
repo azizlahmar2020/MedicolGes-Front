@@ -1,22 +1,29 @@
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Provider } from 'react-redux'; // Import the Provider component
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {store  } from './components/store/config'; // Import the entire config object
-import AboutUs from './components/pages/aboutus'; // Import the AboutUs component
 
 import Signup from './components/user/Signup'
+import { Provider } from 'react-redux'; // Import the Provider component
+
+import {BrowserRouter, Routes, Route, Form} from 'react-router-dom'
+import Signup from './components/user/Signup'
+import AboutUs from './components/pages/aboutus'; // Import the AboutUs component
+import {store  } from './components/store/config'; // Import the entire config object
+
+
 import Login from './components/user/Login'
 import Dashboard from './components/backend/Dashboard'
 import HomePage from './components/user/HomePage'
 import ShowUsers from './components/user/ShowUsers'
 import UpdateUsers from './components/user/UpdateUsers'
 import UserProfiles from './components/user/userprofiles'
+
+import FormBuilderComponent from './components/form/FormBuilder';
+import FormList from './components/form/FormList'
 import MyProfile from './components/user/MyProfile'
 import ShowProjects from './components/project/showProjects';
 import CreateProjectt from './components/project/createProjectt';
-import UpdateProject from './components/project/updateProject';  
-import HomeProject from './components/project/homeProject';  
+import UpdateProject from './components/project/updateProject';  // Import the UpdateProject component
+import HomeProject from './components/project/homeProject';  // Import the HomeProject component
 import ShowProject from './components/project/showProject';
 import Index from './components/template/index'
 import HomeSub from './components/template/homeSubadmin'
@@ -60,6 +67,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Provider>
+
   )
 }
 
