@@ -29,6 +29,8 @@ background: linear-gradient(0deg, #a2bdd2 0%, #1d759a 100%);}
 
 /* Styles pour l'en-tête */
 .chat-header {
+  align-items: center;
+  justify-content: center;
   margin-top: -10px;
   background-color: #0084ff;
   color: white;
@@ -46,6 +48,11 @@ background: linear-gradient(0deg, #a2bdd2 0%, #1d759a 100%);}
 
   border-radius: 0px 20px 0px 20px  ;
 
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
 }
 
 /* Styles pour la zone de chat */
@@ -405,3 +412,58 @@ padding: 30px;
   width: 0 !important; /* Masquer la barre de défilement verticale */
   height: 0 !important; /* Masquer la barre de défilement horizontale */
 }
+
+
+/* ChatBox.css */
+
+.user-list-item.unread {
+  position: relative;
+}
+
+.user-list-item.unread::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red !important;
+}
+
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  margin-top: -12px;
+  margin-left: 32%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.username {
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+
+.search-wrapper {
+  position: relative;
+}
+
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 40px; /* Ajustez selon la position souhaitée */
+  top: 71%;
+  color: #555; /* Couleur de l'icône */
+}
+

@@ -6,8 +6,7 @@ import { Popup } from 'react-chat-elements'
 import { ChatItem } from 'react-chat-elements'
 
 import io from "socket.io-client";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 import Chat from '../Chat/chat';
 import './ChatBox.css';
 import { useParams } from 'react-router-dom';
@@ -167,12 +166,7 @@ export default function ChatBox() {
       <div className='chatpage row'>
         <div className='coloo3 col-md-3'>
           <div className='header-test'>
-            <div className='search-container'>
-              <div className='search-wrapper'>
-                <input className='search' placeholder='Search' />
-                <FontAwesomeIcon icon={faSearch} className='search-icon' />
-              </div>
-            </div>
+           
             <div className="joinChatContainer">
               <div>
                 <ChatList
@@ -188,7 +182,7 @@ export default function ChatBox() {
         <div className='colooo6 col-md-6'>
           <div className='contenu'>
             <div className='chat-container'>
-              <Chat socket={socket} username={user1Id} room={roomData.roomId} />
+              <Chat socket={socket} username={user1Id} room={roomData.roomId} user2={user2Id} />
             </div>
           </div>
         </div>
