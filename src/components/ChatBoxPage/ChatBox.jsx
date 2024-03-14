@@ -1,12 +1,18 @@
+// ChatBox.js
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Popup } from 'react-chat-elements'
+import { ChatItem } from 'react-chat-elements'
+
 import io from "socket.io-client";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Chat from '../Chat/chat';
 import './ChatBox.css';
 import { useParams } from 'react-router-dom';
-import NavbarSub from '../template/navbarSubadmin'
+import NavbarSub from '../template/navbarSubadmin';
+import ChatList from '../ChatList/chatList';
 
 const socket = io.connect("http://localhost:3001", {
   transports: ['websocket'],
@@ -24,6 +30,7 @@ export default function ChatBox() {
   const [user2Id, setUser2Id] = useState(iduserselection);
 
   const [userRooms, setUserRooms] = useState([]);
+  const [unreadConversations, setUnreadConversations] = useState([]);
 
   const getUsersNames = async (userIds) => {
     try {
@@ -81,7 +88,7 @@ export default function ChatBox() {
 
     // Appeler joinRoom automatiquement au chargement du composant
     joinRoom();
-  }, []); // Dépendance vide, donc il ne se déclenchera qu'une fois au chargement
+  }, [user1Id, user2Id]); // Ajout des dépendances user1Id et user2Id
 
   const getExistingRoomId = async (userId1, userId2) => {
     try {
@@ -136,30 +143,43 @@ export default function ChatBox() {
     }
   };
 
+  const handleNewMessage = (roomId) => {
+    if (!unreadConversations.includes(roomId)) {
+      setUnreadConversations((prevUnread) => [...prevUnread, roomId]);
+    }
+  };
+
+  useEffect(() => {
+    // Écoutez l'événement 'new_message' pour gérer les nouveaux messages
+    socket.on('new_message', ({ roomId }) => {
+      handleNewMessage(roomId);
+    });
+
+    return () => {
+      // Nettoyez l'écouteur lors du démontage du composant
+      socket.off('new_message');
+    };
+  }, [unreadConversations]);
+
   return (
     <>
-    <NavbarSub/>
+      <NavbarSub />
       <div className='chatpage row'>
         <div className='coloo3 col-md-3'>
-          <div className='header'>
+          <div className='header-test'>
             <div className='search-container'>
-              <FontAwesomeIcon icon={faSearch} className='search-icon' />
-              <input className='search' placeholder='Search' />
-              <FontAwesomeIcon icon={faSync} className='loop-icon' />
+              <div className='search-wrapper'>
+                <input className='search' placeholder='Search' />
+                <FontAwesomeIcon icon={faSearch} className='search-icon' />
+              </div>
             </div>
             <div className="joinChatContainer">
               <div>
-                <div className='Liste'>
-                  <h4>Utilisateurs avec lesquels vous avez discuté :</h4>
-                  <ul>
-                    {userRooms.map((userId, index) => (
-                      <li key={index} className="user-list-item" onClick={() => joinRoomWithUser(userId)}>
-                        <img src={`../../../public/ChatImage/-person_90382.png`} alt="user" className="user-image" />
-                        {userId}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ChatList
+                  userRooms={userRooms}
+                  joinRoomWithUser={joinRoomWithUser}
+                  unreadConversations={unreadConversations}
+                />
               </div>
             </div>
           </div>
@@ -172,7 +192,9 @@ export default function ChatBox() {
             </div>
           </div>
         </div>
-        <div className='coloo2 col-md-2'>Liste d'amis !!</div>
+        <div className='coloo2 col-md-2'>
+          
+        </div>
       </div>
     </>
   );
