@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import Dashboard from "../backend/Dashboard";
 import { FaEdit, FaTrash } from 'react-icons/fa'; 
 import axiosInstance from '../../axiosInstance'; // Import the customized Axios instance
+import Sidebar from "../backend/sidebar";
 
 function ShowUsers(){
     const [users, setUsers]= useState([]);
@@ -78,57 +78,55 @@ function ShowUsers(){
       };
     return (
         <div>
-            <Dashboard /> {/* Include the Sidebar component */}
-            <div className="main-content d-flex justify-content-center align-items-center">
-                <div className=" vh-100 overflow-auto">
-                    <div className="w-100 bg-white rounded p-3">
+        <Sidebar /> {/* Include the Sidebar component */}
+        <div className="main-content ">
+            <div className="w-100 vh-100 overflow-auto">
+                <div className=" bg-white rounded p-3">
+                        <div class="white_shd full margin_bottom_30">
+                           
+                            <div class="table_section ">
+                                <div class="table-responsive-sm">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Email</th>
+                                                <th>Gender</th>
+                                                <th>Action</th>
 
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                <th>Profile Image</th> 
-                                    <th>Name</th>
-                                    <th>LastName</th>
-                                    <th>Email</th>
-                                    <th>Gender</th>
-                                    <th>Birthdate</th>
-                                    <th>Role</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {users.map((user) => (
-                                    <tr key={user._id}>
-                                        <td>
-                                            {/* Display profile image if available */}
-                                            {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
-                                        </td>
-                                        <td>{user.name}</td>
-                                        <td>{user.lastname}</td>
-                                        <td>{user.email}</td>
-                                        <td>{user.gender}</td>
-                                        <td>{user.birthdate}</td>
-                                        <td>{user.role}</td>
-                                        <td>
-                                            {(user.role === "participant" || user.role === "coordinator") && (
-                                                <button className="btn btn-primary" onClick={() => updateUserRole(user._id)}>
-                                                    {user.role === "participant" ? "Coordinator" : "Undo"}
-                                                </button>
-                                            )}
-                                        </td>
-                                        <td>
-                                        <Link to={`/updateUser/${user._id}`} className="btn btn-success mr-2"><FaEdit /></Link>
-                                    <button className="btn btn-danger" onClick={() => deleteUser(user._id)}><FaTrash /> </button>
-                                </td>
-
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {users.map((user) => (
+                                                <tr key={user._id}>
+                                                    <td style={{ maxWidth: '50px' }}>
+                                                        {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%',marginRight:'5px' }} />}
+                                                         {user.name} {user.lastname}
+                                                    </td>
+                                                    <td style={{ maxWidth: '60px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.email}</td>
+                                                    <td>{user.gender}</td>
+                                                    <td style={{ maxWidth: '60px'}}>
+                                                        {(user.role === "participant" || user.role === "coordinator") && (
+                                                            <button className="btn btn-primary" onClick={() => updateUserRole(user._id)}>
+                                                                {user.role === "participant" ? "Coordinator" : "Undo"}
+                                                            </button>
+                                                        )}
+                                                    
+                                                        <Link to={`/updateProfile/${user._id}`} className="btn btn-success mr-2" style={{color:'white'}}><FaEdit /></Link>
+                                                        <button className="btn btn-danger" onClick={() => deleteUser(user._id)} style={{color:'red'}}><FaTrash /></button>
+                                                        </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    
     );
 }
 

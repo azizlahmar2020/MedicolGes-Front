@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import Link, useLocation, and useNavigate
 import LogoM from '../../assets/img/namem.png'; // Adjust image import path
@@ -7,6 +8,9 @@ const NavbarSub = () => {
     const location = useLocation(); // Get current location
     const [activeItem, setActiveItem] = useState(location.pathname); // Initialize active menu item with current pathname
     const navigate = useNavigate(); // Initialize navigate function
+    const [userName, setUserName] = useState('');
+    const [userLastName, setUserLastName] = useState('');
+    const [userImage, setUserImage] = useState('');
 
     // Function to handle click on menu items
     const handleClick = (path) => {
@@ -19,6 +23,40 @@ const NavbarSub = () => {
         sessionStorage.removeItem('token'); // Clear session token
         navigate('/index'); // Redirect to index page
     };
+    
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const token = sessionStorage.getItem('token');
+                console.log('Token:', token); // Log the token for debugging
+                if (!token) {
+                    navigate('/login');
+                    return;
+                }
+
+                const response = await axios.get('http://localhost:3001/auth/myprofile', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response data:', response.data);
+
+                // Assuming the response data structure contains user name and image URL
+                setUserName(response.data.name); // Set user name
+                setUserLastName(response.data.lastname); // Set user name
+                setUserImage(response.data.profileImage); // Set user image URL
+            } catch (error) {
+                console.log('Error:', error.message);
+                if (error.response && error.response.status === 401) {
+                    // Unauthorized, redirect to login
+                    navigate('/login');
+                }
+            }
+        };
+        fetchProfile();
+    }, [navigate]);
 
     return (
         <header className="header">
@@ -59,12 +97,15 @@ const NavbarSub = () => {
                                 </div>
                             </div>
                             <div className="col-lg-2 col-12">
-                                <div className="get-quote">
-                                    {/* Logout Button */}
-                                    <button onClick={handleLogout} className="btn-logout" style={{width:'150px', height:'40px', marginTop:'10px', 
-                                    backgroundColor:'#0B8FAD',color:'white', borderRadius:'20px'}}>Logout</button>
-
-                                </div>
+                                        <div className="user-info" style={{ display: 'flex', alignItems: 'right' }}>
+                    {userImage && <img src={`http://localhost:3001/profiles/${userImage}`} alt="Profile" style={{ width: '60px', height: '60px', borderRadius: '50%', marginTop: '10px', marginRight: '10px' }} />}
+                    <span className="user-name">      
+                    <Link to="/myprofile">{userName} {userLastName}</Link>
+                    </span>
+                    <div className="logout-icon" onClick={handleLogout} style={{ cursor: 'pointer', marginLeft: '10px' }}>
+                    <FaSignOutAlt size={20} />
+                </div>
+                </div>
                             </div>
                         </div>
                     </div>
