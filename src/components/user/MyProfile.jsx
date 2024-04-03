@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { FaUser, FaTransgender, FaBirthdayCake } from 'react-icons/fa';
+import { useNavigate , Link} from 'react-router-dom';
+import { FaUser, FaTransgender, FaBirthdayCake, FaCog } from 'react-icons/fa';
 import Navbar from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
@@ -17,12 +17,10 @@ function MyProfile() {
             try {
                 const token = sessionStorage.getItem('token');
                 console.log('Token:', token); // Add this line to log the token
-
                 if (!token) {
                     navigate('/login');
                     return;
                 }
-
                 try {
                     // Log request headers before making the request
                     console.log('Request headers before fetch:', {
@@ -80,11 +78,11 @@ function MyProfile() {
                                             <h4>{user.name} {user.lastname}</h4>
                                             <p className="text-secondary mb-1">{user.role}</p>
                                             <p className="text-muted font-size-sm">{user.email}</p>
-                                            {user.role === "sub-admin" && (
-                                                <button className="btn btn-outline-primary" onClick={() => navigate('/homeprojects')}>Projects</button>
-                                            )}
-                                                <button className="btn btn-outline-primary">Chat</button>
-                                            </div>
+                                            <Link to={`/editProfile/${user._id}`} className="btn btn-success mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
+                                                    <FaCog className="mr-2" />Settings
+                                                </Link>
+                                           </div>
+
                                     </div>
                                 </div>
                             </div>

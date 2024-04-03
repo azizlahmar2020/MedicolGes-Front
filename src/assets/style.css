@@ -389,12 +389,12 @@ body{
 	margin-right:0px;
 }
 .header .top-link li a{
-	color:#2C2D3F;
+	color:#7ac0b8;
 	font-size:14px;
 	font-weight:400;
 }
 .header .top-link li:hover a{
-	color:#1A76D1;
+	color:#7ac0b8;
 }
 .header .top-contact{
 	float:right;
@@ -411,10 +411,10 @@ body{
 	font-size:14px;
 }
 .header .top-contact li a:hover{
-	color:#1A76D1;
+	color:#7ac0b8;
 }
 .header .top-contact li i{
-	color:#1A76D1;
+	color:#7ac0b8;
 	margin-right:8px;
 }
 .header .header-inner {
@@ -465,7 +465,7 @@ body{
 	bottom: 0;
 	height: 3px;
 	width:0%;
-	background: #1A76D1;
+	background: #088fad;
 	border-radius: 5px 5px 0 0;
 	opacity:0;
 	visibility:hidden;
@@ -479,7 +479,7 @@ body{
 	width: 100%;
 }
 .header .nav li.active a{
-	color:#1A76D1;
+	color:#088fad;
 }
 .header .nav li:hover a:before{
 	opacity:1;
@@ -729,12 +729,22 @@ body{
 .slider .single-slider .text{
 	margin-top:120px;
 }
+.index-p{
+	font-size: 19px;
+	color: #2C2D3F !important;
+}
+.index-h1{
+	font-size: 40px !important;
+
+}
+
 .slider.index2 .single-slider .text{
 	margin-top:150px;
 }
 .slider .single-slider h1 {
-	color: #2C2D3F;
-	font-size: 38px;
+	color: #2C2D3F !important;
+	font-size: 40px;
+	
 	font-weight: 700;
 	margin: 0;
 	padding: 0;
@@ -4099,7 +4109,7 @@ body{
 .footer .footer-top{
 	padding:100px 0px;
 	position:relative;
-	background:#1A76D1;
+	background:#088fad;
 }
 .footer .footer-top:before{
 	position:absolute;
@@ -4297,6 +4307,69 @@ body{
 	display:inline-block;
 	margin-left:4px;
 }
+
+
+/*KOL HAJA BEIGE NBADDELHA LEHNE */ 
+
+
+
+.about-us-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #176ABC; /* Light gray background */
+}
+
+/* Style for the heading */
+.about-us-container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: white; /* Blue heading color */
+	margin-bottom: 100px;
+	margin-top: 20px;
+}
+
+/* Style for the image section */
+.image-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Style for individual image wrapper */
+.image-wrapper {
+    width: 250px;
+    margin: 20px;
+    background-color: white; /* White background for each card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Style for the image */
+.image-wrapper img {
+    width: 100%;
+    border-radius: 8px 8px 0 0; /* Rounded top corners for the image */
+}
+
+/* Style for the paragraph */
+.image-wrapper p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Style for card footer */
+.card-footer {
+    padding: 10px;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+/* Style for font awesome icons */
+.card-footer svg {
+    font-size: 24px;
+    color: #0056b3; /* Blue color for icons */
+    margin: 0 5px; /* Add spacing between icons */
+}
+
   /*=========================
 	End Footer CSS
 ===========================*/

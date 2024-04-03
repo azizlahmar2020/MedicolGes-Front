@@ -209,9 +209,7 @@ function FeedbackForm() {
                         <Form.Text muted className="cardtext">
                             We will work towards improving your experience
                         </Form.Text>
-                        <div className='padding30px'>
-                            <Button className='btn_purps'  onClick={()=>window.location.href='/submissions'}>Close</Button>
-                        </div>
+                        
                     </Card.Body>
                 </Card>
             )}

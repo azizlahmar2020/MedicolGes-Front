@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { FaEdit, FaTrash, FaUser, FaFileAlt, FaTasks, FaCog, FaArrowLeft } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaUser, FaFileAlt, FaTasks, FaCog, FaArrowLeft,FaEye } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';  // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css';  // Import the default styles for react-toastify
-import Footer from "/src/components/template/footer";
-import NavbarSub from '../template/navbarSubadmin';
+import Sidebar from "../backend/sidebar";
 
 function ShowProjects() {
     const [projects, setProjects] = useState([]);
@@ -47,57 +46,54 @@ function ShowProjects() {
 
     return (
         <div>
-            <NavbarSub/>
-            <div className="main-content d-flex justify-content-center align-items-center">
-                <div className=" vh-100 overflow-auto">
-                    <div className="w-100 bg-white rounded p-3">
-                        <Link to="/homeprojects" className="go-back-btn">
-                            <FaArrowLeft /> Go Back
-                        </Link>
-                        <h3>List Of Projects</h3>
-
-                        {/* React-toastify container */}
-                        <ToastContainer position="top-right" autoClose={3000} />
-
-                        {successMessage && <p className="text-success">{successMessage}</p>}
-
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th><FaFileAlt /> Name</th>
-                                    <th><FaTasks /> Description</th>
-                                    <th><FaUser /> Responsable</th>
-                                    <th><FaCog /> Domaine</th>
-                                    <th>Actions</th>
+        <Sidebar /> {/* Include the Sidebar component */}
+    
+        <div className="main-content d-flex justify-content-center align-items-center">
+            <div className="vh-100 overflow-auto">
+                <div className="w-75 bg-white rounded p-3" style={{ backgroundColor: '#088fad' }}>
+    
+                    {/* React-toastify container */}
+                    <ToastContainer position="top-right" autoClose={3000} />
+    
+                    {successMessage && <p className="text-success">{successMessage}</p>}
+    
+                    <table className="table table-bordered">
+                    <thead style={{ backgroundColor: '#088fad', color: 'white' }}>
+                            <tr>
+                                <th><FaFileAlt /> Name</th>
+                                <th><FaTasks /> Description</th>
+                                <th><FaUser /> Responsable</th>
+                                <th><FaCog /> Domaine</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {projects.map((project) => (
+                                <tr key={project._id}>
+                                    <td style={{ minWidth: '200px' }}>{project.nom}</td>
+                                    <td style={{ minWidth: '400px' }}>{project.desc}</td>
+                                    <td style={{ minWidth: '200px' }}>{project.responsable}</td>
+                                    <td style={{ minWidth: '200px' }}>{project.domaine}</td>
+                                    <td style={{ minWidth: '200px' }}>
+                                        <Link to={`/updateProject/${project._id}`} className="btn btn-success btn-sm mr-1">
+                                            <FaEdit /> 
+                                        </Link>
+                                        <button onClick={() => handleDelete(project._id, project.nom)} className="btn btn-danger btn-sm mr-1" style={{color :'red'}}>
+                                            <FaTrash /> 
+                                        </button>
+                                        <Link to={`/showProject/${project._id}`} className="btn btn-primary btn-sm"style={{color :'#088fad'}}>
+                                            <FaEye/>
+                                        </Link>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {projects.map((project) => (
-                                    <tr key={project._id}>
-                                        <td>{project.nom}</td>
-                                        <td>{project.desc}</td>
-                                        <td>{project.responsable}</td>
-                                        <td>{project.domaine}</td>
-                                        <td>
-                                            <Link to={`/updateProject/${project._id}`} className="btn btn-success">
-                                                <FaEdit /> Edit
-                                            </Link>
-                                            <button onClick={() => handleDelete(project._id, project.nom)} className="btn btn-danger">
-                                                <FaTrash /> Delete
-                                            </button>
-                                            <Link to={`/showProject/${project._id}`} className="btn btn-primary">
-                                                Details
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <Footer/>
         </div>
+    </div>
+    
     );
 }
 

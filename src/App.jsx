@@ -26,7 +26,13 @@ import CreateForm from './components/pages/FormCreationPage/CreateForm'
 import ListForm from './components/pages/FormListingPage/FormListing'
 import FormResponse from './components/pages/FormResponsePage/FormResponse';
 import FeedbackForm from './components/feedback/form';
+import AboutUs from './components/pages/aboutus'; // Import the AboutUs component
+import Feed from './components/feed/feed'; // Import the Feed component
 import './components/feedback/custom.css'
+import ResetPasswordPage from './components/user/ResetPassword';
+import ForgotPassword from './components/user/ForgotPassword';
+import EditProfile from './components/user/EditProfile';
+
 function App() {
   return (
     <Provider store={store}> {/* Wrap your entire app with the Provider */}
@@ -38,7 +44,6 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}></Route>
           <Route path='/homepage' element={<HomePage/>}></Route>
           <Route path='/showUsers' element={<ShowUsers/>}></Route>
-          <Route path='/updateUser/:id' element={<UpdateUsers/>}></Route>
           <Route path='/listprofiles' element={<UserProfiles/>}></Route>
           <Route path='/myprofile' element={<MyProfile />} />
           <Route path='/showProjects' element={<ShowProjects/>}></Route>
@@ -58,6 +63,13 @@ function App() {
           <Route path="/feedback" element={<FeedbackForm />} />
           <Route path="/submissions" element={<Submissions />} />
             <Route path="/submission/:id" element={<Submissions />} />
+            <Route path='/aboutus' element={<AboutUs />} />
+          <Route path='/updateProfile/:id' element={<UpdateUsers/>}/>
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/forgot-password" element={<ForgotPassword/>} />
+          <Route path='/editProfile/:id' element={<EditProfile/>}/>
+          <Route path='/feed' element={<Feed />} />
+
 
         </Routes>
       </BrowserRouter>

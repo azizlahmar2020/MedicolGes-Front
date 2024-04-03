@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles.css';
+import Navbar from "../template/navbarGeneral";
+import Footer from "../template/footer";
 
 
 function HomePage() {
   return (
+    <div>
+    <Navbar/>
     <div className='container' style={{backgroundColor:''}}>
-      <h2 style={{marginTop:'100px' ,marginBottom:'50px',textAlign: 'center' }}>Register As :</h2>
+      <h2 style={{marginTop:'50px' ,marginBottom:'50px',textAlign: 'center' }}>Register As :</h2>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <Link to="/register/sub-admin" style={{ textDecoration: 'none', display: 'inline-block' }}>
           <div className="card" style={{ width: '300px' }}>
@@ -36,6 +40,8 @@ function HomePage() {
           </div>
         </Link>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 }

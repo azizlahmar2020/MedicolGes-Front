@@ -1,8 +1,9 @@
 import React from 'react';
 
+
 const Footer = () => {
     return (
-        <footer id="footer" className="footer ">
+        <footer id="footer" className="footer " >
         <div className="footer-top">
             <div className="container">
                 <div className="row">
@@ -57,7 +58,7 @@ const Footer = () => {
                     </div>
                     <div className="col-lg-3 col-md-6 col-12">
                         <div className="single-footer">
-                            <h2>Newsletter</h2>
+                            <h2>MediColGes</h2>
                             <p>subscribe to our newsletter to get allour news in your inbox.. Lorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
                             <form action="mail/mail.php" method="get" target="_blank" className="newsletter-inner">
                                 <input name="email" placeholder="Email Address" className="common-input" onFocus="this.placeholder = ''"
