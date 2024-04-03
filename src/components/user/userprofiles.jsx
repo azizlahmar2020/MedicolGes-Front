@@ -11,6 +11,7 @@ import ChatBox from "../ChatBoxPage/ChatBox";
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance'; // Import the customized Axios instance
 import "./userprofiles.css"; // Import CSS file for custom styles
+
 import AjoutRdv from "../Rdv/AddRdv";
 import { Button, Modal } from "react-bootstrap";
 
@@ -80,19 +81,12 @@ function UserProfiles() {
     };
     return (
         <div>
-        <NavbarSub/>
+        <NavbarSub />
         <div className="container">
-
-            <div className="row">
-                {/* Showing Candidates */}
-                <div className="row mb-4">
-    <div className="col-12 text-center">
-        <h6 className="mb-0" style={{ color: '#1A76D1',fontSize: '24px' }}>We have a total of {users.length} Candidates</h6>
-    </div>
-</div>
-                {/* Candidate Cards */}
+            <div className="row mb-4">
                 <div className="row">
                     {users.map(user => (
+
                         <div className="col-sm-6 col-lg-6 mb-4 candidate-list" key={user._id}>
                             <div className="candidate-list-image">
                                 {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '300px', height: '100px', borderRadius: '50%' }} />}
@@ -136,6 +130,14 @@ function UserProfiles() {
 </button>
 
 
+                                    <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                                        <span><i className="fa fa-twitter"></i></span>
+                                        <span><i className="fa fa-facebook-f"></i></span>
+                                        <span><i className="fa fa-instagram"></i></span>
+                                        <span><i className="fa fa-linkedin"></i></span>
+                                    </div>
+                                    <div className="px-2 rounded mt-4 date">
+                                        <span className="join">Joined May, 2021</span>
                                     </div>
                                 </div>
                             </div>
@@ -145,9 +147,10 @@ function UserProfiles() {
               
             </div>
         </div>
-                        <Footer/>
-        </div>
-    );
+        <Footer />
+    </div>
+);
 }
+
 
 export default UserProfiles;

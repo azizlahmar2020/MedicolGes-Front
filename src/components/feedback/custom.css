@@ -60,18 +60,24 @@
 
   }
   .form-check-input:checked {
-    background-color: #993c9a !important;
+    background-color: #0B8FAD !important;
+
     border-color: #938b93 !important;
   }
   
   .btn_purp {
+    width: 200px;
+    height: 40px;
+    background-color: #0B8FAD;
     --bs-btn-border-color: #00a6fb !important;
     --bs-btn-bg: #00a6fb !important;
-    margin-left: 550px;
+    margin-left: 520px;
   }
   
   .card-header,thead {
-    background-color: rgb(161 3 244 / 3%) !important;
+    color: white;
+    background-color: #0B8FAD!important;
+
   }
   
   .alert-danger{
