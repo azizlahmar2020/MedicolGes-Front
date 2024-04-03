@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useNavigate, useLocation } from "react-router-dom";
-
+import './signup.css';
 function Signup() {
     const [name, setName] = useState("");
     const [lastname, setLastname] = useState("");
@@ -53,50 +53,41 @@ function Signup() {
 
     return (
         <section className="signup">
-            <link rel="stylesheet" type="text/css" href="/css/style.css" />
+            <link rel="stylesheet" type="text/css" href="/css/signup.css" />
             <div className="container">
                 <div className="signup-content">
                     <div className="signup-form">
-                        <h2 className="form-title">Sign up</h2>
+                        <h2 className="form-title">Sign up <i className="zmdi zmdi-account-add"></i></h2>
                         <form onSubmit={handleSubmit} className="register-form" id="register-form">
                             <div className="form-group">
-                                <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name" onChange={(e) => setName(e.target.value)} />
+                                <div className="name-group">
+                                    <input type="text" name="name" id="name" placeholder="Your Name" onChange={(e) => setName(e.target.value)} />
+                                    <input type="text" name="lastname" id="lastname" placeholder="Your Lastname" onChange={(e) => setLastname(e.target.value)} />
+                                </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="lastname"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="lastname" id="lastname" placeholder="Your Lastname" onChange={(e) => setLastname(e.target.value)} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email"><i className="zmdi zmdi-email"></i></label>
                                 <input type="email" name="email" id="email" placeholder="Your Email" onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password"><i className="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="confirmPassword"><i className="zmdi zmdi-lock-outline"></i></label>
                                 <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Repeat your password" onChange={(e) => setConfirmPassword(e.target.value)} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="gender"><i className="zmdi zmdi-male-female"></i></label>
                                 <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)} style={{ width: '100%', padding: '3px', fontSize: '16px' }} className="select-gender">
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 </select>
-
                             </div>
                             <div className="form-group">
-                                <label htmlFor="birthdate"><i className="zmdi zmdi-calendar"></i></label>
                                 <input type="date" name="birthdate" id="birthdate" onChange={(e) => setBirthdate(e.target.value)} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="profileImage"><i className="zmdi zmdi-image"></i></label>
                                 <input type="file" name="profileImage" id="profileImage" onChange={(e) => setProfileImage(e.target.files[0])} />
                             </div>
                             <div className="form-group form-button">
-                                <input type="submit" name="signup" id="signup" className="form-submit" value="Register" />
+                                <input type="submit" name="signup" id="signup" className="form-submit-reg" value="Register" />
                             </div>
                         </form>
                     </div>

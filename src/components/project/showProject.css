@@ -1,0 +1,33 @@
+.title-p{
+    color: #1A76D1;
+    margin-left: 350px;
+}
+
+
+.table-transparent {
+    background-color: #1A76D1 ;
+    margin-top: 80px;
+    margin-left: 20px;
+    margin-bottom: 140px;
+  }
+  
+  .table-transparent th,
+  .table-transparent td {
+    border-color: #1A76D1;
+  }
+  
+  .table-transparent th {
+    font-weight: bold;
+  }
+  .btn-pf{
+    background-color:#1A76D1 !important;
+    color: white !important;
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+  }
+  .btn-pf:hover {
+
+	background-color: #333 !important
+    ; /* lighter shade of blue */
+  }

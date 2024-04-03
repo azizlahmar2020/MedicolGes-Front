@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Popup } from 'react-chat-elements'
 import { ChatItem } from 'react-chat-elements'
+import Footer from "/src/components/template/footer";
 
 import io from "socket.io-client";
 
@@ -12,7 +13,9 @@ import './ChatBox.css';
 import { useParams } from 'react-router-dom';
 import NavbarSub from '../template/navbarSubadmin';
 import ChatList from '../ChatList/chatList';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import VideoCall from '../VideoChat/HomeVideo'
 const socket = io.connect("http://localhost:3001", {
   transports: ['websocket'],
 });
@@ -27,24 +30,15 @@ export default function ChatBox() {
 
   const [user1Id, setUser1Id] = useState(idsession);
   const [user2Id, setUser2Id] = useState(iduserselection);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const [user2name, setUser2name] = useState(user2Id);
 
   const [userRooms, setUserRooms] = useState([]);
   const [unreadConversations, setUnreadConversations] = useState([]);
 
-  const getUsersNames = async (userIds) => {
-    try {
-      const response = await axios.post('http://localhost:3001/Chat/getUsersNames', { userIds });
-      if (!response.ok) {
-        throw new Error(`Error in response: ${response.status} - ${response.statusText}`);
-      }
+ 
 
-      const data = await response.json();
-      return data.userNames;
-    } catch (error) {
-      console.error("Error fetching user names:", error.message);
-      return [];
-    }
-  };
 
   const getRoomsForUser = async (userId) => {
     try {
@@ -122,7 +116,8 @@ export default function ChatBox() {
   const joinRoomWithUser = async (selectedUserId) => {
     try {
       const existingRoomId = await getExistingRoomId(user1Id, selectedUserId);
-
+      console.log(selectedUserId);
+      setUser2name(selectedUserId)
       if (existingRoomId) {
         socket.emit("join_room", { roomId: existingRoomId });
         setRoomData({ roomId: existingRoomId, showChat: true });
@@ -133,6 +128,7 @@ export default function ChatBox() {
           socket.emit("join_room", { roomId: newRoomData.roomId });
           setRoomData({ roomId: newRoomData.roomId, showChat: true });
           getRoomsForUser(user1Id);
+          setUser1Id(selectedUserId);
         } else {
           throw new Error("Error creating or joining a new room");
         }
@@ -162,8 +158,8 @@ export default function ChatBox() {
 
   return (
     <>
-      <NavbarSub />
-      <div className='chatpage row'>
+     
+      <div className='chatpage row'> <NavbarSub />
         <div className='coloo3 col-md-3'>
           <div className='header-test'>
            
@@ -182,14 +178,17 @@ export default function ChatBox() {
         <div className='colooo6 col-md-6'>
           <div className='contenu'>
             <div className='chat-container'>
-              <Chat socket={socket} username={user1Id} room={roomData.roomId} user2={user2Id} />
+            <Chat socket={socket} username={ user1Id} user2={user2name} room={roomData.roomId} />
             </div>
           </div>
         </div>
         <div className='coloo2 col-md-2'>
-          
+             <VideoCall></VideoCall>
         </div>
-      </div>
+<Footer className='footer' />
+
+
+</div>
     </>
   );
 }

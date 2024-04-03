@@ -10,10 +10,32 @@ import NavbarSub from "../template/navbarSubadmin";
 import ChatBox from "../ChatBoxPage/ChatBox";
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance'; // Import the customized Axios instance
+import "./userprofiles.css"; // Import CSS file for custom styles
+import AjoutRdv from "../Rdv/AddRdv";
+import { Button, Modal } from "react-bootstrap";
+
 
 function UserProfiles() {
     const [users, setUsers] = useState([]);
     const [sessionId, setSessionId] = useState('');
+    const [showModal, setShowModal] = useState(false); // Ajout du nouvel état pour le Modal
+
+    const handleAjoutRdv = async (newRdv) => {
+        try {
+            // Logique pour ajouter le rendez-vous
+            setShowModal(false); // Fermer le Modal après l'ajout
+        } catch (error) {
+            console.error('Erreur lors de l\'ajout du rendez-vous :', error);
+        }
+    };
+
+    const handleOpenModal = () => {
+        setShowModal(true); // Ouvrir le Modal
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false); // Fermer le Modal
+    };
 
     useEffect(() => {
         const fetchSessionId = async () => {
@@ -91,13 +113,27 @@ function UserProfiles() {
                                         </ul>
                                         
 
-                                        <button className="chat-button">
-                        {/* Utilisez la balise Link pour créer un lien vers "/ChatBox" */}
-                        <Link to={`/ChatBox/${sessionId}/${user._id}`} className="btn btn-link">
-                            <FontAwesomeIcon icon={faComment} />
-                            Start Chat
-                        </Link>
-                    </button>
+                                        <button className="custom-chat-button btn btn-link">
+      <Link to={`/ChatBox/${sessionId}/${user._id}`}>
+        <FontAwesomeIcon icon={faComment} />
+        Start Chat
+      </Link>
+    </button>
+
+    <Modal show={showModal} onHide={handleCloseModal}>
+  <Modal.Header closeButton>
+    <Modal.Title>Ajouter un Rendez-vous</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <AjoutRdv handleAjoutRdv={handleAjoutRdv} id={user._id} /> 
+  </Modal.Body>
+  
+</Modal>
+
+<button className="custom-chat-button btn btn-link" onClick={handleOpenModal }>
+    <FontAwesomeIcon icon={faComment} />
+    Ajouter un rendez-vous
+</button>
 
 
                                     </div>
@@ -106,8 +142,7 @@ function UserProfiles() {
                         </div>
                     ))}
                 </div>
-                {/* Pagination */}
-                {/* Add pagination logic here */}
+              
             </div>
         </div>
                         <Footer/>

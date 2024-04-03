@@ -8,7 +8,7 @@ import { CameraFill } from 'react-bootstrap-icons';
 import Modal from 'react-modal';
 import axios from "axios";
 
-function Chat({ socket, username, room ,user2 }) {
+function Chat({ socket, username, room  , user2 }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -99,7 +99,6 @@ function Chat({ socket, username, room ,user2 }) {
   useEffect(() => {
     const receiveMessage = (data) => {
       setMessageList((list) => [...list, data]);
-      console.log("message jee !!", data)
       const chatBody = document.getElementById("chat-body");
       chatBody.scrollTop = chatBody.scrollHeight;
     };
@@ -150,10 +149,9 @@ function Chat({ socket, username, room ,user2 }) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/users/getUser/${user2}`);
+        const response = await axios.get(`http://localhost:3001/users/getUser/${username}`);
         if (response.status === 200) {
           setUserData(response.data); 
-          console.log(response.data)// Stocke les données de l'utilisateur dans l'état
         } else {
           throw new Error("Error fetching user data");
         }
@@ -164,6 +162,22 @@ function Chat({ socket, username, room ,user2 }) {
 
     fetchUser();
   }, [username]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/users/getUser/${user2}`);
+        if (response.status === 200) {
+          setUserData(response.data); 
+        } else {
+          throw new Error("Error fetching user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
+      }
+    };
+
+    fetchUser();
+  }, [user2]);
 
   return (
     <>
@@ -180,11 +194,11 @@ function Chat({ socket, username, room ,user2 }) {
 
         <div id="chat-body" className="chat-body">
           <ScrollToBottom className="message-container">
-          <img src="../../../public/images/image_2024-03-12_014427792.png" alt="user" className="Logochat" />
+          <img src="../../../public/images/nouveau_Logo.png" alt="user" className="Logochat" />
 
             {messageList.map((messageContent, index) => (
               <div
-                className="message"
+                className="message" style={{color:'white'}}
                 id={username === messageContent?.author ? 'you' : 'other'}
                 key={index}
               >
@@ -192,12 +206,12 @@ function Chat({ socket, username, room ,user2 }) {
                   <div>
                     <div className="message-content">
                       {messageContent.message ? (
-                        <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }} style={{color:'white'}}></p>
                       ) : (
                         <img
                           className="image"
                           src={messageContent.image}
-                          style={{ width: '200px', height: '200px' }}
+                          style={{ width: '400px', height: '300px' }}
                           alt="Received Image"
                           onClick={() => openModal(messageContent.image)}
                         />
@@ -218,8 +232,8 @@ function Chat({ socket, username, room ,user2 }) {
           </ScrollToBottom>
         </div>
         <div className="chat-footer">
-          <div className="emoji">
-            <span role="img" aria-label="emoji" onClick={toggleEmojiPicker}>
+          <div className="emoji-Liste">
+            <span className="emoji-btn" role="img" aria-label="emoji"   style={{ height: '27px'  }} onClick={toggleEmojiPicker}>
               &#128515;
             </span>
           </div>

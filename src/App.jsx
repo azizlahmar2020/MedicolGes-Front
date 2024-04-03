@@ -26,7 +26,13 @@ import CreateForm from './components/pages/FormCreationPage/CreateForm'
 import ListForm from './components/pages/FormListingPage/FormListing'
 import FormResponse from './components/pages/FormResponsePage/FormResponse';
 import FeedbackForm from './components/feedback/form';
+import AboutUs from './components/pages/aboutus'; // Import the AboutUs component
+import HomeVideo from './components/VideoChat/HomeVideo'; // Import the Home component
+import Room from './components/VideoChat/Room'; // Import the Room component
 import './components/feedback/custom.css'
+import Rdv from './components/Rdv/ShowRdv';
+import RdvPatient from './components/Rdv/showRdvPatient';
+
 function App() {
   return (
     <Provider store={store}> {/* Wrap your entire app with the Provider */}
@@ -57,7 +63,14 @@ function App() {
           <Route path='/form-response/:id' element={<FormResponse />} /> 
           <Route path="/feedback" element={<FeedbackForm />} />
           <Route path="/submissions" element={<Submissions />} />
-            <Route path="/submission/:id" element={<Submissions />} />
+          <Route path="/submission/:id" element={<Submissions />} />
+          <Route path='/aboutus' element={<AboutUs />} />
+          <Route path="/Video" element={<HomeVideo />} />
+          <Route path="/room/:roomID" element={<Room />} />
+          <Route path="/rdv" element={<Rdv />} />
+          <Route path="/rdvPatient" element={<RdvPatient />} />
+
+
 
         </Routes>
       </BrowserRouter>

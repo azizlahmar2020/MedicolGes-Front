@@ -33,12 +33,12 @@ function HomeSub() {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-7">
-                            <div className="text">
+                            <div className="text" style={{fontSize:'19px'}}>
                             <h1>We Provide <span>Medicol</span> Services That You Can <span>Trust!</span></h1>
                                 <p>We provide medical services that you can trust! Our team is dedicated to conducting thorough medical research to improve patient care and find innovative solutions to healthcare challenges.</p>
                                 <div className="button">
-                                <a href="#" className="btn" style={{ fontSize: '25px', height:'50px', width:'270px', padding:'3px' }}>Get started</a>
-<a href="#" className="btn primary" style={{ fontSize: '22px' , height:'50px', width:'170px', padding:'5px' }}>Login</a>
+                                <a href="/homepage" className="btn" style={{ width: '30%', height: '45px', fontSize: '22px', borderRadius: '4px', paddingTop:'5px' }}>Register Now</a>
+                                    <a href="/login" className="btn primary" style={{width:'20%', height:'45px', fontSize:'20px', paddingTop:'5px',borderRadius: '4px'}}>Login</a>
                                 </div>
                             </div>
                         </div>
@@ -83,23 +83,6 @@ function HomeSub() {
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-12 col-12">
-                        <div className="single-schedule last">
-                            <div className="inner">
-                                <div className="icon">
-                                    <i className="icofont-ui-clock"></i>
-                                </div>
-                                <div className="single-content">
-                                    <span>Donec luctus</span>
-                                    <h4>Opening Hours</h4>
-                                    <ul className="time-sidual">
-                                        <li className="day">Monday - Fridayp <span>8.00-20.00</span></li>
-                                        <li className="day">Saturday <span>9.00-18.30</span></li>
-                                        <li className="day">Monday - Thusday <span>9.00-15.00</span></li>
-                                    </ul>
-                                    <a href="#">LEARN MORE<i className="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -223,14 +206,16 @@ function HomeSub() {
                         fostering advancements in medical care and promoting overall well-being. </p>                       <div className="row">
                             <div className="col-lg-6">
                                 <ul className="list">
-                                    <li><i className="fa fa-caret-right"></i>Sarra Sahli</li>
-                                    <li><i className="fa fa-caret-right"></i>Rayen Jouida</li>
+                                    <li><i className="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
+                                    <li><i className="fa fa-caret-right"></i>Duis massa massa.</li>
+                                    <li><i className="fa fa-caret-right"></i>Aliquam feugiat interdum.</li>
                                 </ul>
                             </div>
                             <div className="col-lg-6">
                                 <ul className="list">
-                                    <li><i className="fa fa-caret-right"></i>Aziz Lahmer </li>
-                                    <li><i className="fa fa-caret-right"></i>Aziz Azizi</li>
+                                    <li><i className="fa fa-caret-right"></i>Maecenas vitae luctus nibh. </li>
+                                    <li><i className="fa fa-caret-right"></i>Duis massa massa.</li>
+                                    <li><i className="fa fa-caret-right"></i>Aliquam feugiat interdum.</li>
                                 </ul>
                             </div>
                         </div>
@@ -388,7 +373,7 @@ function HomeSub() {
             <div className="row">
                 <div className="col-lg-12">
                     <div className="section-title">
-<h2>We Provide You The Best Treatment In Resonable Price</h2>
+                        <h2>We Provide You The Best Treatment In Resonable Price</h2>
                         <img src="./src/assets/img/section-img.png" alt="#"/>
                         <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
                     </div>
