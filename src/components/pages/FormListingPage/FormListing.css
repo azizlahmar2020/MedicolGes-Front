@@ -1,41 +1,128 @@
 .form-listing-container {
-	width: inherit;
-	height: inherit;
-	display: flex;
-	flex-direction: column;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .no-form-text {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 2rem;
 }
 
 .button-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    margin-top: 2rem;
 }
 
 #create-form-btn {
-	cursor: pointer;
-	height: 30px;
-	width: fit-content;
-	border: 1px solid grey;
-	border-radius: 0.625rem;
-	background-color: #f7f7f7;
-	padding: 0px 10px;
+    cursor: pointer;
+    height: 40px;
+    width: 150px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	margin: 5rem 20rem;
+#create-form-btn:hover {
+    background-color: #0056b3;
 }
 
-td,
-th {
-	border: 0.5px solid lightgray;
-	text-align: left;
-	padding: 8px;
+.form-list {
+    width: 90%; /* Adjusted width for the table */
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.form-list th,
+.form-list td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.form-list th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.link-container {
+    display: flex;
+    align-items: center;
+}
+
+.link-container a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.copy-button {
+    margin-left: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.copy-button:hover {
+    transform: scale(1.1);
+}
+.form-list th {
+    background-color: #2b8c7b; /* Updated color */
+    color: #fff; /* Changed text color to white for better contrast */
+}.form-list th {
+    background-color: #2b8c7b; /* Updated color */
+    color: #fff; /* Changed text color to white for better contrast */
+}
+
+#create-form-btn {
+    cursor: pointer;
+    height: 40px;
+    width: 150px;
+    border: none;
+    border-radius: 20px;
+    background-color: #2b8c7b; /* Updated button background color */
+    color: white; /* Text color */
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+	margin-bottom: 70px;
+}
+
+#create-form-btn:hover {
+    background-color: #0056b3;
+}
+.copy-button {
+    margin-left: 1rem;
+	color: #2b8c7b;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.copy-button:hover {
+    transform: scale(1.5);
+    color: black; /* Change color on hover to match table header color */
+}
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	margin-top: 50px;
+    margin-bottom: 1rem;
+}
+
+.title {
+    color: #2b8c7b; /* Color matching table header */
+    font-size: 2.5rem;
+    font-weight: bold;
 }

@@ -3,8 +3,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css'; // Import the react-toastify CSS file
-import { Navbar } from "react-bootstrap";
-import NavbarSub from "../template/navbarSubadmin";
+import NavbarSub from '../template/navbarSubadmin';
+import Footer from "/src/components/template/footer";
+
 
 const CreateProjectt = () => {
   useEffect(() => {
@@ -97,25 +98,15 @@ const CreateProjectt = () => {
 
     return (
         <div>
-            <NavbarSub/>
-            {/* Add meta tags and external CSS links */}
-            <meta charSet="utf-8" />
-            <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>Booking Form HTML Template</title>
-            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet" />
-            <link type="text/css" rel="stylesheet" href="./src/assets/cssproject/bootstrap.min.css" />
-            <link type="text/css" rel="stylesheet" href="./src/assets/cssproject/style.css" />
-            <link rel="stylesheet" type="text/css" href="./src/assets/style.css" />
-
-            <div id="booking" className="section" style={{backgroundImage: `url('./src/assets/img/signup-bg.jpg')`}}>
+            <NavbarSub />
+            <div id="booking" className="section-cp" style={{backgroundImage: `url('./src/assets/img/signup-bg.jpg')`}}>
 
                 <div className="section-center" >
                     <div className="container">
                         <div className="row">
                             <div className="col-md-5">
                                 <div className="booking-cta">
-                                <h1 style={{ color: '#088fad' }}>CREATE YOUR PROJECT</h1>
+                                <h1 style={{ color: '#1A76D1' }}>CREATE YOUR PROJECT</h1>
                                     <p>Medical research plays a crucial role in improving patient care. By conducting research projects, we contribute to the collective effort of finding solutions to complex medical challenges.</p>
                                 </div>
                             </div>
@@ -165,7 +156,7 @@ const CreateProjectt = () => {
                                         </div>
 
                                         <div className="form-btn">
-                                        <button className="submit-btn" type="submit" style={{ backgroundColor: '#088fad', color: 'white', transition: 'background-color 0.3s', cursor: 'pointer' }}>
+                                        <button className="submit-btn" type="submit" style={{ backgroundColor: '#1A76D1', color: 'white', transition: 'background-color 0.3s', cursor: 'pointer' }}>
   Create Project
 </button>
                                         </div>
@@ -176,7 +167,7 @@ const CreateProjectt = () => {
                     </div>
                 </div>
             </div>
-
+            <Footer />
             {/* React-toastify container */}
             <ToastContainer position="top-right" autoClose={3000} />
         </div>

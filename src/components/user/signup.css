@@ -11,12 +11,6 @@
 .signup-form {
     width: 50%;
 }
-/* signup.css */
-.error {
-    font-size: 14px; /* Or whatever size you prefer */
-    color: red; /* Just an example, adjust the color as needed */
-}
-
 
 .form-title {
     padding-left: 110px !important;
