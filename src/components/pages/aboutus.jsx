@@ -15,7 +15,9 @@ const AboutUs = () => {
                 <div className="image-wrapper card">
                     <img src={image1} className="card-img-top" alt="Image 1" />
                     <div className="card-body">
-                        <p className="card-text">Sarra Sahli, a 23 years old girl who's good at everything she does.</p>
+                    <p className="card-text" style={{fontWeight:'bold'}}>Sarra Sahli.</p>
+                        <p>Age : 23</p>
+                        <p>Email: sahli.sarra@esprit.tn</p>
                     </div>
                     <div className="card-footer">
                         <FontAwesomeIcon icon={faFacebook} />
@@ -28,7 +30,9 @@ const AboutUs = () => {
                 <div className="image-wrapper card">
                     <img src={image2} className="card-img-top" alt="Image 2" />
                     <div className="card-body">
-                        <p className="card-text">Rayen Jouida, a 23 years old boy who can beat any ass in ea fc.</p>
+                        <p className="card-text" style={{fontWeight:'bold'}}>Rayen Jouida.</p>
+                        <p>Age : 23</p>
+                        <p>Email: rayen.jouida@esprit.tn</p>
                     </div>
                     <div className="card-footer">
                         <FontAwesomeIcon icon={faFacebook} />
@@ -41,7 +45,9 @@ const AboutUs = () => {
                 <div className="image-wrapper card">
                     <img src={image3} className="card-img-top" alt="Image 3" />
                     <div className="card-body">
-                        <p className="card-text">Aziz Azizi, a 22 years old boy 3andou abann ftayer w s7ifet sohlob feddenya.</p>
+                    <p className="card-text" style={{fontWeight:'bold'}}>Aziz Azizi.</p>
+                        <p>Age : 23</p>
+                        <p>Email: aziz.azizi@esprit.tn</p>
                     </div>
                     <div className="card-footer">
                         <FontAwesomeIcon icon={faFacebook} />
@@ -54,7 +60,9 @@ const AboutUs = () => {
                 <div className="image-wrapper card">
                     <img src={image4} className="card-img-top" alt="Image 4" />
                     <div className="card-body">
-                        <p className="card-text">Aziz Lahmar, haggani.</p>
+                    <p className="card-text" style={{fontWeight:'bold'}}>Mohamed Aziz Lahmar.</p>
+                        <p>Age : 23</p>
+                        <p style={{fontSize:'15px'}}>Email: lahmar.mohamedaziz@esprit.tn</p>
                     </div>
                     <div className="card-footer">
                         <FontAwesomeIcon icon={faFacebook} />

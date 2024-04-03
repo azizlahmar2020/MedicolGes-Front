@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import './login.css';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ function Login() {
 
     return (
         <section className="login">
-            <link rel="stylesheet" type="text/css" href="/css/style.css" />
+            <link rel="stylesheet" type="text/css" href="../../../public/css/style.css" />
             <div className="container text-center" style={{ marginTop: "200px" }}>
                 <div className="row justify-content-center">
                     <div className="col-lg-8">

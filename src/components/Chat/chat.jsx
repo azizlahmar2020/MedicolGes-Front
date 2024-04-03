@@ -184,7 +184,7 @@ function Chat({ socket, username, room ,user2 }) {
 
             {messageList.map((messageContent, index) => (
               <div
-                className="message"
+                className="message" style={{color:'white'}}
                 id={username === messageContent?.author ? 'you' : 'other'}
                 key={index}
               >
@@ -192,7 +192,7 @@ function Chat({ socket, username, room ,user2 }) {
                   <div>
                     <div className="message-content">
                       {messageContent.message ? (
-                        <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }} style={{color:'white'}}></p>
                       ) : (
                         <img
                           className="image"

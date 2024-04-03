@@ -19,8 +19,8 @@ const HomeProject = () => {
                         Explore and manage your projects with ease. Discover how project creations in MediColGes contribute to enriching medical research and advancing healthcare solutions.
                     </p>
                     <div className="mt-4">
-    <Link to="/createProjectt" className="btn btn-blue me-2" style={{ backgroundColor:'#007bff' , color: 'white', paddingTop:'4px',  fontSize: '20px' , height:'40px', width :'250px'  }}>Create a New Project</Link>
-    <Link to="/projectfront" className="btn btn-transparent-blue" style={{ color:'#007bff', backgroundColor:'transparent' ,padding: '1px 24px', fontSize: '18px',height:'40px', width :'350px' ,paddingTop:'4px', }}>Take a Look at Your Previous Projects</Link>
+    <Link to="/createProjectt" className="btn btn-blue me-2" style={{ backgroundColor:'#2b8c7b' , color: 'white', paddingTop:'4px',  fontSize: '20px' , height:'40px', width :'250px'  }}>Create a New Project</Link>
+    <Link to="/projectfront" className="btn btn-transparent-blue" style={{ color:'#2b8c7b', backgroundColor:'transparent' ,padding: '1px 24px', fontSize: '18px',height:'40px', width :'350px' ,paddingTop:'4px', }}>Take a Look at Your Previous Projects</Link>
 </div>
                 </div>
                 <div className="col-md-6">
@@ -45,7 +45,7 @@ const HomeProject = () => {
                     Enhance project efficiency by creating custom forms tailored to your specific project needs. These custom forms can streamline data collection, improve collaboration among team members, and ultimately contribute to the success of your projects.
                     </p>
                     <div className="mt-4">
-                    <Link to="/list-form" className="btn btn-blue me-2" style={{ backgroundColor:'#007bff' , color: 'white', paddingTop:'4px',  fontSize: '20px' , height:'40px', width :'250px'  }}>Explore Custom Forms</Link>
+                    <Link to="/list-form" className="btn btn-blue me-2" style={{ backgroundColor:'#2b8c7b' , color: 'white', paddingTop:'4px',  fontSize: '20px' , height:'40px', width :'250px'  }}>Explore Custom Forms</Link>
                         {/* Add another Link if needed */}
                     </div>
                 </div>

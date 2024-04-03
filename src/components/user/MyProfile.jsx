@@ -5,7 +5,7 @@ import { FaUser, FaTransgender, FaBirthdayCake } from 'react-icons/fa';
 import Navbar from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
-
+import './myprofile.css';
 function MyProfile() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -81,14 +81,15 @@ function MyProfile() {
                                             <p className="text-secondary mb-1">{user.role}</p>
                                             <p className="text-muted font-size-sm">{user.email}</p>
                                             {user.role === "sub-admin" && (
-                                                <button className="btn btn-outline-primary" onClick={() => navigate('/homeprojects')}>Projects</button>
+                                                <button className="btn btn-outline-primary" onClick={() => navigate('/projectfront')} style={{backgroundColor:'#2b8c7b', color:'white', width:'200px', height:'40px', borderRadius:'5px', borderColor:'white'}}>Projects</button>
                                             )}
-                                                <button className="btn btn-outline-primary">Chat</button>
+                                                <button className="btn btn-outline-primary" style={{backgroundColor:'#2b8c7b', color:'white', width:'100px', height:'40px', borderRadius:'5px', borderColor:'white'}}>Chat</button>
                                             </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <div className="col-md-8">
                             {/* Card with user details */}
                             <div className="card mb-3" style={{ backgroundColor: 'white', padding: '155px', borderRadius: '10px' }}>
@@ -119,14 +120,20 @@ function MyProfile() {
                                             {user.birthdate}
                                         </div>
                                     </div>
+                                    
                                     {/* Add other user information fields as needed */}
                                 </div>
+                                            {/* "Edit Profile" button */}
                             </div>
+                            
                             {/* Cards with project status */}
                             {/* Include logic to display project status based on user's data */}
                         </div>
+
+
                     </div>
                 </div>
+                
             </div>
         </div>
                 <Footer/> </div>

@@ -1,0 +1,54 @@
+.modal-title {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .search-result {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    width: 150px;
+    margin-right: 10px;
+  }
+  
+  .btn-success {
+    background-color: #28a745 !important;
+    border-color: #28a745;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838 !important;
+    border-color: #1e7e34;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+  .search-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-btn {
+    background-color: #1A76D1 !important;
+    margin-left: 10px;
+    width: auto;
+  }
+  
