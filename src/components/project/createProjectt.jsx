@@ -64,9 +64,17 @@ const CreateProjectt = () => {
       }
 
       try {
-          const response = await axios.post('http://localhost:3001/projects/createProjectt', formData);
-
-          console.log('Created Project:', response.data.project);
+        const token = sessionStorage.getItem('token'); // Retrieve token from sessionStorage
+        const axiosConfig = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+  
+        const response = await axios.post('http://localhost:3001/projects/createProjectt', formData, axiosConfig);
+  
+        console.log('Created Project:', response.data.project);
+  
 
           toast.success('Project created successfully!', {
               position: 'top-right',

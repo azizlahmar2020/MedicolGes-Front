@@ -6,8 +6,60 @@
     text-align: center;
     margin: 10px;
     transition: transform 0.3s;
+    width: 400px !important;
+    margin-left: 180px;
 }
 
 .single-schedule:hover {
     transform: scale(1.1);
 }
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-bar button {
+    background-color: #1A76D1 ; /* Keep the button background transparent */
+    color: white; /* Set the button text color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.filter-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .filter-bar select {
+    flex: 1;
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .filter-bar button {
+    background-color: #1A76D1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .card {
+
+  }

@@ -5,19 +5,14 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import EmojiPicker from 'emoji-picker-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CameraFill } from 'react-bootstrap-icons';
-<<<<<<< Updated upstream
-=======
 import Modal from 'react-modal';
 import axios from "axios";
->>>>>>> Stashed changes
 
-function Chat({ socket, username, room ,user2 }) {
+function Chat({ socket, username, room  , user2 }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-<<<<<<< Updated upstream
-=======
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [userData, setUserData] = useState(null);
@@ -27,7 +22,6 @@ function Chat({ socket, username, room ,user2 }) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, (url) => `<a href="${url}" target="_blank">${url}</a>`);
   };
->>>>>>> Stashed changes
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -102,11 +96,9 @@ function Chat({ socket, username, room ,user2 }) {
     setIsTyping(false); 
   };
 
-
   useEffect(() => {
     const receiveMessage = (data) => {
       setMessageList((list) => [...list, data]);
-      console.log("message jee !!", data)
       const chatBody = document.getElementById("chat-body");
       chatBody.scrollTop = chatBody.scrollHeight;
     };
@@ -138,21 +130,28 @@ function Chat({ socket, username, room ,user2 }) {
       socket.emit("typing", { room});
     }
 
-
     setTimeout(() => {
       setIsTyping(false);
     }, 2000);
   };
 
+  const openModal = (imageUrl) => {
+    setSelectedImage(imageUrl);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedImage('');
+    setModalIsOpen(false);
+  };
 
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/users/getUser/${user2}`);
+        const response = await axios.get(`http://localhost:3001/users/getUser/${username}`);
         if (response.status === 200) {
           setUserData(response.data); 
-          console.log(response.data)// Stocke les données de l'utilisateur dans l'état
         } else {
           throw new Error("Error fetching user data");
         }
@@ -163,16 +162,26 @@ function Chat({ socket, username, room ,user2 }) {
 
     fetchUser();
   }, [username]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/users/getUser/${user2}`);
+        if (response.status === 200) {
+          setUserData(response.data); 
+        } else {
+          throw new Error("Error fetching user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
+      }
+    };
+
+    fetchUser();
+  }, [user2]);
 
   return (
     <>
-      
       <div className="chat-window">
-<<<<<<< Updated upstream
-        <div className="chat-header">
-          <p>User index</p>
-        </div>
-=======
       <div className="chat-header">
   {userData && (
     <div className="user-info">
@@ -183,12 +192,13 @@ function Chat({ socket, username, room ,user2 }) {
 </div>
 
 
->>>>>>> Stashed changes
         <div id="chat-body" className="chat-body">
           <ScrollToBottom className="message-container">
+          <img src="../../../public/images/nouveau_Logo.png" alt="user" className="Logochat" />
+
             {messageList.map((messageContent, index) => (
               <div
-                className="message"
+                className="message" style={{color:'white'}}
                 id={username === messageContent?.author ? 'you' : 'other'}
                 key={index}
               >
@@ -196,14 +206,19 @@ function Chat({ socket, username, room ,user2 }) {
                   <div>
                     <div className="message-content">
                       {messageContent.message ? (
-                        <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }} style={{color:'white'}}></p>
                       ) : (
-                        <img src={messageContent.image} style={{ width: '500px', height: '500px' }} alt="Received Image" />
+                        <img
+                          className="image"
+                          src={messageContent.image}
+                          style={{ width: '400px', height: '300px' }}
+                          alt="Received Image"
+                          onClick={() => openModal(messageContent.image)}
+                        />
                       )}
                     </div>
                     <div className="message-meta">
                       <p id="time">{messageContent.time}</p>
-                      <p id="author">{messageContent.author}</p>
                     </div>
                   </div>
                 )}
@@ -217,12 +232,13 @@ function Chat({ socket, username, room ,user2 }) {
           </ScrollToBottom>
         </div>
         <div className="chat-footer">
-          <div className="emoji">
-            <span role="img" aria-label="emoji" onClick={toggleEmojiPicker}>
+          <div className="emoji-Liste">
+            <span className="emoji-btn" role="img" aria-label="emoji"   style={{ height: '27px'  }} onClick={toggleEmojiPicker}>
               &#128515;
             </span>
           </div>
           <input
+            className="champs-de-text"
             type="text"
             value={currentMessage}
             placeholder="Hey..."
@@ -248,11 +264,32 @@ function Chat({ socket, username, room ,user2 }) {
               </label>
             </div>
             <div className="button">
-              <button onClick={sendMessage}>&#9658;</button>
+              <button onClick={sendMessage} className="send-button">&#9658;</button>
             </div>
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Image Viewer"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+          },
+          content: {
+            width: '80%',
+            height: '80%',
+            margin: 'auto',
+            padding: '10px',
+            borderRadius: '8px',
+            overflow: 'hidden',
+          },
+        }}
+      >
+        <img src={selectedImage} alt="Selected" style={{ width: '100%', height: '100%' }} />
+      </Modal>
     </>
   );
 }
