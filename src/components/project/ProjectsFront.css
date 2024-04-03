@@ -6,8 +6,6 @@
     text-align: center;
     margin: 10px;
     transition: transform 0.3s;
-    width: 400px !important;
-    margin-left: 180px;
 }
 
 .single-schedule:hover {
@@ -29,7 +27,7 @@
 }
 
 .search-bar button {
-    background-color: #1A76D1 ; /* Keep the button background transparent */
+    background-color: #1A76D1; /* Keep the button background transparent */
     color: white; /* Set the button text color */
     border: none;
     border-radius: 5px;
@@ -59,7 +57,4 @@
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
-  }
-  .card {
-
   }
