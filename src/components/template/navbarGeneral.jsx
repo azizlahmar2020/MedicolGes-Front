@@ -21,6 +21,7 @@ const Navbar = () => {
                                 </div>
 
                                 <div className="mobile-nav"></div>
+
                             </div>
                             <div className="col-lg-7 col-md-9 col-12">
                                 <div className="main-menu">

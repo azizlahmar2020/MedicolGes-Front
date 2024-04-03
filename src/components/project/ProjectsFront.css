@@ -30,6 +30,7 @@
 
 .search-bar button {
     background-color: #1A76D1 ; /* Keep the button background transparent */
+
     color: white; /* Set the button text color */
     border: none;
     border-radius: 5px;

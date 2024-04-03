@@ -14,6 +14,7 @@ const customStyles = {
     borderRadius: "10px",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
   },
+
 };
 
 const AddMemberModal = ({ isOpen, closeModal, handleAddMember }) => {
@@ -27,6 +28,7 @@ const AddMemberModal = ({ isOpen, closeModal, handleAddMember }) => {
       const response = await fetch(
         `http://localhost:3001/users/getUserByEmail/${searchValue}`
       );
+
       if (response.status === 404) {
         setSearchResult(null);
         setErrorMessage("User not found");
@@ -61,6 +63,7 @@ const AddMemberModal = ({ isOpen, closeModal, handleAddMember }) => {
     >
       <h2 className="modal-title">Add Member</h2>
       <form onSubmit={handleSearchSubmit} className="search-form">
+
         <input
           type="text"
           value={searchValue}
@@ -75,6 +78,7 @@ const AddMemberModal = ({ isOpen, closeModal, handleAddMember }) => {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       {searchResult && (
         <div className="search-result">
+
           <h3>Search Result:</h3>
           <p>Name: {searchResult.name}</p>
           <p>Email: {searchResult.email}</p>
@@ -89,9 +93,11 @@ const AddMemberModal = ({ isOpen, closeModal, handleAddMember }) => {
       <button className="btn btn-danger mt-2" onClick={closeModal}>
         Cancel
       </button>
+
     </Modal>
   );
 };
 
 export default AddMemberModal;
+
 

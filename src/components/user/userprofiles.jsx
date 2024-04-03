@@ -12,10 +12,31 @@ import { Link } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance'; // Import the customized Axios instance
 import "./userprofiles.css"; // Import CSS file for custom styles
 
+import AjoutRdv from "../Rdv/AddRdv";
+import { Button, Modal } from "react-bootstrap";
+
 
 function UserProfiles() {
     const [users, setUsers] = useState([]);
     const [sessionId, setSessionId] = useState('');
+    const [showModal, setShowModal] = useState(false); // Ajout du nouvel état pour le Modal
+
+    const handleAjoutRdv = async (newRdv) => {
+        try {
+            // Logique pour ajouter le rendez-vous
+            setShowModal(false); // Fermer le Modal après l'ajout
+        } catch (error) {
+            console.error('Erreur lors de l\'ajout du rendez-vous :', error);
+        }
+    };
+
+    const handleOpenModal = () => {
+        setShowModal(true); // Ouvrir le Modal
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false); // Fermer le Modal
+    };
 
     useEffect(() => {
         const fetchSessionId = async () => {
@@ -65,18 +86,48 @@ function UserProfiles() {
             <div className="row mb-4">
                 <div className="row">
                     {users.map(user => (
-                        <div className="col-sm-3 col-lg-3 mb-6" style={{marginTop:'30px'}} key={user._id}>
-                            <div className="card p-2" style={{width:'250px'}}>
-                                <div className="image d-flex flex-column justify-content-center align-items-center">
-                                        {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />}
-                                    <span className="name mt-3" style={{fontSize:'22px',fontWeight:'bold'}}>{user.name} {user.lastname}</span>
-                                    <span className="idd">{user.email}</span>
-                                    <span className="idd1"> {user.role}</span>
-                                    <button className="btn-link" style={{ border: 'none', background: 'none', fontSize: '30px' }}>
-                                        <Link to={`/ChatBox/${sessionId}/${user._id}`}>
-                                            <FontAwesomeIcon icon={faComment} />
-                                        </Link>
-                                    </button>
+
+                        <div className="col-sm-6 col-lg-6 mb-4 candidate-list" key={user._id}>
+                            <div className="candidate-list-image">
+                                {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '300px', height: '100px', borderRadius: '50%' }} />}
+
+                            </div>
+                            <div className="candidate-list-details">
+                                <div className="candidate-list-info">
+                                    <div className="candidate-list-title">
+                                        <h5>{user.name} {user.lastname}</h5>
+                                    </div>
+                                    <div className="candidate-list-option">
+                                        <ul className="list-unstyled">
+                                            <li><FontAwesomeIcon icon={user.gender === 'male' ? faMars : faVenus} className="pr-1" /> {user.gender}</li>
+                                            <li><FontAwesomeIcon icon={faCalendarAlt} className="pr-1" /> {formatDate(user.birthdate)}</li>
+                                            <li><i className="fas fa-envelope pr-1"></i>{user.email}</li>
+                                            <li><i className="fas fa-user-cog pr-1"></i>{user.role}</li>
+                                            
+                                        </ul>
+                                        
+
+                                        <button className="custom-chat-button btn btn-link">
+      <Link to={`/ChatBox/${sessionId}/${user._id}`}>
+        <FontAwesomeIcon icon={faComment} />
+        Start Chat
+      </Link>
+    </button>
+
+    <Modal show={showModal} onHide={handleCloseModal}>
+  <Modal.Header closeButton>
+    <Modal.Title>Ajouter un Rendez-vous</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <AjoutRdv handleAjoutRdv={handleAjoutRdv} id={user._id} /> 
+  </Modal.Body>
+  
+</Modal>
+
+<button className="custom-chat-button btn btn-link" onClick={handleOpenModal }>
+    <FontAwesomeIcon icon={faComment} />
+    Ajouter un rendez-vous
+</button>
 
 
                                     <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
@@ -93,8 +144,7 @@ function UserProfiles() {
                         </div>
                     ))}
                 </div>
-                {/* Pagination */}
-                {/* Add pagination logic here */}
+              
             </div>
         </div>
         <Footer />

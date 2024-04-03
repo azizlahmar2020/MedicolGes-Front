@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'; // Import the react-toastify CSS
 import NavbarSub from '../template/navbarSubadmin';
 import Footer from "/src/components/template/footer";
 
+
 const CreateProjectt = () => {
   useEffect(() => {
       const script = document.createElement('script');

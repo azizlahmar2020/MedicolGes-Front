@@ -1,7 +1,9 @@
+// ProjectsFront.jsx
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaSearch, FaSortAlphaDown, FaSortAlphaUp } from 'react-icons/fa';
+
 import { ToastContainer, toast } from 'react-toastify';  
 import 'react-toastify/dist/ReactToastify.css';  
 import Footer from "/src/components/template/footer";
@@ -54,6 +56,7 @@ function ProjectsFront() {
           console.error("Error deleting project:", err);
       }
   };
+
 
   const filteredProjects = projects.filter((project) => {
       for (const field in project) {
@@ -141,6 +144,7 @@ function ProjectsFront() {
                                 </MDBCard>
                             </div>
                         ))}
+
                     </div>
                 </div>
             </div>

@@ -21,6 +21,7 @@ const HomeProject = () => {
                     <div className="mt-4">
     <Link to="/createProjectt" className="btn btn-blue me-2" style={{ backgroundColor:'#2b8c7b' , color: 'white', paddingTop:'4px',  fontSize: '20px' , height:'40px', width :'250px'  }}>Create a New Project</Link>
     <Link to="/projectfront" className="btn btn-transparent-blue" style={{ color:'#2b8c7b', backgroundColor:'transparent' ,padding: '1px 24px', fontSize: '18px',height:'40px', width :'350px' ,paddingTop:'4px', }}>Take a Look at Your Previous Projects</Link>
+
 </div>
                 </div>
                 <div className="col-md-6">
@@ -46,6 +47,7 @@ const HomeProject = () => {
                     </p>
                     <div className="mt-4">
                     <Link to="/list-form" className="btn btn-blue me-2" style={{ backgroundColor:'#2b8c7b' , color: 'white', paddingTop:'4px',  fontSize: '20px' , height:'40px', width :'250px'  }}>Explore Custom Forms</Link>
+
                         {/* Add another Link if needed */}
                     </div>
                 </div>

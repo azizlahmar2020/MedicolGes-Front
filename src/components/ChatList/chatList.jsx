@@ -4,6 +4,7 @@ import axios from 'axios';
 import './ChatList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Footer from "/src/components/template/footer";
 
 const ChatList = ({ userRooms, joinRoomWithUser, unreadConversations }) => {
   const [userData, setUserData] = useState({});

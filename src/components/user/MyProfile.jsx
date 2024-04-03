@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { FaUser, FaTransgender, FaBirthdayCake } from 'react-icons/fa';
-import Navbar from "/src/components/template/navbarSubadmin";
+import { useNavigate, Link } from 'react-router-dom';
+import { FaUser, FaTransgender, FaBirthdayCake, FaCog } from 'react-icons/fa';
+import NavbarSub from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
 import './myprofile.css';
+
 function MyProfile() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -17,7 +18,6 @@ function MyProfile() {
             try {
                 const token = sessionStorage.getItem('token');
                 console.log('Token:', token); // Add this line to log the token
-
                 if (!token) {
                     navigate('/login');
                     return;
@@ -54,7 +54,7 @@ function MyProfile() {
         };
 
         fetchProfile();
-    }, []);
+    }, [navigate]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -84,7 +84,9 @@ function MyProfile() {
                                                 <button className="btn btn-outline-primary" onClick={() => navigate('/projectfront')} style={{backgroundColor:'#2b8c7b', color:'white', width:'200px', height:'40px', borderRadius:'5px', borderColor:'white'}}>Projects</button>
                                             )}
                                                 <button className="btn btn-outline-primary" style={{backgroundColor:'#2b8c7b', color:'white', width:'100px', height:'40px', borderRadius:'5px', borderColor:'white'}}>Chat</button>
+
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -109,25 +111,37 @@ function MyProfile() {
                                         </div>
                                         <div className="col-sm-9">
                                             {user.gender}
+
                                         </div>
-                                    </div>
-                                    <hr />
-                                    <div className="row">
-                                        <div className="col-sm-3">
-                                            <h6 className="mb-0"><FaBirthdayCake className="mr-2" />Birthdate</h6>
+                                        <hr />
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <h6 className="mb-0"><FaTransgender className="mr-2" />Gender</h6>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                {user.gender}
+                                            </div>
                                         </div>
-                                        <div className="col-sm-9">
-                                            {user.birthdate}
+                                        <hr />
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <h6 className="mb-0"><FaBirthdayCake className="mr-2" />Birthdate</h6>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                {user.birthdate}
+                                            </div>
                                         </div>
                                     </div>
                                     
                                     {/* Add other user information fields as needed */}
+
                                 </div>
                                             {/* "Edit Profile" button */}
                             </div>
                             
                             {/* Cards with project status */}
                             {/* Include logic to display project status based on user's data */}
+
                         </div>
 
 
@@ -135,9 +149,8 @@ function MyProfile() {
                 </div>
                 
             </div>
+            <Footer />
         </div>
-                <Footer/> </div>
-
     );
 }
 

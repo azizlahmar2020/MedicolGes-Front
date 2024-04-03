@@ -6,6 +6,7 @@ import Navbar from '../template/navbarGeneral'; // Adjust the path as per your p
 import Footer from '/src/components/template/footer'; // Adjust the path as per your project structure
 import './signup.css';
 
+
 function Signup() {
     const [name, setName] = useState("");
     const [lastname, setLastname] = useState("");
@@ -111,6 +112,7 @@ function Signup() {
                             </figure>
                             <Link to="/login" className="signup-image-link">I am already a member</Link>
                         </div>
+
                     </div>
                 </div>
             </section>

@@ -9,6 +9,7 @@
 
 .table-transparent {
     background-color: #0D819C ;
+
     margin-top: 80px;
     margin-left: 20px;
     margin-bottom: 140px;
@@ -17,6 +18,7 @@
   .table-transparent th,
   .table-transparent td {
     border-color: #0D819C;
+
   }
   
   .table-transparent th {
@@ -24,6 +26,7 @@
   }
   .btn-pf{
     background-color:#0D819C !important;
+
     color: white !important;
     width: 200px;
     height: 40px;
@@ -86,3 +89,4 @@
     margin-right: 10px;
   }
   
+

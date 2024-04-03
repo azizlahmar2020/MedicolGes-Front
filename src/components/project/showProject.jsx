@@ -3,11 +3,13 @@ import axios from "axios";
 import { pdf } from "@react-pdf/renderer";
 import { useParams, Link } from "react-router-dom";
 import { FaSpinner, FaComment, FaUserPlus, FaFilePdf } from "react-icons/fa";
+
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
 import ProjectPdf from "./projectpdf";
 import AddMemberModal from "../project/addmembers";
 import "./showProject.css";
+
 
 const ShowProject = () => {
   const { projectId } = useParams();
@@ -17,6 +19,7 @@ const ShowProject = () => {
 
   const handleAddMember = async (projectId, memberId) => {
     try {
+
       if (!projectId) {
         setError("Project ID is missing.");
         return;
@@ -45,6 +48,7 @@ const ShowProject = () => {
 
     fetchProjectDetails();
   }, [projectId]);
+
 
   const exportToPdf = async () => {
     const pdfBlob = await pdf(<ProjectPdf projectDetails={projectDetails} />).toBlob();
@@ -90,6 +94,7 @@ const ShowProject = () => {
                   </>
                 )}
               </div>
+
             </div>
           </div>
         </div>
@@ -97,6 +102,7 @@ const ShowProject = () => {
       <br></br>
       <br></br>
       <br></br>
+
 
       <AddMemberModal
         isOpen={modalIsOpen}

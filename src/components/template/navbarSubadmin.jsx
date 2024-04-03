@@ -13,6 +13,7 @@ const NavbarSub = () => {
         setActiveItem(path); // Set active menu item
     };
 
+
     // Function to handle logout
     const handleLogout = () => {
         sessionStorage.removeItem('token'); // Clear session token
@@ -35,6 +36,7 @@ const NavbarSub = () => {
 
                             <div className="mobile-nav"></div>
                         </div>
+
                             <div className="col-lg-7 col-md-9 col-12">
                                 <div className="main-menu">
                                     <nav className="navigation">
@@ -51,6 +53,7 @@ const NavbarSub = () => {
                                             <li className={activeItem === '/projectfront' ? 'active' : ''}>
                                                 <Link to="/projectfront" onClick={() => handleClick('/homeprojects')}>My projects</Link>
                                             </li>
+
                                         </ul>
                                     </nav>
                                 </div>
@@ -60,6 +63,7 @@ const NavbarSub = () => {
                                     {/* Logout Button */}
                                     <button onClick={handleLogout} className="btn-logout" style={{width:'150px', height:'40px', marginTop:'10px', 
                                     backgroundColor:'#0B8FAD',color:'white', borderRadius:'20px'}}>Logout</button>
+
                                 </div>
                             </div>
                         </div>

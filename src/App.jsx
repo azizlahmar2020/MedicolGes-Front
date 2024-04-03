@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Provider } from 'react-redux'; // Import the Provider component
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { store } from './components/store/config'; // Import the entire config object
+
 import Submissions from './components/feedback/submission';
 import Signup from './components/user/Signup'
 import Login from './components/user/Login'
@@ -27,8 +28,14 @@ import ListForm from './components/pages/FormListingPage/FormListing'
 import FormResponse from './components/pages/FormResponsePage/FormResponse';
 import FeedbackForm from './components/feedback/form';
 import AboutUs from './components/pages/aboutus'; // Import the AboutUs component
-import MediNews from './components/pages/medinews'; // Import the MediNews component
+
+  import MediNews from './components/pages/medinews'; // Import the MediNews component
 import Feed from './components/feed/feed'; // Import the Feed component
+import HomeVideo from './components/VideoChat/HomeVideo'; // Import the Home component
+import Room from './components/VideoChat/Room'; // Import the Room component
+import './components/feedback/custom.css'
+import Rdv from './components/Rdv/ShowRdv';
+import RdvPatient from './components/Rdv/showRdvPatient';
 
 import './components/feedback/custom.css'
 function App() {
@@ -63,8 +70,15 @@ function App() {
           <Route path="/submissions" element={<Submissions />} />
           <Route path="/submission/:id" element={<Submissions />} />
           <Route path='/aboutus' element={<AboutUs />} />
-          <Route path='/medinews/:pageNumber' element={<MediNews />} />
+
+             <Route path='/medinews/:pageNumber' element={<MediNews />} />
           <Route path='/feed' element={<Feed />} />
+          <Route path="/Video" element={<HomeVideo />} />
+          <Route path="/room/:roomID" element={<Room />} />
+          <Route path="/rdv" element={<Rdv />} />
+          <Route path="/rdvPatient" element={<RdvPatient />} />
+
+
 
         </Routes>
       </BrowserRouter>
