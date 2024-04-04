@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import Link, useLocation, and useNavigate
 import LogoM from '../../assets/img/namem.png'; // Adjust image import path
 import Logo from '../../assets/img/logom.png'; // Adjust image import path
+import { FaSignOutAlt } from 'react-icons/fa'; // Import the logout icon from react-icons/fa
 
 const NavbarSub = () => {
     const location = useLocation(); // Get current location

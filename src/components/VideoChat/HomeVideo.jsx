@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import de FontAwesome
 import { faArrowRight, faRandom } from '@fortawesome/free-solid-svg-icons'; // Import des icônes
 
-import "./style.css"; // Import du fichier CSS externe
+import "./videostyle.css"; // Import du fichier CSS externe
 
 const Home = () => {
   const [roomCode, setRoomCode] = useState("");
