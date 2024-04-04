@@ -81,6 +81,9 @@ function MyProfile() {
                                             <Link to={`/editProfile/${user._id}`} className="btn btn-success mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
                                                     <FaCog className="mr-2" />Settings
                                                 </Link>
+                                                <Link to={`/ChatBox/${user._id}_self/${user._id}`} className="btn btn-success mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
+                                                    <FaCog className="mr-2" />Chat
+                                                </Link>
                                            </div>
 
                                     </div>
