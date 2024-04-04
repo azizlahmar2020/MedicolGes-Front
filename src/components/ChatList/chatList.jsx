@@ -4,6 +4,7 @@ import axios from 'axios';
 import './ChatList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Footer from "/src/components/template/footer";
 
 const ChatList = ({ userRooms, joinRoomWithUser, unreadConversations }) => {
   const [userData, setUserData] = useState({});
@@ -45,17 +46,16 @@ const ChatList = ({ userRooms, joinRoomWithUser, unreadConversations }) => {
       <div className='search-container'>
         <div className='search-wrapper'>
           <input
-            className='search'
+            className='search_chat'
             placeholder='Search'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <FontAwesomeIcon icon={faSearch} className='search-icon' />
         </div>
       </div>
       <div className='Liste'>
         <h4 className='conv'> Conversation: </h4>
-        <ul>
+        <ul className='user-list'> {/* Ajouter la classe pour la barre de défilement */}
           {filteredUserRooms.map((userId, index) => (
             <li key={index} className={`user-list-item ${isUnread(userId) ? 'unread' : ''}`} onClick={() => joinRoomWithUser(userId)}>
               <div className="message-info">

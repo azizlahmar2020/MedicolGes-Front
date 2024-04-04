@@ -123,7 +123,7 @@ function EditProfile() {
         </span>
         Update
     </button>
-    <Link to="/showUsers" className="btn btn-outline-secondary rounded-pill mt-3"style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
+    <Link to="/myprofile" className="btn btn-outline-secondary rounded-pill mt-3"style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
         <span style={{ marginRight: '5px' }}>
             <FontAwesomeIcon icon={faTimes} />
         </span>

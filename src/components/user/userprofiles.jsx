@@ -11,11 +11,33 @@ import ChatBox from "../ChatBoxPage/ChatBox";
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance'; // Import the customized Axios instance
 import "./userprofiles.css"; // Import CSS file for custom styles
-
+import AjoutRdv from "../Rdv/AddRdv";
+import {  Modal } from "react-bootstrap";
 
 function UserProfiles() {
     const [users, setUsers] = useState([]);
     const [sessionId, setSessionId] = useState('');
+    const [showModal, setShowModal] = useState(false); // Ajout du nouvel état pour le Modal
+    const [selectedUserId, setSelectedUserId] = useState(null); // Déclarer et initialiser selectedUserId
+
+    const handleOpenModal = (userId) => {
+      setSelectedUserId(userId); // Mettre à jour selectedUserId lors de la sélection d'un utilisateur
+      setShowModal(true);
+    };
+    const handleAjoutRdv = async (newRdv) => {
+        try {
+            // Logique pour ajouter le rendez-vous
+            setShowModal(false); // Fermer le Modal après l'ajout
+        } catch (error) {
+            console.error('Erreur lors de l\'ajout du rendez-vous :', error);
+        }
+    };
+
+   
+
+    const handleCloseModal = () => {
+        setShowModal(false); // Fermer le Modal
+    };
 
     useEffect(() => {
         const fetchSessionId = async () => {
@@ -64,34 +86,45 @@ function UserProfiles() {
         <div className="container">
             <div className="row mb-4">
                 <div className="row">
-                    {users.map(user => (
-                        <div className="col-sm-3 col-lg-3 mb-6" style={{marginTop:'30px'}} key={user._id}>
-                            <div className="card p-2" style={{width:'250px'}}>
-                                <div className="image d-flex flex-column justify-content-center align-items-center">
-                                        {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />}
-                                    <span className="name mt-3" style={{fontSize:'22px',fontWeight:'bold'}}>{user.name} {user.lastname}</span>
-                                    <span className="idd">{user.email}</span>
-                                    <span className="idd1"> {user.role}</span>
-                                    <button className="btn-link" style={{ border: 'none', background: 'none', fontSize: '30px' }}>
-                                        <Link to={`/ChatBox/${sessionId}/${user._id}`}>
-                                            <FontAwesomeIcon icon={faComment} />
-                                        </Link>
-                                    </button>
+                {users.map(user => (
+    <div className="col-sm-3 col-lg-3 mb-6" style={{marginTop:'30px'}} key={user._id}>
+        <div className="card p-2" style={{width:'250px'}}>
+            <div className="image d-flex flex-column justify-content-center align-items-center">
+                {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />}
+                <span className="name mt-3" style={{fontSize:'22px',fontWeight:'bold'}}>{user.name} {user.lastname}</span>
+                <span className="idd">{user.email}</span>
+                <span className="idd1"> {user.role}</span>
+                <button className="btn-link" style={{ border: 'none', background: 'none', fontSize: '30px' }}>
+                    <Link to={`/ChatBox/${sessionId}/${user._id}`}>
+                        <FontAwesomeIcon icon={faComment} />
+                    </Link>
+                </button>
+                <button className="custom-chat-button btn btn-link" onClick={() => handleOpenModal(user._id)}>
+                    <FontAwesomeIcon icon={faComment} />
+                    Ajouter un rendez-vous
+                </button>
+                <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                    <span><i className="fa fa-twitter"></i></span>
+                    <span><i className="fa fa-facebook-f"></i></span>
+                    <span><i className="fa fa-instagram"></i></span>
+                    <span><i className="fa fa-linkedin"></i></span>
+                </div>
+                <div className="px-2 rounded mt-4 date">
+                    <span className="join">Joined May, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+))}
+<Modal show={showModal} onHide={handleCloseModal}>
+    <Modal.Header closeButton>
+        <Modal.Title>Ajouter un Rendez-vous</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+        <AjoutRdv handleAjoutRdv={handleAjoutRdv} id={selectedUserId} /> 
+    </Modal.Body>
+</Modal>
 
-
-                                    <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
-                                        <span><i className="fa fa-twitter"></i></span>
-                                        <span><i className="fa fa-facebook-f"></i></span>
-                                        <span><i className="fa fa-instagram"></i></span>
-                                        <span><i className="fa fa-linkedin"></i></span>
-                                    </div>
-                                    <div className="px-2 rounded mt-4 date">
-                                        <span className="join">Joined May, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
                 </div>
                 {/* Pagination */}
                 {/* Add pagination logic here */}

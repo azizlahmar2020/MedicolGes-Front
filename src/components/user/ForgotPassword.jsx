@@ -53,7 +53,7 @@ function ForgotPassword() {
                       {message && <p className="mt-3">{message}</p>}
 
                       <button type="submit" className="btn btn-primary"style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>Submit</button>
-                      <Link to="/login" className="btn btn-primary"style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>Back to Login</Link>
+                      <Link to="/login" className="btn btn-primary"style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white', paddingTop:'6px' }}>Back to Login</Link>
 
 
                       </div>

@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.pagination-item {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.pagination-item.active {
+    font-weight: bold;
+}
+
+.pagination-arrow {
+    cursor: pointer;
+}
+.card {
+    height: 100%;
+    
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: 10px;
+}
+
+.card-text {
+    flex-grow: 1;
+}
+
+.card-text-divider {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.card-link {
+    color: inherit; /* Preserve the card text color */
+    text-decoration: none; /* Remove underlining */
+
+  }
+  
+  .card-link .card:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-link .card-body {
+    padding: 1.25rem;
+  }
+  .col-md-4 {
+    margin-bottom: 20px; /* Adjust the margin value as needed */
+  }
+  .container {
+    text-align: center; /* Center align the content */
+  }
+  
+  h2 {
+    font-family: 'Montserrat', sans-serif; /* Apply the Montserrat font */
+    font-weight: bold; /* Make the font bold */
+    font-size: 36px; /* Adjust the font size */
+    margin-top: 40px; /* Add space above the heading */
+    margin-bottom: 30px; /* Add space below the heading */
+  }
+  
+  h2 span {
+    color: #098DAD; /* Set color to blue for "CoMedic" */
+  }
+  
+  h2 .news {
+    color: #333; /* Set color to black for "News" */
+  }
+    
+
+

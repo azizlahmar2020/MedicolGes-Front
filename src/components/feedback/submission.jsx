@@ -8,7 +8,6 @@ import {Col} from 'react-bootstrap';
 import PhoneInput from 'react-phone-number-input'
 import Navbar from '../template/navbarGeneral';
 import Table from 'react-bootstrap/Table';
-import Sidebar from '../backend/sidebar';
 
 function Submissions() {
     const allEntries = JSON.parse(localStorage.getItem("allEntries"));
@@ -38,6 +37,7 @@ function Submissions() {
     const singleEntryForm = ()=>{
         return(
             <Container>
+                            <Navbar/>
 
                 <Card>
                     <Card.Header>
@@ -77,7 +77,6 @@ function Submissions() {
     }    
     return (
         <>
-        <Sidebar/>
         {displayDetail?
             (singleEntryForm())
             :
@@ -89,17 +88,20 @@ function Submissions() {
                             <th>Patient Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            {Object.keys(feedback_type).map((ty)=>(<th>{feedback_type[ty]}</th>))}
                         </tr>
                     </thead>
                     <tbody>
                         {allEntries.map(entry=>(
                             <tr>
-                            <td><a href={`/submission/${entry['id']}`}>View Details</a></td>
+                                <td><a href={`/submission/${entry['id']}`} target="_blank" rel="noopener noreferrer">View Details</a></td>
                                 <td>{entry['name']}</td>
                                 <td>{entry['email']}</td>
                                 <td>{entry['phone']}</td>
 
-                               
+                                {Object.keys(feedback_type).map((ty)=>(
+                                    <td>{handleCheckVal(ty,entry)}</td>
+                                ))}
                             </tr>
                         ))}
                     </tbody>

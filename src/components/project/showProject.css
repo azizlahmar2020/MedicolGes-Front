@@ -1,11 +1,15 @@
 .title-p{
-    color: #1A76D1;
+    color: #0D819C;
     margin-left: 350px;
 }
-
+.card{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
 
 .table-transparent {
-    background-color: #1A76D1 ;
+    background-color: #0D819C ;
+
     margin-top: 80px;
     margin-left: 20px;
     margin-bottom: 140px;
@@ -13,14 +17,16 @@
   
   .table-transparent th,
   .table-transparent td {
-    border-color: #1A76D1;
+    border-color: #0D819C;
+
   }
   
   .table-transparent th {
     font-weight: bold;
   }
   .btn-pf{
-    background-color:#1A76D1 !important;
+    background-color:#0D819C !important;
+
     color: white !important;
     width: 200px;
     height: 40px;
@@ -31,3 +37,56 @@
 	background-color: #333 !important
     ; /* lighter shade of blue */
   }
+  .card-legend {
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+    .project-title {
+    color: #0D819C;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  .project-info {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #0D819C;
+
+  }
+  
+  .project-name {
+    font-weight: bold;
+  }
+  .feedback-button {
+    background-color: #1A76D1;
+    color: white;
+  }
+  
+  .export-button {
+    background-color: #17A589;
+    color: white;
+  }
+  
+  .add-member-button {
+    background-color: #F39C12;
+    color: white;
+  }
+  
+  /* Hover effects */
+  .feedback-button:hover,
+  .export-button:hover,
+  .add-member-button:hover {
+    background-color: #0E4C92;
+  }
+  
+  /* Additional styling */
+  .feedback-button {
+    margin-right: 10px;
+  }
+  
+
