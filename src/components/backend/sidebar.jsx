@@ -91,13 +91,14 @@ function Sidebar() {
       <li><a href="/CreateCategory"><i className="fa fa-table purple_color2"></i> <span>Categories</span></a></li>
       <li>
          <a href="/CreateSubcategory" ><i className="fa fa-object-group white_color"></i> <span>SubCategories</span></a>
-         
+
       </li>
       <li>
          <a href="/submissions" ><i className="fa fa-book white_color"></i> <span>Feedbacks</span></a>
          
       </li>
       <li><a href="/createInstitution"><i className="fa fa-map purple_color2"></i> <span>Institutions</span></a></li>
+
       <li><a href="/showUsers"><i className="fa fa-user pink_color"></i> <span>Users</span></a></li>
    </ul>
 </div>
