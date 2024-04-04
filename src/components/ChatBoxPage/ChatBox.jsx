@@ -185,10 +185,11 @@ export default function ChatBox() {
         <div className='coloo2 col-md-2'>
              <VideoCall></VideoCall>
         </div>
-<Footer className='footer' />
+
 
 
 </div>
+<Footer className='footer' />
     </>
   );
 }

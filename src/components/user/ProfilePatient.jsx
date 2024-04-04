@@ -5,8 +5,9 @@ import { FaUser, FaTransgender, FaBirthdayCake, FaCog } from 'react-icons/fa';
 import Navbar from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
+import NavbarParticipant from "../template/navbarParticipant";
 
-function MyProfile() {
+function ProfilePatient() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -65,7 +66,7 @@ function MyProfile() {
     return (
         <div> 
         <div className="container align-center">
-                <NavbarSub/>
+                <NavbarParticipant/>
             <div className="container" style={{ backgroundColor: '038cfc', padding: '20px', borderRadius: '10px' }}>
                 <div className="main-body">
                     <div className="row gutters-sm">
@@ -78,12 +79,10 @@ function MyProfile() {
                                             <h4>{user.name} {user.lastname}</h4>
                                             <p className="text-secondary mb-1">{user.role}</p>
                                             <p className="text-muted font-size-sm">{user.email}</p>
-                                            <Link to={`/editProfile/${user._id}`} className="btn btn-success mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
+                                            <Link to={`/editPatientProfile/${user._id}`} className="btn btn-success mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
                                                     <FaCog className="mr-2" />Settings
                                                 </Link>
-                                                <Link to={`/ChatBox/${user._id}_self/${user._id}`} className="btn btn-success mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
-                                                    <FaCog className="mr-2" />Chat
-                                                </Link>
+                                              
                                            </div>
 
                                     </div>
@@ -135,4 +134,4 @@ function MyProfile() {
     );
 }
 
-export default MyProfile;
+export default ProfilePatient;

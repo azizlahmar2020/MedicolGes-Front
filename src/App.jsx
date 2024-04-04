@@ -37,8 +37,22 @@ import HomeVideo from './components/VideoChat/HomeVideo';
 import Room from './components/VideoChat/Room';
 import Rdv from './components/Rdv/ShowRdv';
 import RdvPatient from './components/Rdv/showRdvPatient';
+import CreateInstitutionForm from './components/institution/CreateInstitutionForm';
+import UpdateInstitutionForm from './components/institution/UpdateInsitutionForm';
+import SingleInstitutionDetail from './components/institution/SingleInstitutionDetail';
+import CategoryDetailComponent from './components/category/CategoryDetailComponent';
+import CreateCategory from './components/category/CreateCategory';
+import UpdateCategoryComponent from './components/category/UpdateCategoryComponent';
+import SubcategoryDetailComponent from './components/subcategory/SubcategoryDetailComponent';
+import CreateSubcategoryComponent from './components/subcategory/CreateSubcategoryComponent';
+import UpdateSubcategoryComponent from './components/subcategory/updatesubcategory'
 
 import './components/feedback/custom.css';
+import ProfilePatient from './components/user/ProfilePatient';
+import MembersForPatient from './components/user/MembersForPatient';
+import EditPatientProfile from './components/user/editPatientProfile';
+import FeedPatient from './components/feed/feedPatient';
+import ShowProjBack from './components/project/showProjBack';
 
 function App() {
   return (
@@ -80,6 +94,22 @@ function App() {
           <Route path='/room/:roomID' element={<Room />} />
           <Route path='/rdv' element={<Rdv />} />
           <Route path='/rdvPatient' element={<RdvPatient />} />
+          <Route path="/createInstitution" element={<CreateInstitutionForm />} />
+          <Route path="/updateInstitution" element={<UpdateInstitutionForm />} />
+          <Route path="/singleInstitution" element={<SingleInstitutionDetail />} />
+          <Route path="/CategoryDetail" element={<CategoryDetailComponent />} />
+          <Route path="/CreateCategory" element={<CreateCategory />} />
+          <Route path="/UpdateCategory" element={<UpdateCategoryComponent />} />
+          <Route path="/SubcategoryDetail" element={<SubcategoryDetailComponent />} />
+          <Route path="/CreateSubcategory" element={<CreateSubcategoryComponent />} />
+          <Route path="/updatesubcategory" element={< UpdateSubcategoryComponent/>} />
+          <Route path='/profilePatient' element={<ProfilePatient />} />
+          <Route path='/membersPatient' element={<MembersForPatient />} />
+          <Route path='/editPatientProfile/:id' element={<EditPatientProfile />} />
+          <Route path='/feedPatient' element={<FeedPatient />} />
+          <Route path='/showProjectback/:projectId' element={<ShowProjBack />} />
+
+          
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -7,8 +7,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
+import NavbarParticipant from "../template/navbarParticipant";
 
-const Feed = () => {
+const FeedPatient = () => {
     const [projects, setProjects] = useState([]);
     const [projectComments, setProjectComments] = useState({});
 
@@ -125,7 +126,7 @@ const Feed = () => {
   
 
     return (
-        <div>            <NavbarSub/>
+        <div>            <NavbarParticipant/>
         
         <div className="feed-container">
 
@@ -182,4 +183,4 @@ const Feed = () => {
 };
 
 
-export default Feed;
+export default FeedPatient;

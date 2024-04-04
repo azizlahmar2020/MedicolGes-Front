@@ -81,7 +81,7 @@ function ShowProjects() {
                                         <button onClick={() => handleDelete(project._id, project.nom)} className="btn btn-danger btn-sm mr-1" style={{color :'red'}}>
                                             <FaTrash /> 
                                         </button>
-                                        <Link to={`/showProject/${project._id}`} className="btn btn-primary btn-sm"style={{color :'#088fad'}}>
+                                        <Link to={`/showProjectback/${project._id}`} className="btn btn-primary btn-sm"style={{color :'#088fad'}}>
                                             <FaEye/>
                                         </Link>
                                     </td>

@@ -18,16 +18,26 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // Envoi des données de connexion à l'API.
             const result = await axios.post('http://localhost:3001/auth/login', { email, password });
             console.log(result);
-            if (result && result.data && result.data.token) {
-                sessionStorage.setItem('token', result.data.token);
-                navigate('/homesub');
+            // Vérification si la réponse contient un token et un rôle.
+            if (result && result.data && result.data.token && result.data.role) {
+                sessionStorage.setItem('token', result.data.token); // Stockage du token dans sessionStorage.
+                // Décision de navigation basée sur le rôle.
+                if(result.data.role === 'patient') {
+                    navigate('/homeparticipant'); // Rediriger vers la page d'accueil des patients.
+                } else if (result.data.role === 'admin') {
+                    navigate('/dashboard'); // Rediriger vers le tableau de bord pour les administrateurs.
+                } else {
+                    navigate('/homesub'); // Rediriger vers une autre page d'accueil pour les autres rôles.
+                }
             }
         } catch (err) {
             console.log(err);
         }
     };
+    
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);

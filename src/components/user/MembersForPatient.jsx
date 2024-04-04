@@ -13,8 +13,9 @@ import axiosInstance from '../../axiosInstance'; // Import the customized Axios 
 import "./userprofiles.css"; // Import CSS file for custom styles
 import AjoutRdv from "../Rdv/AddRdv";
 import {  Modal } from "react-bootstrap";
+import NavbarParticipant from "../template/navbarParticipant";
 
-function UserProfiles() {
+function MembersForPatient() {
     const [users, setUsers] = useState([]);
     const [sessionId, setSessionId] = useState('');
     const [showModal, setShowModal] = useState(false); // Ajout du nouvel état pour le Modal
@@ -82,7 +83,7 @@ function UserProfiles() {
     };
     return (
         <div>
-        <NavbarSub />
+        <NavbarParticipant />
         <div className="container">
             <div className="row mb-4">
                 <div className="row">
@@ -99,10 +100,7 @@ function UserProfiles() {
                         <FontAwesomeIcon icon={faComment} />
                     </Link>
                 </button>
-                <button className="custom-chat-button btn btn-link" onClick={() => handleOpenModal(user._id)}>
-                    <FontAwesomeIcon icon={faComment} />
-                    Ajouter un rendez-vous
-                </button>
+               
                 <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
                     <span><i className="fa fa-twitter"></i></span>
                     <span><i className="fa fa-facebook-f"></i></span>
@@ -116,14 +114,6 @@ function UserProfiles() {
         </div>
     </div>
 ))}
-<Modal show={showModal} onHide={handleCloseModal}>
-    <Modal.Header closeButton>
-        <Modal.Title>Ajouter un Rendez-vous</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-        <AjoutRdv handleAjoutRdv={handleAjoutRdv} id={selectedUserId} /> 
-    </Modal.Body>
-</Modal>
 
                 </div>
                 {/* Pagination */}
@@ -136,4 +126,4 @@ function UserProfiles() {
 }
 
 
-export default UserProfiles;
+export default MembersForPatient;

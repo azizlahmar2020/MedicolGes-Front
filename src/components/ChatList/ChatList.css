@@ -13,12 +13,20 @@
     flex-grow: 1; /* Permet au nom d'utilisateur de s'étendre pour occuper tout l'espace restant */
   }
   
-  .search-container {
-    position: relative;
-    width: 100%;
+ 
+  .search_chat {
+    margin-top: 10%;
+  margin-right: 40px;
+  margin-left: -25px;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    justify-content: center;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
   }
-
-  
 .user-list-item {
     display: block;
     width: 80%;
@@ -29,6 +37,11 @@
     background-color: #e0e0e0;
     border-radius: 5px;
     cursor: pointer;
+  }
+  
+  .user-list {
+    max-height: 500px; /* Hauteur maximale de la liste des utilisateurs */
+    overflow-y: auto; /* Ajouter une barre de défilement verticale lorsque nécessaire */
   }
   
   .user-list-item:hover {
