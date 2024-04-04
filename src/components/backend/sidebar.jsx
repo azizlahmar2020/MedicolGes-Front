@@ -31,16 +31,16 @@ function Sidebar() {
       </li>
       <li><a href="/showProjects"><i className="fa fa-clock-o orange_color"></i> <span>Projects</span></a></li>
       
-      <li><a href="tables.html"><i className="fa fa-table purple_color2"></i> <span>Categories</span></a></li>
+      <li><a href="/CategoryDetail"><i className="fa fa-table purple_color2"></i> <span>Categories</span></a></li>
       <li>
-         <a href="#apps" ><i className="fa fa-object-group white_color"></i> <span>SubCategories</span></a>
+         <a href="/SubcategoryDetail" ><i className="fa fa-object-group white_color"></i> <span>SubCategories</span></a>
          
       </li>
       <li>
          <a href="/submissions" ><i className="fa fa-book white_color"></i> <span>Feedbacks</span></a>
          
       </li>
-      <li><a href="map.html"><i className="fa fa-map purple_color2"></i> <span>Institutions</span></a></li>
+      <li><a href="/singleInstitution"><i className="fa fa-map purple_color2"></i> <span>Institutions</span></a></li>
       <li><a href="/showUsers"><i className="fa fa-user pink_color"></i> <span>Users</span></a></li>
       <li><a href="settings.html"><i className="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
    </ul>

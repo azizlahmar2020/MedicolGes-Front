@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Institution.css';
 import Sidebar from '../backend/sidebar'; // Importez le composant Sidebar
-import institutionImage from 'C:/Users/ASUS/Desktop/versionRayen/MedicolGes-Front-main/src/assets/images/institutionImage.jpg'; // Importez votre image
+import institutionImage from '../../assets/images/institutionImage.jpg'; // Importez votre image
 
 const CreateInstitutionForm = () => {
   const [address, setAddress] = useState('');
