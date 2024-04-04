@@ -14,6 +14,7 @@ function AjoutRdv({ handleAjoutRdv, id }) {
 
   useEffect(() => {
     if (id) {
+      console.log (id)
       setPatient(id);
     }
   }, [id]);
