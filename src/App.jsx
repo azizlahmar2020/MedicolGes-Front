@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { store } from './components/store/config';
-
+import ChatBoxParticipant from './components/ChatBoxPage/ChatBoxPatient';
 import Submissions from './components/feedback/submission';
 import Signup from './components/user/Signup';
 import Login from './components/user/Login';
@@ -110,7 +110,7 @@ function App() {
           <Route path='/showProjectback/:projectId' element={<ShowProjBack />} />
 
           
-
+          <Route path='/ChatBoxParticipant/:idsession/:iduserselection' element={<ChatBoxParticipant />} />
         </Routes>
       </BrowserRouter>
     </Provider>

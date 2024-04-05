@@ -81,7 +81,7 @@ function ShowUsers(){
         <Sidebar /> {/* Include the Sidebar component */}
         <div className="main-content ">
             <div className="w-100 vh-100 overflow-auto">
-                <div className=" bg-white rounded p-3">
+                <div className=" bg-white rounded p-3" style={{ backgroundColor: '#088fad',marginTop:'70px',marginLeft:'300px' }}>
                         <div className="white_shd full margin_bottom_30">
                            
                             <div className="table_section ">

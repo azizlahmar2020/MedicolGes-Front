@@ -94,7 +94,7 @@ function UpdateProject() {
   <link rel="stylesheet" href="../../../src/components/backend/css/bootstrap-select.css" />
   <link rel="stylesheet" href="../../../src/components/backend/css/custom.css" />            <Sidebar/>
             <div className="main-content d-flex justify-content-center align-items-center">
-                <div className=" vh-100 overflow-auto">
+                <div className=" vh-100 overflow-auto" style={{ marginTop:'150px'}}>
                     <div className="w-100 bg-white rounded p-3">
                         <h2>Update Project</h2>
                         <form>

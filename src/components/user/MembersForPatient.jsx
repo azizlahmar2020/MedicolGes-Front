@@ -96,7 +96,7 @@ function MembersForPatient() {
                 <span className="idd">{user.email}</span>
                 <span className="idd1"> {user.role}</span>
                 <button className="btn-link" style={{ border: 'none', background: 'none', fontSize: '30px' }}>
-                    <Link to={`/ChatBox/${sessionId}/${user._id}`}>
+                    <Link to={`/ChatBoxParticipant/${sessionId}/${user._id}`}>
                         <FontAwesomeIcon icon={faComment} />
                     </Link>
                 </button>

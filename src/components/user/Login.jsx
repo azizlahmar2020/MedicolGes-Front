@@ -102,7 +102,7 @@ function Login() {
                                 </div>
                             </div>
                             <div className="col-lg-4 d-flex align-items-center justify-content-end">
-                                <img src='/images/login.jpg' className="img-fluid" alt="login image" />
+                                <img src='/images/login.jpg' className="img-fluid" alt="login image"/>
                             </div>
                         </div>
                     </div>
