@@ -6,15 +6,16 @@
   border-radius: 15px;
   background-color: #ffffff; /* White background */
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
-  width: 100% !important;
+  width: 80% !important;
 }
 
 .chatpage {
   background-color: #ffffff; /* White background */
   margin-left: 9px;
+  justify-content: center;
   position: flex;
   
-  width: 100%;
+  width: 97%;
   height: 100% !important;
 }
 

@@ -98,8 +98,8 @@ const CreateProjectt = () => {
 
     return (
         <div>
-            <NavbarSub />
             <div id="booking" className="section-cp" style={{backgroundImage: `url('./src/assets/img/signup-bg.jpg')`}}>
+            <NavbarSub className="navCp" />
 
                 <div className="section-center" >
                     <div className="container">
