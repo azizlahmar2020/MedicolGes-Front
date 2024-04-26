@@ -50,7 +50,7 @@ function ShowProjects() {
     
         <div className="main-content d-flex justify-content-center align-items-center">
             <div className="vh-100 overflow-auto">
-                <div className="w-75 bg-white rounded p-3" style={{ backgroundColor: '#088fad' }}>
+                <div className="w-75 bg-white rounded p-3" style={{ backgroundColor: '#088fad',marginTop:'70px',marginLeft:'300px' }}>
     
                     {/* React-toastify container */}
                     <ToastContainer position="top-right" autoClose={3000} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate , Link} from 'react-router-dom';
-import { FaUser, FaTransgender, FaBirthdayCake, FaCog } from 'react-icons/fa';
+import { FaUser, FaTransgender, FaBirthdayCake, FaCog,FaComments,FaUniversity,FaBriefcase } from 'react-icons/fa';
 import Navbar from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
@@ -78,12 +78,12 @@ function MyProfile() {
                                             <h4>{user.name} {user.lastname}</h4>
                                             <p className="text-secondary mb-1">{user.role}</p>
                                             <p className="text-muted font-size-sm">{user.email}</p>
-                                            <Link to={`/editProfile/${user._id}`} className="btn btn-success mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
+                                            <Link to={`/editProfile/${user._id}`} className="btn mr-2" style={{ backgroundColor: '#0C8CAC', width:'170px', height:'38px',color:'white',paddingTop:'5px' }}>
                                                     <FaCog className="mr-2" />Settings
                                                 </Link>
-                                                <Link to={`/ChatBox/${user._id}_self/${user._id}`} className="btn btn-success mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
-                                                    <FaCog className="mr-2" />Chat
-                                                </Link>
+                                                <Link to={`/ChatBox/${user._id}_self/${user._id}`} className="btn mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white',paddingTop:'5px' }}>
+    <FaComments className="mr-2" />Chat
+</Link>
                                            </div>
 
                                     </div>
@@ -118,6 +118,24 @@ function MyProfile() {
                                         </div>
                                         <div className="col-sm-9">
                                             {user.birthdate}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <h6 className="mb-0"><FaBriefcase className="mr-2" />Job</h6>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            {user.job}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <h6 className="mb-0"><FaUniversity className="mr-2" />Institution</h6>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            {user.institution}
                                         </div>
                                     </div>
                                     {/* Add other user information fields as needed */}

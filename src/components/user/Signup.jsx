@@ -16,12 +16,13 @@ function Signup() {
         confirmPassword: "",
         gender: "male", // Default value set to male
         birthdate: "",
+        
     });
     const [profileImage, setProfileImage] = useState(null); // State to store the selected profile image
     const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
     const location = useLocation();
     const role = location.pathname.split('/').pop();
+    const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the custom popup
 
     const validate = () => {
         let tempErrors = {};
@@ -55,8 +56,8 @@ function Signup() {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log(result);
-            navigate('/login');
+            setShowPopup(true); // Show custom popup after successful registration
+
         } catch (err) {
             if (err.response && err.response.status === 409) {
                 setErrors(prev => ({ ...prev, global: "Email already exists" }));
@@ -117,6 +118,7 @@ function Signup() {
                                 </div>
                                 {/* Error message */}
                                 {errors.global && <p className="error global-error">{errors.global}</p>}
+
                                 {/* Submit Button */}
                                 <div className="form-group form-button">
                                     <input type="submit" name="signup" className="form-submit-reg" value="Register" />
@@ -134,7 +136,17 @@ function Signup() {
                 <br/>
                 <br/>
                 <br/>
+       
             </div>
+        {showPopup && (
+        <div className="custom-popup" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 9999 }}>
+            <div className="custom-popup-content" style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '5px', textAlign: 'center' }}>
+            <p>Please check your email to validate your account.</p>
+            <p>If you haven't received any email, please check that you entered a valid one.</p>
+            <button style={{ padding: '8px 16px', borderRadius: '3px', backgroundColor: '#ff5c5c', color: '#fff', border: 'none', cursor: 'pointer' }} onClick={() => setShowPopup(false)}>Close</button>
+            </div>
+        </div>
+        )}
         </section>
     );
 }

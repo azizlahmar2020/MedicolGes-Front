@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { store } from './components/store/config';
-
+import ChatBoxParticipant from './components/ChatBoxPage/ChatBoxPatient';
 import Submissions from './components/feedback/submission';
 import Signup from './components/user/Signup';
 import Login from './components/user/Login';
@@ -53,6 +53,7 @@ import MembersForPatient from './components/user/MembersForPatient';
 import EditPatientProfile from './components/user/editPatientProfile';
 import FeedPatient from './components/feed/feedPatient';
 import ShowProjBack from './components/project/showProjBack';
+import EmailVerify from './components/user/EmailVerify';
 
 function App() {
   return (
@@ -96,7 +97,7 @@ function App() {
           <Route path='/rdvPatient' element={<RdvPatient />} />
           <Route path="/createInstitution" element={<CreateInstitutionForm />} />
           <Route path="/updateInstitution" element={<UpdateInstitutionForm />} />
-          <Route path="/singleInstitution" element={<SingleInstitutionDetail />} />
+          <Route path="/singleInstitution/:id" element={<SingleInstitutionDetail />} /> 
           <Route path="/CategoryDetail" element={<CategoryDetailComponent />} />
           <Route path="/CreateCategory" element={<CreateCategory />} />
           <Route path="/UpdateCategory" element={<UpdateCategoryComponent />} />
@@ -108,9 +109,8 @@ function App() {
           <Route path='/editPatientProfile/:id' element={<EditPatientProfile />} />
           <Route path='/feedPatient' element={<FeedPatient />} />
           <Route path='/showProjectback/:projectId' element={<ShowProjBack />} />
-
-          
-
+          <Route path="/auth/:id/verify-email/:token" element={<EmailVerify />} />
+          <Route path='/ChatBoxParticipant/:idsession/:iduserselection' element={<ChatBoxParticipant />} />
         </Routes>
       </BrowserRouter>
     </Provider>

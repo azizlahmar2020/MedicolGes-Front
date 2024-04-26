@@ -60,24 +60,37 @@ const FeedPatient = () => {
     };
     const handleComment = async (projectId, comment) => {
         try {
-            const token = sessionStorage.getItem('token'); // Retrieve token from sessionStorage
-            if (!token) {
-                toast.error("You must be logged in to comment.");
-                return;
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            toast.error("You must be logged in to comment.");
+            return;
+          }
+      
+          const response = await axios.post(
+            `http://localhost:3001/projects/addComment/${projectId}`,
+            { comment },
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+      
+          // Update the projects state with the newly added comment
+          const updatedProjects = projects.map(project => {
+            if (project._id === projectId) {
+              return {
+                ...project,
+                comments: [...project.comments, response.data.project.comments[project.comments.length]]
+              };
             }
-            await axios.post(`http://localhost:3001/projects/addComment/${projectId}`, { comment }, {
-                headers: {
-                  'Authorization': `Bearer ${token}`
-                }
-            });
-            toast.success("Comment added successfully.");
-            // You might want to fetch the project data again here to update the UI with the new comment
-            // Or you could locally update the state to display the new comment without refetching
+            return project;
+          });
+      
+          setProjects(updatedProjects);
+      
+          toast.success("Comment added successfully.");
         } catch (error) {
-            console.error('Error adding comment:', error);
-            toast.error("Failed to add comment. Please try again.");
+          console.error('Error adding comment:', error);
+          toast.error("Failed to add comment. Please try again.");
         }
-    };
+      };
 
      // Function to fetch user details from userId
      const fetchUserDetails = async (userId) => {

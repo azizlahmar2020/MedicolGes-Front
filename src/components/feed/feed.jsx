@@ -59,25 +59,38 @@ const Feed = () => {
     };
     const handleComment = async (projectId, comment) => {
         try {
-            const token = sessionStorage.getItem('token'); // Retrieve token from sessionStorage
-            if (!token) {
-                toast.error("You must be logged in to comment.");
-                return;
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            toast.error("You must be logged in to comment.");
+            return;
+          }
+      
+          const response = await axios.post(
+            `http://localhost:3001/projects/addComment/${projectId}`,
+            { comment },
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+      
+          // Update the projects state with the newly added comment
+          const updatedProjects = projects.map(project => {
+            if (project._id === projectId) {
+              return {
+                ...project,
+                comments: [...project.comments, response.data.project.comments[project.comments.length]]
+              };
             }
-            await axios.post(`http://localhost:3001/projects/addComment/${projectId}`, { comment }, {
-                headers: {
-                  'Authorization': `Bearer ${token}`
-                }
-            });
-            toast.success("Comment added successfully.");
-            // You might want to fetch the project data again here to update the UI with the new comment
-            // Or you could locally update the state to display the new comment without refetching
+            return project;
+          });
+      
+          setProjects(updatedProjects);
+      
+          toast.success("Comment added successfully.");
         } catch (error) {
-            console.error('Error adding comment:', error);
-            toast.error("Failed to add comment. Please try again.");
+          console.error('Error adding comment:', error);
+          toast.error("Failed to add comment. Please try again.");
         }
-    };
-
+      };
+      
      // Function to fetch user details from userId
      const fetchUserDetails = async (userId) => {
         try {
@@ -121,65 +134,56 @@ const Feed = () => {
         }
     };
    
-    
-  
-
     return (
-        <div>            <NavbarSub/>
-        
-        <div className="feed-container">
-
-            {projects.map((project) => (
-                <div key={project._id} className="project-card-custom">
-                    <div className="project-info-custom">
-                        <h3>{project.nom}</h3>
-                        <p>{project.desc}</p>
-                        <p><strong>Responsible:</strong> {project.responsable}</p>
-                        <p><strong>Domain:</strong> {project.domaine}</p>
-
-                        <div className="likes-section"><FaHeart /> {project.likes || 0} Likes</div> {/* Updated likes section */}
-                    </div>
-                    <div className="project-actions-custom">
-                        <button className={`like-btn-custom ${project.liked ? 'liked' : ''}`} onClick={() => handleLike(project._id)}><FaHeart /> Like</button> {/* Add 'liked' class if project is liked */}
-                        <button className="comment-btn-custom"><FaComment /> Comment</button>
-                        <button className="contact-btn-custom"><FaPhone /> Contact</button>
-                    </div>
-                    <div className="comment-section-custom">
-                    {project.comments && project._id in projectComments && (
-                        <ul>
-                            {projectComments[project._id].map((comment, index) => (
-                            <li key={index}>
-                            <div className="comment" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <img src={`http://localhost:3001/profiles/${comment.userDetails.profileImage}`} alt="Profile" style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
-                                <div>
-                                    <strong>{comment.userDetails.name}</strong>
-                                    <p>{comment.comment}</p>
-                                </div>
-                            </div>
-                        </li>
-                        
-                            ))}
-                        </ul>
-                    )}
-                        <textarea className="comment-textarea" placeholder="Write a comment..." onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey) {
-                                e.preventDefault();
-                                const comment = e.target.value.trim();
-                                if (comment) {
-                                    handleComment(project._id, comment);
-                                    e.target.value = '';
+        <div>
+            <NavbarSub/>
+            <div className="feed-container">
+                {projects.map((project) => (
+                    <div key={project._id} className="project-card-custom">
+                        <div className="project-info-custom">
+                            <h3>{project.nom}</h3>
+                            <p>{project.desc}</p>
+                            <p><strong>Responsible:</strong> {project.responsable}</p>
+                            <p><strong>Domain:</strong> {project.domaine}</p>
+                            <div className="likes-section"><FaHeart /> {project.likes || 0} Likes</div>
+                        </div>
+                        <div className="project-actions-custom">
+                            <button className={`like-btn-custom ${project.liked ? 'liked' : ''}`} onClick={() => handleLike(project._id)}><FaHeart /> Like</button>
+                            <button className="comment-btn-custom"><FaComment /> Comment</button>
+                            <button className="contact-btn-custom"><FaPhone /> Contact</button>
+                        </div>
+                        <div className="comment-section-custom">
+                            {project.comments && project._id in projectComments && (
+                                <ul>
+                                    {projectComments[project._id].map((comment, index) => (
+                                        <li key={index} className="comment-card">
+                                            <div className="comment-details">
+                                                <img src={`http://localhost:3001/profiles/${comment.userDetails.profileImage}`} alt="Profile" />
+                                                <div className="comment-content">
+                                                    <strong>{comment.userDetails.name}</strong>
+                                                    <p>{comment.comment}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            <textarea className="comment-textarea" placeholder="Write a comment..." onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    const comment = e.target.value.trim();
+                                    if (comment) {
+                                        handleComment(project._id, comment);
+                                        e.target.value = '';
+                                    }
                                 }
-                            }
-                        }} />
-
-                        {/* Display comments here */}
+                            }} />
+                        </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
         </div>
     );
 };
-
 
 export default Feed;

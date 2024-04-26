@@ -99,10 +99,9 @@ function UserProfiles() {
                         <FontAwesomeIcon icon={faComment} />
                     </Link>
                 </button>
-                <button className="custom-chat-button btn btn-link" onClick={() => handleOpenModal(user._id)}>
-                    <FontAwesomeIcon icon={faComment} />
-                    Ajouter un rendez-vous
-                </button>
+                <button className="custom-rdv-button btn btn-link" onClick={() => handleOpenModal(user._id)}>
+    <FontAwesomeIcon icon={faCalendarAlt} />
+</button>
                 <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
                     <span><i className="fa fa-twitter"></i></span>
                     <span><i className="fa fa-facebook-f"></i></span>

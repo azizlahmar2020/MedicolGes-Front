@@ -100,7 +100,6 @@ const CreateInstitutionForm = () => {
                 <button className="btn btn-primary d-flex  align-items-center mt-5" type="submit">Créer Institution</button>
                 <div className="mt-3 d-inline-flex align-items-center">
                 <Link to="/updateInstitution" className="btn btn-secondary d-flex  align-items-center mt-5">Aller à la mise à jour</Link>
-                <Link to="/singleInstitution" className="btn btn-secondary mt-5">Single Institution</Link>
                 <Link to="/dashboard" className="btn btn-secondary mt-5">Retourner à Dashboard</Link>
                 </div>
                 </form>
