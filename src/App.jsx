@@ -46,6 +46,7 @@ import UpdateCategoryComponent from './components/category/UpdateCategoryCompone
 import SubcategoryDetailComponent from './components/subcategory/SubcategoryDetailComponent';
 import CreateSubcategoryComponent from './components/subcategory/CreateSubcategoryComponent';
 import UpdateSubcategoryComponent from './components/subcategory/updatesubcategory'
+import ChatWinDowBot from "./components/ChatBot/ChatWindow";
 
 import './components/feedback/custom.css';
 import ProfilePatient from './components/user/ProfilePatient';
@@ -111,6 +112,7 @@ function App() {
           <Route path='/showProjectback/:projectId' element={<ShowProjBack />} />
           <Route path="/auth/:id/verify-email/:token" element={<EmailVerify />} />
           <Route path='/ChatBoxParticipant/:idsession/:iduserselection' element={<ChatBoxParticipant />} />
+          <Route path='/chatbot' element={<ChatWinDowBot />} />
         </Routes>
       </BrowserRouter>
     </Provider>
