@@ -1,0 +1,150 @@
+/* Styles spécifiques à la section de vidéo call */
+.video-call-section .relative {
+    position: relative;
+  }
+  
+  .video-call-section .h-screen {
+    height: 100vh;
+  }
+  
+  /* Overlay */
+  .video-call-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Hero Info */
+  .video-call-section .hero-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 20px;
+    max-width: 90vw;
+    margin: 0 auto;
+  }
+  
+  /* Autres styles spécifiques à la section de vidéo call */
+  .video-call-section .borderrr {
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    padding-top: 0px;
+    margin-top: 20px;
+  }
+  
+  /* Main content */
+  .video-call-section .title-video {
+    font-size: 200%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: white;
+    text-align: center;
+  }
+  
+  .video-call-section .hero-subtitle {
+    font-size: 26px;
+    color: white;
+    margin-top: -2px;
+    text-align: center;
+  }
+  
+  /* Enter Code form */
+  .video-call-section .enter-code-form {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .video-call-section .enter-code-label {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: white;
+  }
+  
+  .video-call-section .enter-code-input {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    max-width: 14rem;
+  }
+  
+  .video-call-section .enter-code-button {
+    background-color: #1e4af9 !important;
+    color: white;
+    font-weight: bold;
+    border: none !important;
+    height: 40px!important;
+    border-radius: 20px;
+    padding: 7px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  /* Generated Code section */
+  .video-call-section .generate-code-title {
+    color: white;
+    margin-top: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 19px;
+    font-weight: bold;
+    margin-left: -28px;
+  }
+  
+  .video-call-section .generate-code-button {
+    background-color: #1e4af9;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .video-call-section .generated-code-text {
+    color: white;
+    margin-top: 10px;
+    font-size: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  /* Icônes */
+  .video-call-section .icon {
+    font-size: 24px;
+    margin-right: 5px;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    .video-call-section .hero-info {
+      padding: 0 10px;
+    }
+  
+    .video-call-section .title-video {
+      font-size: 40px;
+    }
+  
+    .video-call-section .hero-subtitle {
+      font-size: 20px;
+    }
+  
+    .video-call-section .enter-code-label {
+      font-size: 20px;
+    }
+  
+    .video-call-section .enter-code-input {
+      max-width: 12rem;
+    }
+  
+    .video-call-section .generate-code-title {
+      font-size: 20px;
+    }
+  }
+  

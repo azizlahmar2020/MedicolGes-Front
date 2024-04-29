@@ -6,6 +6,7 @@ import './ShowRdv.css';
 import axiosInstance from '../../axiosInstance';
 import NavbarSub from "../template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
+import NavbarParticipant from '../template/navbarParticipant';
 
 function ShowRDV() {
   const [rdvs, setRDVs] = useState([]);
@@ -102,7 +103,7 @@ function ShowRDV() {
 
   return (
     <>
-            <NavbarSub/>
+            <NavbarParticipant/>
 
       <h1 className='titre_rdv'>Rendez-vous disponibles :</h1>
    <div className='rdv_page'>

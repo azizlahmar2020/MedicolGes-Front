@@ -3,6 +3,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css'; // Import the react-toastify CSS file
+import NavbarSub from '../template/navbarSubadmin';
+import Footer from "/src/components/template/footer";
+
 
 const CreateProjectt = () => {
   useEffect(() => {
@@ -95,17 +98,8 @@ const CreateProjectt = () => {
 
     return (
         <div>
-            {/* Add meta tags and external CSS links */}
-            <meta charSet="utf-8" />
-            <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>Booking Form HTML Template</title>
-            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet" />
-            <link type="text/css" rel="stylesheet" href="./src/assets/cssproject/bootstrap.min.css" />
-            <link type="text/css" rel="stylesheet" href="./src/assets/cssproject/style.css" />
-            <link rel="stylesheet" type="text/css" href="./src/assets/style.css" />
-
-            <div id="booking" className="section" style={{backgroundImage: `url('./src/assets/img/signup-bg.jpg')`}}>
+            <div id="booking" className="section-cp" style={{backgroundImage: `url('./src/assets/img/signup-bg.jpg')`}}>
+            <NavbarSub className="navCp" />
 
                 <div className="section-center" >
                     <div className="container">
@@ -173,7 +167,7 @@ const CreateProjectt = () => {
                     </div>
                 </div>
             </div>
-
+            <Footer />
             {/* React-toastify container */}
             <ToastContainer position="top-right" autoClose={3000} />
         </div>

@@ -50,12 +50,12 @@ function HomeSub() {
         <div className="hero-slider">
            
            
-        <div className="single-slider" style={{backgroundImage: `url('./src/assets/img/slider2.jpg')`}}>
+        <div className="single-slider" style={{backgroundImage: `url('./src/assets/img/slider.jpg')`}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-7">
                             <div className="text" style={{fontSize:'19px'}}>
-                            <h1>We Provide <span>Medicol</span> Services That You Can <span>Trust!</span></h1>
+                            <h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
                                 <p>We provide medical services that you can trust! Our team is dedicated to conducting thorough medical research to improve patient care and find innovative solutions to healthcare challenges.</p>
                                 <div className="button">
                                 <a href="/homepage" className="btn" style={{ width: '30%', height: '45px', fontSize: '22px', borderRadius: '4px', paddingTop:'5px' }}>Register Now</a>
@@ -80,10 +80,12 @@ function HomeSub() {
                                     <i className="fa fa-ambulance"></i>
                                 </div>
                                 <div className="single-content">
-                                    <span>Lorem Amet</span>
-                                    <h4>Emergency Cases</h4>
-                                    <p>Lorem ipsum sit amet consectetur adipiscing elit. Vivamus et erat in lacus convallis sodales.</p>
-                                    <a href="#">LEARN MORE<i className="fa fa-long-arrow-right"></i></a>
+                                    <span>Browse projects</span>
+                                    <h4>Projects</h4>
+                                    <p>Browse various projects made by different doctors and project initiators and have the 
+                                        chane to participate in one.
+                                    </p>
+                                    <a href="#">TAKE ME THERE<i className="fa fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -95,10 +97,12 @@ function HomeSub() {
                                     <i className="icofont-prescription"></i>
                                 </div>
                                 <div className="single-content">
-                                    <span>Fusce Porttitor</span>
-                                    <h4>Doctors Timetable</h4>
-                                    <p>Lorem ipsum sit amet consectetur adipiscing elit. Vivamus et erat in lacus convallis sodales.</p>
-                                    <a href="#">LEARN MORE<i className="fa fa-long-arrow-right"></i></a>
+                                    <span>Explore forms</span>
+                                    <h4>Forms</h4>
+                                    <p>Take a look at the trending forms that can help doctors and project initatiors to have a more 
+                                        accurate diagnosis.
+                                    </p>
+                                    <a href="#">TAKE ME THERE<i className="fa fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -164,49 +168,6 @@ function HomeSub() {
         </div>
     </section>
     
-    <div id="fun-facts" className="fun-facts section overlay">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-3 col-md-6 col-12">
-                    <div className="single-fun">
-                        <i className="icofont icofont-home"></i>
-                        <div className="content">
-                            <span className="counter">3468</span>
-                            <p>Hospital Rooms</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-12">
-                    <div className="single-fun">
-                        <i className="icofont icofont-user-alt-3"></i>
-                        <div className="content">
-                            <span className="counter">557</span>
-                            <p>Specialist Doctors</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-12">
-                    <div className="single-fun">
-                        <i className="icofont-simple-smile"></i>
-                        <div className="content">
-                            <span className="counter">4379</span>
-                            <p>Happy Patients</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-12">
-                    <div className="single-fun">
-                        <i className="icofont icofont-table"></i>
-                        <div className="content">
-                            <span className="counter">32</span>
-                            <p>Years of Experience</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <section className="why-choose section" >
         <div className="container">
             <div className="row">
@@ -214,7 +175,7 @@ function HomeSub() {
                     <div className="section-title">
                         <h2>We Offer Different Services To Improve Your Health</h2>
                         <img src="./src/assets/img/section-img.png" alt="#"/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                        <p>Discover a range of services aimed at enhancing your well-being, including:</p>
                     </div>
                 </div>
             </div>
@@ -338,7 +299,9 @@ function HomeSub() {
                     <div className="section-title">
                         <h2>We Offer Different Services To Improve Your Health</h2>
                         <img src="./src/assets/img/section-img.png" alt="#"/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                        <p>Discover a range of services aimed at enhancing your well-being, including:
+
+</p>
                     </div>
                 </div>
             </div>
@@ -347,132 +310,64 @@ function HomeSub() {
                     <div className="single-service">
                         <i className="icofont icofont-prescription"></i>
                         <h4><a href="service-details.html">General Treatment</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>	
+                        <p>Explore a range of wellness strategies and treatment options for various health concerns on our platform.
+
+</p>	
                     </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-12">
                     <div className="single-service">
                         <i className="icofont icofont-tooth"></i>
                         <h4><a href="service-details.html">Teeth Whitening</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>	
+                        <p>Discover safe and effective methods to brighten your smile with our expert tips and product recommendations.
+
+</p>	
                     </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-12">
                     <div className="single-service">
                         <i className="icofont icofont-heart-alt"></i>
                         <h4><a href="service-details.html">Heart Surgery</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>	
+                        <p>Get guidance and support for heart surgery, from understanding the procedure to post-operative care.
+
+</p>	
                     </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-12">
                     <div className="single-service">
                         <i className="icofont icofont-listening"></i>
                         <h4><a href="service-details.html">Ear Treatment</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>	
+                        <p>Find relief from ear-related issues with our comprehensive resources on diagnosis and management.
+
+</p>	
                     </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-12">
                     <div className="single-service">
                         <i className="icofont icofont-eye-alt"></i>
                         <h4><a href="service-details.html">Vision Problems</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>	
+                        <p>Learn about common vision problems and find solutions to maintain optimal eye health on our platform.
+
+</p>	
                     </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-12">
                     <div className="single-service">
                         <i className="icofont icofont-blood"></i>
                         <h4><a href="service-details.html">Blood Transfusion</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus dictum eros ut imperdiet. </p>	
+                        <p>Access information and support for blood transfusions, including donation guidelines and recipient resources.
+
+
+
+
+
+
+</p>	
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section className="pricing-table section">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-12">
-                    <div className="section-title">
-                        <h2>We Provide You The Best Treatment In Resonable Price</h2>
-                        <img src="./src/assets/img/section-img.png" alt="#"/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
-                    </div>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-lg-4 col-md-12 col-12">
-                    <div className="single-table">
-                        <div className="table-head">
-                            <div className="icon">
-                                <i className="icofont icofont-ui-cut"></i>
-                            </div>
-                            <h4 className="title">Plastic Suggery</h4>
-                            <div className="price">
-                                <p className="amount">$199<span>/ Per Visit</span></p>
-                            </div>	
-                        </div>
-                        <ul className="table-list">
-                            <li><i className="icofont icofont-ui-check"></i>Lorem ipsum dolor sit</li>
-                            <li><i className="icofont icofont-ui-check"></i>Cubitur sollicitudin fentum</li>
-                            <li className="cross"><i className="icofont icofont-ui-close"></i>Nullam interdum enim</li>
-                            <li className="cross"><i className="icofont icofont-ui-close"></i>Donec ultricies metus</li>
-                            <li className="cross"><i className="icofont icofont-ui-close"></i>Pellentesque eget nibh</li>
-                        </ul>
-                        <div className="table-bottom">
-                            <a className="btn" href="#">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-md-12 col-12">
-                    <div className="single-table">
-                        <div className="table-head">
-                            <div className="icon">
-                                <i className="icofont icofont-tooth"></i>
-                            </div>
-                            <h4 className="title">Teeth Whitening</h4>
-                            <div className="price">
-                                <p className="amount">$299<span>/ Per Visit</span></p>
-                            </div>	
-                        </div>
-                        <ul className="table-list">
-                            <li><i className="icofont icofont-ui-check"></i>Lorem ipsum dolor sit</li>
-                            <li><i className="icofont icofont-ui-check"></i>Cubitur sollicitudin fentum</li>
-                            <li><i className="icofont icofont-ui-check"></i>Nullam interdum enim</li>
-                            <li className="cross"><i className="icofont icofont-ui-close"></i>Donec ultricies metus</li>
-                            <li className="cross"><i className="icofont icofont-ui-close"></i>Pellentesque eget nibh</li>
-                        </ul>
-                        <div className="table-bottom">
-                            <a className="btn" href="#">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-md-12 col-12">
-                    <div className="single-table">
-                        <div className="table-head">
-                            <div className="icon">
-                                <i className="icofont-heart-beat"></i>
-                            </div>
-                            <h4 className="title">Heart Suggery</h4>
-                            <div className="price">
-                                <p className="amount">$399<span>/ Per Visit</span></p>
-                            </div>	
-                        </div>
-                        <ul className="table-list">
-                            <li><i className="icofont icofont-ui-check"></i>Lorem ipsum dolor sit</li>
-                            <li><i className="icofont icofont-ui-check"></i>Cubitur sollicitudin fentum</li>
-                            <li><i className="icofont icofont-ui-check"></i>Nullam interdum enim</li>
-                            <li><i className="icofont icofont-ui-check"></i>Donec ultricies metus</li>
-                            <li><i className="icofont icofont-ui-check"></i>Pellentesque eget nibh</li>
-                        </ul>
-                        <div className="table-bottom">
-                            <a className="btn" href="#">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>	
-        </div>	
-    </section>	
     
     
     
@@ -481,9 +376,9 @@ function HomeSub() {
             <div className="row">
                 <div className="col-lg-12">
                     <div className="section-title">
-                        <h2>Keep up with Our Most Recent Medical News.</h2>
+                        <h2>Keep up with The Recent Medical News in Algeria.</h2>
                         <img src="./src/assets/img/section-img.png" alt="#"/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                        <p>Everything you need to know about health in algeria in one simple click.</p>
                     </div>
                 </div>
             </div>
@@ -491,13 +386,16 @@ function HomeSub() {
                 <div className="col-lg-4 col-md-6 col-12">
                     <div className="single-news">
                         <div className="news-head">
-                            <img src="./src/assets/img/blog1.jpg" alt="#"/>
+                            <img src="./src/assets/img/algeria1.png" alt="#"/>
                         </div>
                         <div className="news-body">
                             <div className="news-content">
-                                <div className="date">22 Aug, 2020</div>
-                                <h2><a href="blog-single.html">We have annnocuced our new product.</a></h2>
-                                <p className="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
+                                <div className="date">24 Sep 2019
+</div>
+                                <h2><a href="blog-single.html">Eight babies die in Algeria hospital fire: Emergency services | News | Al Jazeera</a></h2>
+                                <p className="text">Government opens inquiry after pre-dawn blaze at maternity hospital in Oued Souf.
+
+.</p>
                             </div>
                         </div>
                     </div>
@@ -505,13 +403,15 @@ function HomeSub() {
                 <div className="col-lg-4 col-md-6 col-12">
                     <div className="single-news">
                         <div className="news-head">
-                            <img src="./src/assets/img/blog2.jpg" alt="#"/>
+                            <img src="./src/assets/img/algeria2.png" alt="#"/>
                         </div>
                         <div className="news-body">
                             <div className="news-content">
-                                <div className="date">15 Jul, 2020</div>
-                                <h2><a href="blog-single.html">Top five way for solving teeth problems.</a></h2>
-                                <p className="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
+                                <div className="date">11 Dec 2020</div>
+                                <h2><a href="blog-single.html">The Perils of Pregnancy.</a></h2>
+                                <p className="text">Algerian soon-to-be mothers go through terrifying experiences while navigating the country’s overburdened healthcare systems.
+
+</p>
                             </div>
                         </div>
                     </div>
@@ -519,13 +419,14 @@ function HomeSub() {
                 <div className="col-lg-4 col-md-6 col-12">
                     <div className="single-news">
                         <div className="news-head">
-                            <img src="./src/assets/img/blog3.jpg" alt="#"/>
+                            <img src="./src/assets/img/algeria3.png" alt="#"/>
                         </div>
                         <div className="news-body">
                             <div className="news-content">
-                                <div className="date">05 Jan, 2020</div>
-                                <h2><a href="blog-single.html">We provide highly business soliutions.</a></h2>
-                                <p className="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
+                                <div className="date">27 Feb 2023</div>
+                                <h2><a href="blog-single.html">They come, they stay -- stories of Chinese doctors in Algeria
+.</a></h2>
+                                <p className="text">Over the past 60 years, Chinese doctors have treated about 27.37 million Algeri..</p>
                             </div>
                         </div>
                     </div>
@@ -534,43 +435,6 @@ function HomeSub() {
         </div>
     </section>
     
-    <div className="clients overlay">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-12 col-md-12 col-12">
-                    <div className="owl-carousel clients-slider">
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client1.png" alt="#"/>
-                        </div>
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client2.png" alt="#"/>
-                        </div>
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client3.png" alt="#"/>
-                        </div>
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client4.png" alt="#"/>
-                        </div>
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client5.png" alt="#"/>
-                        </div>
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client1.png" alt="#"/>
-                        </div>
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client2.png" alt="#"/>
-                        </div>
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client3.png" alt="#"/>
-                        </div>
-                        <div className="single-clients">
-                            <img src="./src/assets/img/client4.png" alt="#"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <section className="appointment">
         <div className="container">
@@ -579,7 +443,7 @@ function HomeSub() {
                     <div className="section-title">
                         <h2>We Are Always Ready to Help You. Book An Appointment</h2>
                         <img src="./src/assets/img/section-img.png" alt="#"/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+                        <p>what are you waiting for ? Book an appointment right now!</p>
                     </div>
                 </div>
             </div>

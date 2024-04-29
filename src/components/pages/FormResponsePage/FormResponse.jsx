@@ -5,6 +5,8 @@ import CustomInput from "../../CustomInput/CustomInput";
 import formActions from "./../../store/actions/formActions";
 import "./FormResponse.css";
 import { history } from "../../store/config";
+import NavbarSub from "../../template/navbarSubadmin";
+import Footer from "../../template/footer";
 
 const FormResponse = () => {
 	let { id } = useParams();
@@ -111,87 +113,105 @@ const FormResponse = () => {
 	
 	return (
 		<>
-			<div className="form-container" onFocus={() => setIsError(false)}>
-				{form.length > 0 && (
-					<>
-						<div className="form-header">
-							<span className="response-form-title">{form[0].formJson.title}</span>
-						</div>
-						{form[0].formJson.body.map((que, index) => {
-							return (
-								<React.Fragment key={index}>
-    <p className="question"> {`${que.id}. ${que.question}`} </p>
-    {que.type === "1" && (
-        <CustomInput
-            que={que}
-            onChange={(e, que, index) => handleOnChange(e, que, index)}
-        />
-    )}
-    {que.type === "2" && (
-        <input
-            type="number"
-            className="numeric-input"
-            placeholder="Enter a numeric value"
-            value={response[que.id] || ""}
-            onChange={(e) => handleOnChange(e, que)}
-        />
-    )}
-	{que.type === "3" && (
-    <input
-        type="date"
-        className="date-input"
-        onChange={(e) => handleOnChange(e, que)}
-    />
-)}
+		<NavbarSub/>
+    <div className="container">
+        <div className="row justify-content-center">
+            <div className="col-md-8" style={{marginTop:'100px'}}>
+                <div className="card">
+                    <div className="card-body">
+                        <div className="form-container" onFocus={() => setIsError(false)}>
+                            {form.length > 0 && (
+                                <>
+                                    <div className="form-header">
+                                        <span className="response-form-title">{form[0].formJson.title}</span>
+                                    </div>
+                                    {form[0].formJson.body.map((que, index) => (
+                                        <React.Fragment key={index}>
+                                            <p className="question"> {`${que.id}. ${que.question}`} </p>
+                                            {que.type === "1" && (
+                                                <CustomInput
+                                                    que={que}
+                                                    onChange={(e, que, index) => handleOnChange(e, que, index)}
+                                                />
+                                            )}
+                                            {que.type === "2" && (
+                                                <input
+                                                    type="number"
+                                                    className="form-control numeric-input"
+                                                    placeholder="Enter a numeric value"
+                                                    value={response[que.id] || ""}
+                                                    onChange={(e) => handleOnChange(e, que)}
+                                                />
+                                            )}
+                                            {que.type === "3" && (
+                                                <input
+                                                    type="date"
+                                                    className="form-control date-input"
+                                                    onChange={(e) => handleOnChange(e, que)}
+                                                />
+                                            )}
 
-    {que.type === "4" && (
-        que.options.map((option, optionIndex) => (
-            <div key={optionIndex}>
-                <label>
-                    <input
-                        type="checkbox"
-                        value={option}
-                        onChange={(e) => handleCheckboxChange(e, que)}
-                    />
-                    {option}
-                </label>
+                                            {que.type === "4" && (
+                                                que.options.map((option, optionIndex) => (
+                                                    <div className="form-check" key={optionIndex}>
+                                                        <input
+                                                            type="checkbox"
+                                                            className="form-check-input"
+                                                            id={`checkbox-${que.id}-${optionIndex}`}
+                                                            value={option}
+                                                            onChange={(e) => handleCheckboxChange(e, que)}
+                                                        />
+                                                        <label className="form-check-label" htmlFor={`checkbox-${que.id}-${optionIndex}`}>
+                                                            {option}
+                                                        </label>
+                                                    </div>
+                                                ))
+                                            )}
+                                            {que.type === "5" && (
+                                                que.options.map((option, optionIndex) => (
+                                                    <div className="form-check" key={optionIndex}>
+                                                        <input
+                                                            type="radio"
+                                                            className="form-check-input"
+                                                            id={`radio-${que.id}-${optionIndex}`}
+                                                            name={`radio-${que.id}`}
+                                                            value={option}
+                                                            onChange={(e) => handleRadioChange(e, que)}
+                                                        />
+                                                        <label className="form-check-label" htmlFor={`radio-${que.id}-${optionIndex}`}>
+                                                            {option}
+                                                        </label>
+                                                    </div>
+                                                ))
+                                            )}
+                                        </React.Fragment>
+                                    ))}
+                                </>
+                            )}
+
+                            <div className="form-footer">
+                                <button className="btn btn-primary save-response-btn" onClick={() => saveResponse()} style={{backgroundColor:'#088fad'}}>
+                                    Save Response
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        ))
+        </div>
+    </div>
+    {isError && (
+        <p className="error error-message">
+            <span> Please enter response!!! </span>
+        </p>
     )}
-    {que.type === "5" && (
-        que.options.map((option, optionIndex) => (
-            <div key={optionIndex}>
-                <label>
-                    <input
-                        type="radio"
-                        name={`radio-${que.id}`}
-                        value={option}
-                        onChange={(e) => handleRadioChange(e, que)}
-                    />
-                    {option}
-                </label>
-            </div>
-        ))
-    )}
-</React.Fragment>
+	<br/>
+		<br/>
+		<br/>
+		<br/>
+	<Footer/>
+</>
 
-							);
-						})}
-					</>
-				)}
-
-				<div className="form-footer">
-					<button className="save-response-btn btn" onClick={() => saveResponse()}>
-						Save Response
-					</button>
-				</div>
-			</div>
-			{isError && (
-				<p className="error error-message">
-					<span> Please enter response!!! </span>
-				</p>
-			)}
-		</>
 	);
 };
 

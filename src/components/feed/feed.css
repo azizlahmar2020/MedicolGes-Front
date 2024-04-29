@@ -1,0 +1,149 @@
+/* feed.css */
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-card-custom {
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.project-info-custom {
+  margin-bottom: 20px;
+}
+
+.project-info-custom h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.project-info-custom p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.project-actions-custom {
+  display: flex;
+  gap: 10px;
+}
+
+.like-btn-custom,
+.comment-btn-custom,
+.contact-btn-custom {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f0f2f5;
+  border: 1px solid #ccc;
+}
+
+.like-btn-custom:hover,
+.comment-btn-custom:hover,
+.contact-btn-custom:hover {
+  background-color: #e4e6eb;
+}
+
+.comment-section-custom {
+  margin-top: 20px;
+}
+
+.comment-textarea-custom {
+  width: 100%;
+  min-height: 50px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+.project-info-custom {
+  position: relative;
+}
+
+.likes-section {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.like-btn-custom.liked {
+  color: red;
+}
+.like-btn-custom,
+.comment-btn-custom,
+.contact-btn-custom {
+  margin-left: 160px !important;
+  margin-top: 20px !important;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+}
+
+.like-btn-custom:focus,
+.comment-btn-custom:focus,
+.contact-btn-custom:focus {
+    outline: none;
+}
+
+.like-btn-custom:hover,
+.comment-btn-custom:hover,
+.contact-btn-custom:hover {
+    color: #007bff; /* Change color on hover if needed */
+}
+/* feed.css */
+
+/* Add border between project actions and comment section */
+.comment-section-custom {
+  border-top: 2px solid #ccc;
+  margin-top: 40px !important;
+  padding-top: 10px; /* Add some padding to create space */
+}
+
+/* Style the border line */
+.project-actions-custom {
+  margin-top: 10px; /* Add some space between project info and project actions */
+}
+
+.comment-section-custom {
+  margin-top: 10px; /* Add some space between project actions and comments */
+}
+/* feed.css */
+
+/* Style for comment card */
+.comment-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin-left: -20px;
+  border-radius: 50px;
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.comment-card img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.comment-card .comment-details {
+  display: flex;
+  align-items: center;
+}
+
+.comment-card .comment-content {
+  flex-grow: 1;
+}

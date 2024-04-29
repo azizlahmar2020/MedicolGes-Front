@@ -5,11 +5,12 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ShowRdv.css';
 import AjoutRdv from './AddRdv';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import axiosInstance from '../../axiosInstance';
 import NavbarSub from "../template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'; // Import the trash and edit icons
 
 function ShowRDV() {
   const [rdvs, setRDVs] = useState([]);
@@ -172,7 +173,6 @@ function ShowRDV() {
     <>
             <NavbarSub/>
 
-      <h1 className='titre_rdv'>Rendez-vous disponibles :</h1>
    <div className='rdv_page'>
       <div className='search-container row mt-2'>
   <div className='col-md-6'>
@@ -217,8 +217,14 @@ function ShowRDV() {
                       {users[rdv.patient]?.profileImage && <img src={`http://localhost:3001/profiles/${users[rdv.patient]?.profileImage}`} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
                     </div>
                   </div>
-                  <Button className="btn btn-danger" onClick={() => handleCancelRdv(rdv._id)}>Annuler ce RDV</Button>
-                  <Button className="btn btn-success" onClick={() => handleUpdateClick(rdv._id)}>Modifier ce RDV</Button>
+                  <div className="buttons-container">
+  <Button className="btn btn-danger" onClick={() => handleCancelRdv(rdv._id)}>
+    <FontAwesomeIcon icon={faTrash} /> Cancel 
+  </Button>
+  <Button className="btn btn-success" onClick={() => handleUpdateClick(rdv._id)}>
+    <FontAwesomeIcon icon={faEdit} /> Modify
+  </Button>
+</div>
                 </Card.Body>
               </Card>
             ))
