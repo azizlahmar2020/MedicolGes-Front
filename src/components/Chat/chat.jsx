@@ -5,8 +5,11 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import EmojiPicker from 'emoji-picker-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CameraFill } from 'react-bootstrap-icons';
-import Modal from 'react-modal';
+import { Modal } from "react-bootstrap";
+
 import axios from "axios";
+import ChatBot from '../ChatBot/ChatWindow'; 
+
 
 function Chat({ socket, username, room  , user2 }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -16,6 +19,17 @@ function Chat({ socket, username, room  , user2 }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [userData, setUserData] = useState(null);
+
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+
+  // Fonction pour ouvrir le chatbot
+  const openChatbot = () => setIsChatbotOpen(true);
+
+  // Fonction pour fermer le chatbot
+  const closeChatbot = () => setIsChatbotOpen(false);
+  const handleCloseModal = () => {
+      setIsChatbotOpen(false);
+  };  
 
   // Fonction pour remplacer les URL dans le texte par des liens HTML
   const replaceURLsWithLinks = (text) => {
@@ -51,18 +65,14 @@ function Chat({ socket, username, room  , user2 }) {
         time: `${new Date().getHours()}:${new Date().getMinutes()}`,
       };
 
-      if (socket) {
-        socket.emit("send_message", messageData);
-      }
-
-      setMessageList((list) => [...list, messageData]);
+      socket.emit("send_message", messageData);
+      setMessageList((prevMessages) => [...prevMessages, messageData]);
       setCurrentMessage("");
-      setIsTyping(false); 
+      setIsTyping(false);
     } else {
       alert("Please enter a message");
     }
   };
-
   const handleFileChange = (event) => {
     const file = event.target.files[0];
 
@@ -263,6 +273,42 @@ function Chat({ socket, username, room  , user2 }) {
                 <CameraFill size={24} />
               </label>
             </div>
+            <ul className="pro-features">
+                {/* Bouton pour ouvrir le chatbot */}
+                <a className="get-pro" onClick={openChatbot}>Ask me</a>
+                <li className="big-title">Pro Version Available on Themeforest</li>
+                <li className="title">Pro Version Features</li>
+                <li>2+ premade home pages</li>
+                <li>20+ html pages</li>
+                <li>Color Plate With 12+ Colors</li>
+                <li>Sticky Header / Sticky Filters</li>
+                <li>Working Contact Form With Google Map</li>
+
+                {/* Composant ChatBot */}
+                <Modal style={{border:'none'}} show={isChatbotOpen} onHide={handleCloseModal}>
+                    
+                 
+                        <ChatBot closeChatbot={closeChatbot} />
+                  
+                </Modal>
+            </ul>
+      {/* Modèle de chatbot */}
+      {/* <Modal
+        isOpen={isChatbotOpen}
+        onRequestClose={toggleChatbot}
+        contentLabel="Chatbot Modal"
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
+          },
+          content: {
+            overflow: "hidden",
+            zIndex:"999"
+          },
+        }}
+      >
+        <ChatBot closeChatbot={toggleChatbot} />
+      </Modal> */}
             <div className="button">
               <button onClick={sendMessage} className="send-button">&#9658;</button>
             </div>
@@ -271,8 +317,8 @@ function Chat({ socket, username, room  , user2 }) {
       </div>
 
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
+        show={modalIsOpen}
+        onHide={closeModal}
         contentLabel="Image Viewer"
         style={{
           overlay: {

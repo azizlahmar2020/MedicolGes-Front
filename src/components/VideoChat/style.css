@@ -143,4 +143,10 @@
       font-size: 20px;
     }
   }
+  .room-container {
+    width: 100%;
+    height: calc(100vh - 100px); /* Adjust height as needed */
+    overflow: hidden;
+  }
+  
   
