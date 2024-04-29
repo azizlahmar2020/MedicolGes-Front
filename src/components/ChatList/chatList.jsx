@@ -66,7 +66,6 @@ const ChatList = ({ userRooms, joinRoomWithUser, unreadConversations }) => {
                       <div className={`message-username ${isUnread(userId) ? 'unread' : ''}`}>
                         {userData[userId].name}
                       </div>
-                      {/* Ajoutez d'autres détails du message ici si nécessaire */}
                     </div>
                   </>
                 )}
