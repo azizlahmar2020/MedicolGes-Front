@@ -117,7 +117,7 @@ function UserProfiles() {
 ))}
 <Modal show={showModal} onHide={handleCloseModal}>
     <Modal.Header closeButton>
-        <Modal.Title>Ajouter un Rendez-vous</Modal.Title>
+        <Modal.Title>Add meeting scheduling</Modal.Title>
     </Modal.Header>
     <Modal.Body>
         <AjoutRdv handleAjoutRdv={handleAjoutRdv} id={selectedUserId} /> 
