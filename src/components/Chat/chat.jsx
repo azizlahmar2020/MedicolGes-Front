@@ -253,9 +253,7 @@ const [imageText, setImageText] = useState(false);
                   style={{ margin: '8px', cursor: 'pointer' }}
                   onClick={() => openImageText(messageContent.image)}
                 />
-     <Modal style={{ border: 'none' }} show={imageText} onHide={handleImageTextClose}>
-        {selectedImage && <TextImage ImageUrl={selectedImage} />}
-      </Modal>
+     
 </>
 
 
@@ -369,6 +367,9 @@ const [imageText, setImageText] = useState(false);
         }}
       >
         <img src={selectedImage} alt="Selected" style={{ width: '100%', height: '100%' }} />
+      </Modal>
+      <Modal style={{ border: 'none' }} show={imageText} onHide={handleImageTextClose}>
+        {selectedImage && <TextImage ImageUrl={selectedImage} />}
       </Modal>
     </>
   );

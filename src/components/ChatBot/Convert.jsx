@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Tesseract from 'tesseract.js';
 import PropTypes from 'prop-types';
-
+import "./ChatWindow.css"
 function ImageToText({ ImageUrl }) {
   const [selectedImage, setSelectedImage] = useState(ImageUrl);
   const [textResult, setTextResult] = useState("");
