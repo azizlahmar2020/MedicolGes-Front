@@ -246,7 +246,7 @@ const [imageText, setImageText] = useState(false);
                   src={messageContent.image}
                   style={{ width: '400px', height: '300px' }}
                   alt="Received Image"
-                  onClick={() => openImageText(messageContent.image)}
+                  onClick={() => openModal(messageContent.image)}
                 />
                 <FontAwesomeIcon
                   icon={faEye}
@@ -347,7 +347,10 @@ const [imageText, setImageText] = useState(false);
           </div>
         </div>
       </div>
-
+      <Modal style={{ border: 'none' }} show={imageText} onHide={handleImageTextClose}>
+        {selectedImage && <TextImage ImageUrl={selectedImage} />}
+      </Modal>
+      
       <Modal
         show={modalIsOpen}
         onHide={closeModal}
@@ -368,9 +371,7 @@ const [imageText, setImageText] = useState(false);
       >
         <img src={selectedImage} alt="Selected" style={{ width: '100%', height: '100%' }} />
       </Modal>
-      <Modal style={{ border: 'none' }} show={imageText} onHide={handleImageTextClose}>
-        {selectedImage && <TextImage ImageUrl={selectedImage} />}
-      </Modal>
+     
     </>
   );
 }
