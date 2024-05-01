@@ -90,8 +90,8 @@ const NavbarParticipant = () => {
                                             <li className={activeItem === '/membersPatient' ? 'active' : ''}>
                                                 <Link to="/membersPatient" onClick={() => handleClick('/membersPatient')}>Members</Link>
                                             </li>
-                                            <li className={activeItem === '/rdvPatient' ? 'active' : ''}>
-                                                <Link to="/rdvPatient" onClick={() => handleClick('/rdvPatient')}>Appointments</Link>
+                                            <li className={activeItem === '/rdv' ? 'active' : ''}>
+                                                <Link to="/rdv" onClick={() => handleClick('/rdv')}>Appointments</Link>
                                             </li>
                                             <li className={activeItem === '/feedPatient' ? 'active' : ''}>
                                                 <Link to="/feedPatient" onClick={() => handleClick('/feedPatient')}>Feed</Link>

@@ -99,7 +99,8 @@ body.dark-mode {
 .chatBot-app{
   align-items: center;
   display: flex;
-  width: auto;
+  
+  width: 470px;
   z-index: 1;
 position:fixed;
 }

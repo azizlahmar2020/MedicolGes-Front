@@ -6,9 +6,11 @@ import EmojiPicker from 'emoji-picker-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CameraFill } from 'react-bootstrap-icons';
 import { Modal } from "react-bootstrap";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import ChatBot from '../ChatBot/ChatWindow'; 
+import TextImage from '../ChatBot/Convert';
 
 
 function Chat({ socket, username, room  , user2 }) {
@@ -19,8 +21,9 @@ function Chat({ socket, username, room  , user2 }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [userData, setUserData] = useState(null);
-
+const [imageText, setImageText] = useState(false);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  
 
   // Fonction pour ouvrir le chatbot
   const openChatbot = () => setIsChatbotOpen(true);
@@ -30,6 +33,25 @@ function Chat({ socket, username, room  , user2 }) {
   const handleCloseModal = () => {
       setIsChatbotOpen(false);
   };  
+
+
+
+  // Fonction pour ouvrir le chatbot
+
+   const openImageText = (imageUrl) => {
+    setSelectedImage(imageUrl);
+    setImageText(true);
+  };
+
+  const closeImageText = () => setImageText(false);
+
+  const handleImageTextClose = () => {
+    setSelectedImage('');
+    setImageText(false);
+  };
+
+
+
 
   // Fonction pour remplacer les URL dans le texte par des liens HTML
   const replaceURLsWithLinks = (text) => {
@@ -218,13 +240,25 @@ function Chat({ socket, username, room  , user2 }) {
                       {messageContent.message ? (
                         <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }} style={{color:'white'}}></p>
                       ) : (
-                        <img
-                          className="image"
-                          src={messageContent.image}
-                          style={{ width: '400px', height: '300px' }}
-                          alt="Received Image"
-                          onClick={() => openModal(messageContent.image)}
-                        />
+                        <>                    
+                         <img
+                  className="image"
+                  src={messageContent.image}
+                  style={{ width: '400px', height: '300px' }}
+                  alt="Received Image"
+                  onClick={() => openImageText(messageContent.image)}
+                />
+                <FontAwesomeIcon
+                  icon={faEye}
+                  style={{ margin: '8px', cursor: 'pointer' }}
+                  onClick={() => openImageText(messageContent.image)}
+                />
+     <Modal style={{ border: 'none' }} show={imageText} onHide={handleImageTextClose}>
+        {selectedImage && <TextImage ImageUrl={selectedImage} />}
+      </Modal>
+</>
+
+
                       )}
                     </div>
                     <div className="message-meta">

@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'; 
 import axios from 'axios';
-import { Button, Form, Alert } from 'react-bootstrap'; // Importer Alert depuis react-bootstrap
+import { Button, Form, Alert } from 'react-bootstrap'; 
 import { toast } from 'react-toastify'; 
 import axiosInstance from '../../axiosInstance';
 import './ajoutRdv.css';
+
 function AjoutRdv({ handleAjoutRdv, id }) {
   const [date, setDate] = useState('');
   const [heure, setHeure] = useState('');
   const [docteur, setDocteur] = useState('');
   const [patient, setPatient] = useState('');
-  const [dateError, setDateError] = useState(false); // Ajouter un état pour gérer l'erreur de date
+  const [dateError, setDateError] = useState(false);
+  const [Status, setStatus] = useState('En attente');
+  const [RoomUrl, setGeneratedCode] = useState('');
 
   useEffect(() => {
     if (id) {
-      console.log (id)
       setPatient(id);
     }
   }, [id]);
@@ -45,17 +47,24 @@ function AjoutRdv({ handleAjoutRdv, id }) {
     try {
       const today = new Date();
       const selectedDate = new Date(date);
-
+  
       if (selectedDate < today) {
-        
-        setDateError(true); // Définir l'état de l'erreur de date sur true
-        window.alert("selectedDate < today")
+        setDateError(true);
+        window.alert("La date sélectionnée doit être supérieure ou égale à aujourd'hui.");
         return;
       }
+  
+      const newRdv = { date, heure, docteur, patient, Status };
 
-      const newRdv = { date, heure, docteur, patient };
+      // Générer le code uniquement lorsque vous êtes prêt à envoyer le formulaire
+      const code = generateRandomCode();
+      if (code) {
+        newRdv.RoomUrl = code;
+      } else {
+        throw new Error("La génération du code a échoué.");
+      }
+  
       await axios.post(`http://localhost:3001/rdv/add`, newRdv);
-      console.log(id)
       handleAjoutRdv(newRdv);
       toast.success('Rendez-vous ajouté avec succès !', {
         position: 'bottom-right',
@@ -68,9 +77,30 @@ function AjoutRdv({ handleAjoutRdv, id }) {
       });
     } catch (error) {
       console.error('Erreur lors de l\'ajout du rendez-vous :', error);
+      if (error.response) {
+        console.error('Server responded with:', error.response.data);
+      }
+      // Ajoutez d'autres actions pour gérer les erreurs, par exemple, afficher un message d'erreur à l'utilisateur.
     }
   };
 
+  const generateRandomCode = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+    let code = '';
+    const charSet = new Set();
+    
+    while (charSet.size < 12) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      const character = characters[randomIndex];
+      if (!charSet.has(character)) {
+        charSet.add(character);
+        code += character;
+      }
+    }
+    
+    return code;
+  };
+  
   return (
     <div>
       <Form>
@@ -82,14 +112,14 @@ function AjoutRdv({ handleAjoutRdv, id }) {
             value={date}
             onChange={(e) => {
               setDate(e.target.value);
-              setDateError(false); // Réinitialiser l'état de l'erreur de date à false lorsque la date change
+              setDateError(false);
             }}
           />
-          {dateError && <Alert variant="danger">La date doit être supérieure ou égale à aujourd'hui</Alert>} {/* Afficher l'erreur si dateError est true */}
+          {dateError && <Alert variant="danger">Date must be greater than or equal to today.</Alert>}
         </Form.Group>
 
         <Form.Group controlId="formHeure">
-          <Form.Label>Heure</Form.Label>
+          <Form.Label>Hour</Form.Label>
           <Form.Control
             type="time"
             placeholder="Heure"
@@ -97,15 +127,15 @@ function AjoutRdv({ handleAjoutRdv, id }) {
             onChange={(e) => setHeure(e.target.value)}
           />
         </Form.Group>
-
+       
         <Button id="add-rdv-button" variant="primary" onClick={handleAddRdv} style={{paddingTop:'5px'}}>
-          Ajouter
+          Add
         </Button>
+        
       </Form>
     </div>
   );
 }
-
 AjoutRdv.propTypes = {
   handleAjoutRdv: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,

@@ -4,13 +4,12 @@ import { Card, Button, Modal, Row } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ShowRdv.css';
-import AjoutRdv from './AddRdv';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import axiosInstance from '../../axiosInstance';
-import NavbarSub from "../template/navbarSubadmin";
-import Footer from "/src/components/template/footer";
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'; // Import the trash and edit icons
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import NavbarSub from '../template/navbarSubadmin';
+import Footer from '../template/footer';
+import axiosInstance from '../../axiosInstance';
 
 function ShowRDV() {
   const [rdvs, setRDVs] = useState([]);
@@ -48,23 +47,40 @@ function ShowRDV() {
     
     fetchSessionId();
 }, []);
+const handleCloseUpdateModal = () => {
+  setShowUpdateModal(false);
+};
+
 
   useEffect(() => {
     const fetchRDVs = async () => {
       try {
-        // Fetch RDVs only if sessionId is available
         if (sessionId) {
-          const response = await axios.get(`http://localhost:3001/rdv/getDoctorRdv/${sessionId}`);
-          console.log('Response:', sessionId);
+          const response = await axios.get(`http://localhost:3001/rdv/getPatientRdv/${sessionId}`);
           setRDVs(response.data);
         }
       } catch (error) {
-        console.error('Erreur lors de la récupération des rendez-vous :', error);
+        console.error('Erreur lors de la récupération des rendez-vous patients :', error);
       }
     };
 
     fetchRDVs();
-  }, [sessionId]); // Trigger the effect when sessionId changes
+  }, [sessionId]); 
+
+  useEffect(() => {
+    const fetchRDVs = async () => {
+      try {
+        if (sessionId) {
+          const response = await axios.get(`http://localhost:3001/rdv/getDoctorRdv/${sessionId}`);
+          setRDVs(prevRDVs => [...prevRDVs, ...response.data]);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération des rendez-vous docteurs :', error);
+      }
+    };
+
+    fetchRDVs();
+  }, [sessionId]); 
 
   useEffect(() => {
     const fetchUser = async (userId) => {
@@ -92,23 +108,6 @@ function ShowRDV() {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toISOString().slice(0, 10);
-  };
-
-  const handleAddRdvClick = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
-  const handleCloseUpdateModal = () => {
-    setShowUpdateModal(false);
-  };
-
-  const handleAjoutRdv = (newRdv) => {
-    setRDVs([...rdvs, newRdv]);
-    handleCloseModal();
   };
 
   const handleCancelRdv = async (rdvId) => {
@@ -167,73 +166,78 @@ function ShowRDV() {
     }
     return true;
   });
-  
 
   return (
     <>
-            <NavbarSub/>
-
-   <div className='rdv_page'>
-      <div className='search-container row mt-2'>
-  <div className='col-md-6'>
-    <div className='search-wrapper'>
-      <input
-        className='searchRDV form-control'
-        placeholder='Rechercher par nom ou prénom'
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-    </div>
-  </div>
-  <div className='col-md-3'>
-      <input type="date" className='filterdate' value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
-  </div>
-</div>
-
-
-      <div className='liste_rdv'>
-        <ToastContainer />
-        <Row xs={1} md={2} lg={4} className="g-4">
-          {filteredRDVs.length === 0 ? (
-            <div style={{ width: "100%" }}>
-              <h1>Aucun rendez-vous trouvé.</h1>
+      <NavbarSub />
+      <div className='rdv_page'>
+        <div className='search-container row mt-2'>
+          <div className='col-md-6'>
+            <div className='search-wrapper'>
+              <input
+                className='searchRDV form-control'
+                placeholder='Rechercher par nom ou prénom'
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
-          ) : (
-            filteredRDVs.map((rdv) => (
-              <Card key={rdv._id} style={{ width: '22rem', margin: '10px' }}>
-                <Card.Body>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <div style={{ flex: 1 }}>
-                      <Card.Title>Date : {formatDate(rdv.date)}</Card.Title>
-                      <Card.Text style={{ width: '200px', borderRadius: '50%' }}>
-                        Heure : {rdv.heure}
-                        <br />
-                        Docteur : {users[rdv.docteur]?.name} {users[rdv.docteur]?.lastname}
-                        <br />
-                        Patient : {users[rdv.patient]?.name} {users[rdv.patient]?.lastname}
-                      </Card.Text>
+          </div>
+          <div className='col-md-3'>
+            <input type="date" className='filterdate' value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
+          </div>
+        </div>
+        <div className='liste_rdv'>
+          <ToastContainer />
+          <Row xs={1} md={2} lg={4} className="g-4">
+            {filteredRDVs.length === 0 ? (
+              <div style={{ width: "100%" }}>
+                <h1>No appointments found.</h1>
+              </div>
+            ) : (
+              filteredRDVs.map((rdv) => (
+                <Card key={rdv._id} style={{height:'17rem', width: '27rem', margin: '8px' }}>
+                  <Card.Body>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                      <div style={{ flex: 1 }}>
+                        <Card.Title>Date : {formatDate(rdv.date)}</Card.Title>
+                        <Card.Text style={{ width: '200px', borderRadius: '50%' }}>
+                          <h1> {rdv.heure}</h1>
+                          Organizer : {users[rdv.docteur]?.name} {users[rdv.docteur]?.lastname}
+                          <br />
+                          Participant : {users[rdv.patient]?.name} {users[rdv.patient]?.lastname}
+                          <br />
+                          <small style={{color:'green'}}> Status : {rdv?.Status}</small>
+                        </Card.Text>
+                      </div>
+                      <div style={{ flex: 1, textAlign: 'right' }}>
+                        {users[rdv.patient]?.profileImage && <img src={`http://localhost:3001/profiles/${users[rdv.patient]?.profileImage}`} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
+                      </div>
                     </div>
-                    <div style={{ flex: 1, textAlign: 'right' }}>
-                      {users[rdv.patient]?.profileImage && <img src={`http://localhost:3001/profiles/${users[rdv.patient]?.profileImage}`} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
+                    <div style={{display:'flex'}} className="buttons-container">
+                     
+                    {(rdv.docteur === sessionId) && (
+                        <>
+                          <Button className="btn btn-danger" onClick={() => handleCancelRdv(rdv._id)}>
+                            <FontAwesomeIcon icon={faTrash} /> Cancel 
+                          </Button>
+                         <Button className="btn btn-success" onClick={() => handleUpdateClick(rdv._id)}>
+                            <FontAwesomeIcon icon={faEdit} /> Modify
+                          </Button>
+                        </>
+                      )} 
+                      <Button className="participate-btn" disabled={new Date(rdv.date).toDateString() !== new Date().toDateString()} as={Link} to={`/room/${rdv.RoomUrl}`}>
+                        <FontAwesomeIcon icon={faEdit} /> Participate
+                      </Button>
                     </div>
-                  </div>
-                  <div className="buttons-container">
-  <Button className="btn btn-danger" onClick={() => handleCancelRdv(rdv._id)}>
-    <FontAwesomeIcon icon={faTrash} /> Cancel 
-  </Button>
-  <Button className="btn btn-success" onClick={() => handleUpdateClick(rdv._id)}>
-    <FontAwesomeIcon icon={faEdit} /> Modify
-  </Button>
-</div>
-                </Card.Body>
-              </Card>
-            ))
-          )}
-        </Row>
-      </div>
-      <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
+                  </Card.Body>
+                </Card>
+              ))
+            )}
+          </Row>
+        </div>
+        <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Modifier le rendez-vous</Modal.Title>
+          <Modal.Title>Edit appointment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
@@ -241,21 +245,21 @@ function ShowRDV() {
             <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} />
           </div>
           <div>
-            <label>Heure:</label>
+            <label>Hour:</label>
             <input type="time" value={newHeure} onChange={e => setNewHeure(e.target.value)} />
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseUpdateModal}>
-            Annuler
+            Cancel
           </Button>
           <Button variant="primary" onClick={handleUpdateRdv}>
-            Enregistrer
+            save
           </Button>
         </Modal.Footer>
       </Modal>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

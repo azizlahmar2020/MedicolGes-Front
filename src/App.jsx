@@ -36,7 +36,6 @@ import MediNews from './components/pages/medinews';
 import HomeVideo from './components/VideoChat/HomeVideo';
 import Room from './components/VideoChat/Room';
 import Rdv from './components/Rdv/ShowRdv';
-import RdvPatient from './components/Rdv/showRdvPatient';
 import CreateInstitutionForm from './components/institution/CreateInstitutionForm';
 import UpdateInstitutionForm from './components/institution/UpdateInsitutionForm';
 import SingleInstitutionDetail from './components/institution/SingleInstitutionDetail';
@@ -55,7 +54,7 @@ import EditPatientProfile from './components/user/editPatientProfile';
 import FeedPatient from './components/feed/feedPatient';
 import ShowProjBack from './components/project/showProjBack';
 import EmailVerify from './components/user/EmailVerify';
-
+import Converte from './components/ChatBot/Convert.jsx';
 function App() {
   return (
     <Provider store={store}>
@@ -95,7 +94,6 @@ function App() {
           <Route path='/Video' element={<HomeVideo />} />
           <Route path='/room/:roomID' element={<Room />} />
           <Route path='/rdv' element={<Rdv />} />
-          <Route path='/rdvPatient' element={<RdvPatient />} />
           <Route path="/createInstitution" element={<CreateInstitutionForm />} />
           <Route path="/updateInstitution" element={<UpdateInstitutionForm />} />
           <Route path="/singleInstitution/:id" element={<SingleInstitutionDetail />} /> 
@@ -113,6 +111,7 @@ function App() {
           <Route path="/auth/:id/verify-email/:token" element={<EmailVerify />} />
           <Route path='/ChatBoxParticipant/:idsession/:iduserselection' element={<ChatBoxParticipant />} />
           <Route path='/chatbot' element={<ChatWinDowBot />} />
+          <Route path='/cnv' element={<Converte />} />
         </Routes>
       </BrowserRouter>
     </Provider>
