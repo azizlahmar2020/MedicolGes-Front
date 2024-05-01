@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Tesseract from 'tesseract.js';
 import PropTypes from 'prop-types';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./ChatWindow.css"
+import { toast } from 'react-toastify';
 function ImageToText({ ImageUrl }) {
   const [selectedImage, setSelectedImage] = useState(ImageUrl);
   const [textResult, setTextResult] = useState("");
@@ -33,16 +36,30 @@ console.log(ImageUrl)
       setTextResult("");
     }
   };
+  const copyTextResult = () => {
+    navigator.clipboard.writeText(textResult);
+    toast.success('Texte copié avec succès !', {
+      position: 'bottom-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   return (
     <div className="App">
-      <h1>Image To Text</h1>
+      <h1 className='TitleImage_Text'>Image to text</h1>
       
       <div className="result">
         {loading && <p>Loading...</p>}
         {textResult && !loading && (
           <div className="box-p">
-            <p>{textResult}</p>
+                      <FontAwesomeIcon icon={faCopy} className="copy-iconTextImage" onClick={copyTextResult} />
+
+            <p className='textResultImage'>{textResult}</p>
           </div>
         )}
       </div>

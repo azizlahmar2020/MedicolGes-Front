@@ -212,3 +212,47 @@ position:fixed;
   font-size: 12px; /* Taille de police réduite */
   color: #fff; /* Couleur du texte */
 }
+.box-p{
+  border: #1f1f1f solid 1px;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.box-p {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.box-p .textResultImage {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.copy-iconTextImage {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.copy-iconTextImage:hover {
+  color: #333;
+}
+
+.TitleImage_Text{
+  text-align: center;
+  color: #333;
+  line-height: 1.5;
+}
