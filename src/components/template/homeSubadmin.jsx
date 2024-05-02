@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./navbarSubadmin";
 import Footer from "./footer";
 import NavbarSub from "./navbarSubadmin";
-import { Modal } from "react-bootstrap";
+import { Modal, ToastContainer } from "react-bootstrap";
 import ChatBot from '../ChatBot/ChatWindow'; 
 function HomeSub() {
     
@@ -400,6 +400,7 @@ function HomeSub() {
                     </div>
                 </div>
             </div>
+
             <div className="row">
                 <div className="col-lg-4 col-md-12 col-12">
                     <div className="single-table">

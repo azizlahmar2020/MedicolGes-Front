@@ -148,6 +148,7 @@ export default function ChatBox() {
     // Écoutez l'événement 'new_message' pour gérer les nouveaux messages
     socket.on('new_message', ({ roomId }) => {
       handleNewMessage(roomId);
+      
     });
 
     return () => {
@@ -160,7 +161,8 @@ export default function ChatBox() {
     <>
      
      
-      <div className='chatpage row'> <NavbarSub />
+      <div className='chatpage row'> 
+      <NavbarSub />
         <div className='coloo3 col-md-3'>
           <div className='header-test'>
            
@@ -169,7 +171,9 @@ export default function ChatBox() {
                 <ChatList
                   userRooms={userRooms}
                   joinRoomWithUser={joinRoomWithUser}
-                  unreadConversations={unreadConversations}
+                  unreadConversations={unreadConversations} 
+                  socket={socket} 
+                  username={ user1Id}
                 />
               </div>
             </div>

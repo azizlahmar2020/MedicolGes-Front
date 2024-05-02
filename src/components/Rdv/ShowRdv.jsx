@@ -206,7 +206,12 @@ const handleCloseUpdateModal = () => {
                           <br />
                           Participant : {users[rdv.patient]?.name} {users[rdv.patient]?.lastname}
                           <br />
+                        {(rdv.Status=='En attente')&&(
                           <small style={{color:'green'}}> Status : {rdv?.Status}</small>
+                        )}
+                         {(rdv.Status=='Late')&&(
+                          <small style={{color:'red'}}> Status : {rdv?.Status}</small>
+                        )}  
                         </Card.Text>
                       </div>
                       <div style={{ flex: 1, textAlign: 'right' }}>

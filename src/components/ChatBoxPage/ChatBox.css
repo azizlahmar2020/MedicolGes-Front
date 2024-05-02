@@ -31,11 +31,10 @@
 
 .chatpage {
   background-color: #ffffff; /* White background */
-  margin-left: 5px;
-  justify-content: center;
+  margin-left: 25px;
   position: flex;
   
-  width: 97%;
+  width: 94%;
   height: 100% !important;
 }
 

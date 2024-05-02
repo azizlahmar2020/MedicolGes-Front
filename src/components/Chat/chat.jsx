@@ -11,6 +11,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import ChatBot from '../ChatBot/ChatWindow'; 
 import TextImage from '../ChatBot/Convert';
+import { ToastContainer, toast } from "react-toastify";
 
 
 function Chat({ socket, username, room  , user2 }) {
@@ -21,9 +22,11 @@ function Chat({ socket, username, room  , user2 }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [userData, setUserData] = useState(null);
-const [imageText, setImageText] = useState(false);
+  const [imageText, setImageText] = useState(false);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-  
+  const [fullName, setFullName] = useState('');
+  const [NotNumberNotif, setNotNumberNotif] = useState(0);
+
 
   // Fonction pour ouvrir le chatbot
   const openChatbot = () => setIsChatbotOpen(true);
@@ -49,8 +52,44 @@ const [imageText, setImageText] = useState(false);
     setSelectedImage('');
     setImageText(false);
   };
+  
+  
 
+  const notifyWithFullName = async (userId, message) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/users/getUserFullName/${userId}`);
+        const response1 = await axios.get(`http://localhost:3001/users/getUserImage/${userId}`);
+        console.log('de', response1, '')
+        const fullName = response.data.fullName;
+        console.log(userId)
+        if (fullName) {
+            const notificationContent = (
+                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <img src={`http://localhost:3001/profiles/${response1.data.profileImage}`} style={{ height: '100px', width: '100px', borderRadius: '50%' }} alt="Profile" className="user-image" />
+                  <div className="notification__avatar">
+                    <h5>{`${fullName}`} : </h5>
+                    <span style={{ marginLeft: '10px' ,maxHeight:'200px'}}>{` ${message}`}</span>
+                </div></div>
+            );
 
+            toast.success(notificationContent, {
+                position: 'bottom-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+        } else {
+            toast.error('Failed to get user full name.');
+        }
+    } catch (error) {
+        console.error('Error notifying with full name:', error);
+        toast.error('Failed to notify with user full name.');
+    }
+};
 
 
   // Fonction pour remplacer les URL dans le texte par des liens HTML
@@ -132,10 +171,19 @@ const [imageText, setImageText] = useState(false);
     const receiveMessage = (data) => {
       setMessageList((list) => [...list, data]);
       const chatBody = document.getElementById("chat-body");
+      if (data.author !== username) {
+
+        notifyWithFullName(data.author,data.message);
+
+        console.log('htaaa', data.author)
+    
+    
+    }
       chatBody.scrollTop = chatBody.scrollHeight;
     };
-
+      console.log('socket','')
     if (socket) {
+
       socket.on("receive_message", receiveMessage);
 
       socket.on("typing", (data) => {
@@ -194,6 +242,7 @@ const [imageText, setImageText] = useState(false);
 
     fetchUser();
   }, [username]);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -213,6 +262,7 @@ const [imageText, setImageText] = useState(false);
 
   return (
     <>
+    
       <div className="chat-window">
       <div className="chat-header">
   {userData && (
@@ -371,7 +421,7 @@ const [imageText, setImageText] = useState(false);
       >
         <img src={selectedImage} alt="Selected" style={{ width: '100%', height: '100%' }} />
       </Modal>
-     
+      <ToastContainer />
     </>
   );
 }
