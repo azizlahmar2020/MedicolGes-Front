@@ -55,11 +55,14 @@ import FeedPatient from './components/feed/feedPatient';
 import ShowProjBack from './components/project/showProjBack';
 import EmailVerify from './components/user/EmailVerify';
 import Converte from './components/ChatBot/Convert.jsx';
+import Symptoms from './components/diagnosis/symptoms';
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
+        <Route path='/self-diagnosis' element={<Symptoms />} />
+
           <Route path='/register/:role' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='/dashboard' element={<Dashboard />} />
