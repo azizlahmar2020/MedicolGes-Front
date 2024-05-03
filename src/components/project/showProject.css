@@ -4,7 +4,7 @@
 }
 .card{
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 150px;
 }
 
 .table-transparent {
@@ -12,7 +12,7 @@
 
     margin-top: 80px;
     margin-left: 20px;
-    margin-bottom: 140px;
+    margin-bottom: 100px;
   }
   
   .table-transparent th,
@@ -43,12 +43,12 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 80px;
   }
     .project-title {
     color: #0D819C;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 120px;
     font-size: 24px;
   }
   .project-info {

@@ -3,19 +3,24 @@ import axios from 'axios';
 import * as XLSX from 'xlsx';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Institution.css';
-import Sidebar from '../backend/sidebar'; // Importez le composant Sidebar
-
+import { Table, Button, Modal, Form } from 'react-bootstrap';
+import Sidebar from '../backend/sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import QrCode from '../../assets/images/QrCode.png'; // Import de l'image
 const UpdateInstitutionForm = () => {
   const [institutions, setInstitutions] = useState([]);
-  const [showList, setShowList] = useState(false);
-  const [selectedInstitution, setSelectedInstitution] = useState(null);
-  const [updatedAddress, setUpdatedAddress] = useState('');
-  const [updatedCategory, setUpdatedCategory] = useState('');
-  const [updatedSubcategory, setUpdatedSubcategory] = useState('');
-  const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [showList, setShowList] = useState(true); // Afficher la liste par défaut
+  const [selectedInstitution, setSelectedInstitution] = useState(null);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(''); // Ajout d'un état de recherche
+  const [editingInstitutionId, setEditingInstitutionId] = useState(null); // État pour gérer le mode de modification
+  const [editValues, setEditValues] = useState({}); // Stocker les valeurs modifiées
+  const [analyzing, setAnalyzing] = useState(false); // État pour indiquer si l'analyse est en cours
 
+  // Charger les institutions
   useEffect(() => {
     const fetchInstitutions = async () => {
       try {
@@ -25,74 +30,99 @@ const UpdateInstitutionForm = () => {
         console.error('Erreur lors de la récupération des institutions:', error);
       }
     };
-    if (showList) {
-      fetchInstitutions();
-    }
-  }, [showList]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/categories');
-        setCategories(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des catégories:', error);
-      }
-    };
-    fetchCategories();
-  }, []);
-
-  useEffect(() => {
+    
     const fetchSubcategories = async () => {
       try {
         const response = await axios.get('http://localhost:3001/subcategories');
-        setSubcategories(response.data);
+        setSubcategories(response.data); // Stocke les sous-catégories
       } catch (error) {
         console.error('Erreur lors de la récupération des sous-catégories:', error);
       }
     };
-    fetchSubcategories();
-  }, []);
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/categories');
+        setCategories(response.data); // Stocke les sous-catégories
+      } catch (error) {
+        console.error('Erreur lors de la récupération des sous-catégories:', error);
+      }
+    };
+    const fetchData = async () => {
+      const [institutionsResponse, subcategoriesResponse, categoriesResponse] = await Promise.all([
+        axios.get('http://localhost:3001/institutions'),
+        axios.get('http://localhost:3001/subcategories'),
+        axios.get('http://localhost:3001/categories'),
+      ]);
+      setInstitutions(institutionsResponse.data);
+      setSubcategories(subcategoriesResponse.data);
+      setCategories(categoriesResponse.data);
+    };
 
-  const handleUpdateButtonClick = (institution) => {
-    setSelectedInstitution(institution);
-    setUpdatedAddress(institution.address);
-    setUpdatedCategory(institution.category);
-    setUpdatedSubcategory(institution.subcategory);
+    fetchData();
+  
+
+    fetchInstitutions();
+    fetchSubcategories(); // Récupérer les sous-catégories
+    fetchCategories(); // Récupérer les catégories
+
+  }, []);
+  // Fonction pour obtenir le nom de la sous-catégorie à partir de l'ID
+  const getSubcategoryName = (subcategoryId) => {
+    const subcategory = subcategories.find((sc) => sc._id === subcategoryId);
+    return subcategory ? subcategory.subcategory_name : 'Inconnu'; // Retourne le nom de la sous-catégorie
+  };
+  const getCategoryName = (categoryId) => {
+    const category = categories.find((sc) => sc._id === categoryId);
+    return category ? category.category_name : 'Inconnu'; // Retourne le nom de la sous-catégorie
+  };
+   // Fonction pour gérer le mode de modification
+   const handleEdit = (institution) => {
+    setEditingInstitutionId(institution._id);
+    setEditValues({
+      address: institution.address,
+      category: institution.category,
+      subcategory: institution.subcategory,
+    });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
+  // Gestion des modifications dans les champs
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditValues({ ...editValues, [name]: value });
+  };
+
+  // Sauvegarde des modifications
+  const handleSave = async () => {
     try {
-      const updatedData = {
-        address: updatedAddress,
-        category: updatedCategory,
-        subcategory: updatedSubcategory
-      };
-  
-      await axios.patch(`http://localhost:3001/institutions/${selectedInstitution._id}`, updatedData);
-      console.log('Institution mise à jour avec succès');
-      window.alert('Institution mise à jour avec succès'); // Afficher une alerte
-      window.location.reload(); // Rafraîchir la page après la mise à jour
+      // Exemple de sauvegarde avec axios
+      await axios.patch(`http://localhost:3001/institutions/${editingInstitutionId}`, editValues);
+
+      // Mettre à jour la liste des institutions avec les nouvelles valeurs
+      const updatedInstitutions = institutions.map((institution) =>
+        institution._id === editingInstitutionId
+          ? { ...institution, ...editValues }
+          : institution
+      );
+      setInstitutions(updatedInstitutions);
+
+      setEditingInstitutionId(null); // Sortir du mode de modification
+      alert('Les modifications ont été enregistrées.');
     } catch (error) {
-      console.error('Erreur lors de la mise à jour de l\'institution:', error);
+      console.error('Erreur lors de la sauvegarde:', error);
     }
   };
-  
+
+  // Fonction pour exporter vers Excel
   const exportToExcel = () => {
     const workbook = XLSX.utils.book_new();
-
-    const data = institutions.map(institution => ({
-      Address: institution.address,
-      Category: institution.category,
-      Subcategory: institution.subcategory
+    const data = institutions.map((institution) => ({
+      Adresse: institution.address,
+      Catégorie: getCategoryName(institution.category),
+      "Sous-catégorie":  getSubcategoryName(institution.subcategory),
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(data);
-
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Institutions');
-
     XLSX.writeFile(workbook, 'institutions.xlsx');
   };
 
@@ -104,18 +134,49 @@ const UpdateInstitutionForm = () => {
       const workbook = XLSX.read(data, { type: 'array' });
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-      // Analysez les données Excel et effectuez les actions nécessaires
+      // Traitez les données importées ici
       console.log(jsonData);
     };
     reader.readAsArrayBuffer(file);
   };
 
-  // Gestionnaire de changement de fichier
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       importFromExcel(file);
     }
+  };
+
+  const handleDelete = async (institutionId) => {
+    try {
+      await axios.delete(`http://localhost:3001/institutions/${institutionId}`);
+      setInstitutions(institutions.filter((inst) => inst._id !== institutionId));
+      setShowDeleteConfirmation(false);
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'institution:", error);
+    }
+  };
+
+  // Filtrer les institutions en fonction du terme de recherche
+  const filteredInstitutions = institutions.filter((institution) => {
+    const address = institution.address ? institution.address.toLowerCase() : ''; // Vérifier si l'adresse est définie
+    const category = institution.category ? getCategoryName(institution.category).toLowerCase() : ''; // Vérifier si la catégorie est définie
+    const subcategory = institution.subcategory ? getSubcategoryName(institution.subcategory).toLowerCase() : ''; // Vérifier si la sous-catégorie est définie
+    return (
+      address.includes(searchTerm.toLowerCase()) ||
+      category.includes(searchTerm.toLowerCase()) ||
+      subcategory.includes(searchTerm.toLowerCase())
+    );
+  });
+
+  // Fonction pour lancer l'analyse des données
+  const handleDataAnalysis = () => {
+    setAnalyzing(true); // Indiquer que l'analyse est en cours
+    // Ici, vous pouvez mettre votre logique pour l'analyse des données
+    setTimeout(() => {
+      setAnalyzing(false); // Marquer l'analyse comme terminée après un certain délai (simulé ici)
+      // Affichez l'image ou effectuez d'autres actions après l'analyse des données
+    }, 10000); // Simulation d'une analyse de données pendant 3 secondes
   };
 
   return (
@@ -125,70 +186,125 @@ const UpdateInstitutionForm = () => {
           <Sidebar />
         </div>
         <div className="col-md-9 mt-5">
-          <h2 className="mt-5">Choisir une institution à mettre à jour :</h2>
-          {showList && (
-            <div >
-              <div className=" d-flex  align-items-center mt-5">
-              <button className="btn btn-primary d-flex  align-items-center mt-3 " onClick={() => setShowList(false)}>Masquer la liste des institutions</button>
-              <button className="btn btn-success d-flex  align-items-center mt-3" onClick={exportToExcel}>Exporter vers Excel</button>
+          <h2 className="col-md-9 mt-5">Liste des institutions :</h2>
+          {/* Recherche */}
+          <Form.Group controlId="searchInstitutions">
+            <Form.Label>Rechercher:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Rechercher par adresse, catégorie, ou sous-catégorie"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </Form.Group>
+          {/* Boutons d'exportation et d'importation */}
+          <div className="d-flex mb-3">
+            <Button className="btn btn-success" onClick={exportToExcel}>
+              Exporter vers Excel
+            </Button>
+            {/* Bouton pour lancer l'analyse des données */}
+            <Button className="btn btn-primary ml-3" onClick={handleDataAnalysis}>
+              Analyse des données
+            </Button>
+            {/* Affichage de l'image si l'analyse est en cours */}
+            {analyzing && <img src={QrCode} alt="QR Code" className="ml-3" />}
 
-              <Link to="/singleInstitution" className="btn btn-primary d-flex  align-items-center mt-3">Détail d'une institution unique</Link>
-              </div>
-              {/* Ajoutez le bouton d'importation */}
-              <input type="file" className="form-control-file mt-3" accept=".xlsx, .xls" onChange={handleFileChange} />
+            <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} className="ml-3" />
+          </div>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Adresse</th>
+                <th>Catégorie</th>
+                <th>Sous-catégorie</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredInstitutions.map((institution) => (
+                <tr key={institution._id}>
+                  {editingInstitutionId === institution._id ? (
+                    <>
+                      {/* Affichage en mode édition */}
+                      <td>
+                        <Form.Control
+                          type="text"
+                          name="address"
+                          value={editValues.address}
+                          onChange={handleEditChange}
+                        />
+                      </td>
+                      <td>
+                        <Form.Control
+                          type="text"
+                          name="category"
+                          value={editValues.category}
+                          onChange={handleEditChange}
+                        />
+                      </td>
+                      <td>
+                        <Form.Control
+                          type="text"
+                          name="subcategory"
+                          value={editValues.subcategory}
+                          onChange={handleEditChange}
+                        />
+                      </td>
+                      <td>
+                        <Button variant="success" onClick={handleSave}>
+                          <FontAwesomeIcon icon={faEdit} /> Sauvegarder
+                        </Button>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      {/* Affichage en mode normal */}
+                      <td>{institution.address}</td>
+                      <td>{getCategoryName(institution.category)}</td>
+                      <td>{getSubcategoryName(institution.subcategory)}</td>
+                      <td>
+                      <Button
+  variant="danger"
+  onClick={() => {
+    setSelectedInstitution(institution); // Définit l'institution à supprimer
+    setShowDeleteConfirmation(true);   // Affiche la confirmation de suppression
+  }}
+>
+  <FontAwesomeIcon icon={faTrash} /> Supprimer
+</Button>
 
-              {/* Ajoutez un lien vers /dashboard */}
-              <Link to="/dashboard" className="btn btn-secondary mt-3">Retour à Dashboard</Link>
-
-              {/* Ajoutez un lien vers /createInstitution */}
-              <Link to="/createInstitution" className="btn btn-secondary mt-3">Créer une institution</Link>
-            </div>
-          )}
-
-          {!showList && (
-            <button className="btn btn-success mb-3 mt-5" onClick={() => setShowList(true)}>Afficher la liste des institutions</button>
-          )}
-
-          {showList && (
-            <ul className="list-group mt-5">
-              {institutions.map(institution => (
-                <li key={institution._id} className="list-group-item mt-5">
-                  <div>
-                    <strong>Adresse:</strong> {institution.address}
-                  </div>
-                  <button className="btn btn-success mt-5" onClick={() => handleUpdateButtonClick(institution)}>Update</button>
-                </li>
+                        <Button variant="success" onClick={() => handleEdit(institution)}>
+                          <FontAwesomeIcon icon={faEdit} /> Mettre à jour
+                        </Button>
+                        <Link to={`/singleInstitution/${institution._id}`}>
+  <Button variant="info">
+    <FontAwesomeIcon icon={faInfoCircle} /> Détails
+  </Button>
+</Link>
+                      </td>
+                    </>
+                  )}
+                </tr>
               ))}
-            </ul>
-          )}
-
-          {selectedInstitution && (
-            <form onSubmit={handleSubmit}>
-              <div className="form-group mt-5">
-                <label>Nouvelle adresse:</label>
-                <input className="form-control mt-5" type="text" value={updatedAddress} onChange={(e) => setUpdatedAddress(e.target.value)} />
-              </div>
-              <div className="form-group mt-5">
-                <label>Nouvelle catégorie:</label>
-                <select className="form-control mt-5" value={updatedCategory} onChange={(e) => setUpdatedCategory(e.target.value)}>
-                  <option value="">Sélectionner une catégorie</option>
-                  {categories.map(cat => (
-                    <option key={cat._id} value={cat._id}>{cat.category_name}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group mt-5">
-                <label>Nouvelle sous-catégorie:</label>
-                <select className="form-control mt-5" value={updatedSubcategory} onChange={(e) => setUpdatedSubcategory(e.target.value)}>
-                  <option value="">Sélectionner une sous-catégorie</option>
-                  {subcategories.map(subcat => (
-                    <option key={subcat._id} value={subcat._id}>{subcat.subcategory_name}</option>
-                  ))}
-                </select>
-              </div>
-              <button className="btn btn-primary d-flex  align-items-center mt-5" type="submit">Mettre à jour l'institution</button>
-            </form>
-          )}
+            </tbody>
+          </Table>
+          {/* Confirmation de suppression */}
+          <Modal show={showDeleteConfirmation} onHide={() => setShowDeleteConfirmation(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Confirmation de suppression</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Êtes-vous sûr de vouloir supprimer {selectedInstitution?.address} ?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowDeleteConfirmation(false)}>
+                Annuler
+              </Button>
+              <Button variant="danger" onClick={()=> handleDelete(selectedInstitution._id)}>
+                Supprimer
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </div>

@@ -15,18 +15,25 @@
   
  
   .search_chat {
-    margin-top: 10%;
-  margin-right: 40px;
-  margin-left: -25px;
-    width: 200px;
+    margin-top: 10px; /* Réduit l'espacement en haut */
+    margin-right: 10px; /* Ajuste l'espacement à droite */
+    margin-left: 10px; /* Ajuste l'espacement à gauche */
+    width: calc(100% - 2px); /* Utilise la largeur totale moins 20px de marges */
+    max-width: 200px; /* Limite la largeur maximale à 200px */
     height: 50px;
     text-align: center;
     justify-content: center;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     border: none;
     border-radius: 20px;
     box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
   }
+  
+  /* Assurez-vous que la recherche conserve son aspect centré */
+  .search_chat:focus {
+    outline: none; /* Supprime la mise en surbrillance lorsque l'élément est en focus */
+  }
+  
 .user-list-item {
     display: block;
     width: 80%;

@@ -4,28 +4,39 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Category.css';
 import Sidebar from '../backend/sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle, faTrash, faEdit, faSave } from '@fortawesome/free-solid-svg-icons';
+import { Button } from 'react-bootstrap';
 
 const UpdateCategoryComponent = ({ categoryId }) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [updatedCategoryName, setUpdatedCategoryName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isEditing, setIsEditing] = useState(false); 
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/categories');
+      setCategories(response.data);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des catégories:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/categories');
-        setCategories(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des catégories:', error);
-      }
-    };
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    if (selectedCategory && isEditing) {
+      setUpdatedCategoryName(selectedCategory.category_name);
+    }
+  }, [selectedCategory, isEditing]);
+
   const handleCategorySelection = (category) => {
     setSelectedCategory(category);
-    setUpdatedCategoryName(category.category_name);
+    setIsEditing(true);
   };
 
   const handleUpdateCategory = async () => {
@@ -33,13 +44,28 @@ const UpdateCategoryComponent = ({ categoryId }) => {
       const response = await axios.patch(`http://localhost:3001/categories/${selectedCategory._id}`, { category_name: updatedCategoryName });
       console.log('Catégorie mise à jour avec succès:', response.data);
       setUpdatedCategoryName('');
-      // Afficher une alerte pour indiquer le succès de la mise à jour
+      setIsEditing(false); 
       window.alert('Catégorie mise à jour avec succès !');
+      // Rafraîchir les catégories après la modification
+      fetchCategories();
     } catch (error) {
       console.error('Erreur lors de la mise à jour de la catégorie:', error);
     }
   };
-  
+
+  const handleDeleteCategory = async (categoryId) => {
+    const shouldDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');
+    if (shouldDelete) {
+      try {
+        await axios.delete(`http://localhost:3001/categories/${categoryId}`);
+        const updatedCategories = categories.filter(category => category._id !== categoryId);
+        setCategories(updatedCategories);
+        window.alert('Catégorie supprimée avec succès !');
+      } catch (error) {
+        console.error('Erreur lors de la suppression de la catégorie:', error);
+      }
+    }
+  };
 
   const filteredCategories = categories.filter(category =>
     category.category_name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -48,11 +74,11 @@ const UpdateCategoryComponent = ({ categoryId }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-3 p-0"> {/* Ajoutez la classe p-0 pour supprimer les marges */}
+        <div className="col-md-3 p-0">
           <Sidebar />
         </div>
         <div className="col-md-9 mt-5">
-          <h2 className=" mt-5">Mettre à jour une catégorie :</h2>
+          <h2 className="mt-5">Mettre à jour une catégorie :</h2>
           <div className="mb-3 mt-5">
             <input
               type="text"
@@ -63,19 +89,52 @@ const UpdateCategoryComponent = ({ categoryId }) => {
             />
           </div>
           <div className="mb-3 mt-5">
-            <select className="form-select mt-5" value={selectedCategory} onChange={(e) => handleCategorySelection(JSON.parse(e.target.value))}>
-              <option value="">Sélectionner une catégorie</option>
-              {filteredCategories.map(category => (
-                <option key={category._id} value={JSON.stringify(category)}>{category.category_name}</option>
-              ))}
-            </select>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Nom de la catégorie</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCategories.map(category => (
+                  <tr key={category._id}>
+                    <td>{isEditing && selectedCategory._id === category._id ? (
+                      <input
+                        type="text"
+                        value={updatedCategoryName}
+                        onChange={(e) => setUpdatedCategoryName(e.target.value)}
+                      />
+                    ) : category.category_name}</td>
+                    <td>
+                      {isEditing && selectedCategory._id === category._id ? (
+                        <Button variant="success" onClick={handleUpdateCategory}>
+                          <FontAwesomeIcon icon={faSave} /> Enregistrer
+                        </Button>
+                      ) : (
+                        <>
+                          <Link to={`/UpdateCategory `}>
+                            <Button variant="info">
+                              <FontAwesomeIcon icon={faInfoCircle} /> Détails
+                            </Button>
+                          </Link>
+                          <Button variant="success" onClick={() => handleCategorySelection(category)}>
+                            <FontAwesomeIcon icon={faEdit} /> Modifier
+                          </Button>
+                          <button className="btn btn-danger mr-2" onClick={() => handleDeleteCategory(category._id)}>
+                            <FontAwesomeIcon icon={faTrash} /> Supprimer
+                          </button>
+                          
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div className="mb-5 mt-5">
-            <input type="text" className="form-control mt-5" value={updatedCategoryName} onChange={(e) => setUpdatedCategoryName(e.target.value)} />
-            <button  style={{ backgroundColor: 'gray' }} className="btn btn-secondary ml-3 mt-5" onClick={handleUpdateCategory}>Mettre à jour</button>
-          </div>
-          <Link to="/CategoryDetail" className="btn btn-secondary">Retour</Link>
-          <Link to="/dashboard" className="btn btn-secondary">dashboard</Link>
+          <Link to="/CreateCategory" className="btn btn-primary">retourner</Link>
+          <Link to="/dashboard" className="btn btn-secondary">Dashboard</Link>
         </div>
       </div>
     </div>

@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+
+/* Styles des messages utilisateurs */
+.messageBot.user {
+  align-self: flex-end;
+  background-color: #655e5e; /* Couleur de fond pour les messages utilisateurs */
+  color: #fff; /* Couleur du texte pour les messages utilisateurs */
+  padding: 10px; /* Ajout de rembourrage autour des messages */
+  border-radius: 10px; /* Coins arrondis pour les messages utilisateurs */
+  margin: 10px ; /* Marge autour des messages */
+  min-width: 100px; /* Largeur minimale pour les messages utilisateurs */
+  z-index: 1;
+
+}
+
+.messageBot.user p {
+  margin: 0; /* Suppression de la marge par défaut */
+  font-weight: bold; /* Texte en gras */
+  color: #d3dcea;
+  z-index: -1;
+  
+}
+
+/* Styles des messages de l'IA */
+.messageBot.ai {
+  padding: 20px;
+  align-self: flex-start;
+  background-color: #bdc2ce ; /* Couleur de fond pour les messages de l'IA */
+  padding: 10px; /* Ajout de rembourrage autour des messages */
+  border-radius: 10px; /* Coins arrondis pour les messages de l'IA */
+  margin: 10px ; /* Marge autour des messages */
+  min-width: 100px; /* Largeur minimale pour les messages de l'IA */
+  z-index: 1;
+
+}
+
+.messageBot.ai p {
+  margin: 0; /* Suppression de la marge par défaut */
+  font-family: Arial, sans-serif; /* Police de caractères */
+  font-size: 14px; /* Taille de la police */
+  line-height: 1.5; /* Hauteur de ligne */
+  color: #333; 
+
+}
+
+/* Styles généraux pour l'entrée de texte */
+.input-box {
+  margin-top: 10px; /* Marge en haut de la boîte de saisie */
+}
+
+/* Styles pour le mode sombre */
+body.dark-mode {
+  background-color: #1f1f1f; /* Couleur de fond pour le mode sombre */
+  color: #fff; /* Couleur du texte pour le mode sombre */
+}
+
+.Ici_Logo{
+  z-index: 0;
+}
+/* Styles pour la fenêtre de chat */
+.chatBot-window {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  z-index: -1;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #2c2c2c; /* Couleur de fond pour la fenêtre de chat */
+  padding: 20px; /* Ajout de rembourrage à la fenêtre de chat */
+}
+
+.bgaa{
+  border-radius: 25px;
+  margin-top: 2px;
+  background-color: #fff;
+  flex-grow: 1;
+  margin-top: -15px;
+  z-index: 1;
+  overflow-y: auto; }
+/* Styles pour le conteneur de messages */
+
+
+.chatBot-container {
+  margin-top: 20px;
+  flex-grow: 1;
+  height: auto;
+  margin-bottom: 20px;
+  overflow-y: auto; /* Ajout d'un défilement vertical si nécessaire */
+}
+
+/* Styles pour les messages */
+/* Styles des messages */
+.messageBot {
+  border: 1px solid #616060; /* Ajout d'une bordure autour des messages */
+  border-radius: 10px; /* Coins arrondis pour les messages */
+  height: auto; /* Hauteur dynamique en fonction du contenu */
+  z-index: 1;
+}
+.chatBot-app{
+  align-items: center;
+  display: flex;
+  
+  width: 470px;
+  z-index: 1;
+position:fixed;
+}
+
+
+/* Styles pour le mode clair */
+
+
+/* Styles pour le mode plein écran */
+.full-screen .chat-window {
+  width: 60vw;
+  height: 90vh;
+  padding: 20px;
+}
+
+/* Styles supplémentaires pour l'en-tête */
+.header_ChatBot {
+  justify-content: center;
+  display: flex;
+  color: #fff; /* Couleur du texte pour l'en-tête */
+  padding: 20px;
+  margin-bottom: 20px;
+  padding-top: 5px;
+}
+
+.header_ChatBot h1 {
+  margin: 0;
+  font-size: 24px; /* Taille de police pour le titre de l'en-tête */
+}
+
+#chat-header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* Style du texte des messages */
+.message-text {
+  margin: 0; /* Suppression de la marge par défaut */
+}
+/* Styles pour la barre de défilement */
+/* Barre de défilement */
+::-webkit-scrollbar {
+  width: 12px; /* Largeur de la barre de défilement */
+}
+
+/* Bouton flèche de la barre de défilement */
+::-webkit-scrollbar-button {
+  display: flex;
+  height: 3px;
+}
+
+/* Piste de défilement */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Couleur de fond */
+}
+
+/* Partie de la barre de défilement qui peut être déplacée */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Couleur de la barre de défilement */
+  border-radius: 3px; /* Coins arrondis */
+}
+
+/* Coin inférieur droit de la barre de défilement */
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1; /* Couleur de fond */
+}
+.borderrr {
+  display: flex;
+  flex-direction: column; /* Alignement vertical du contenu */
+  justify-content: center;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  padding-top: 10px;
+  height: auto;
+  
+  width: auto;
+  margin-top: 20px;
+}
+.exp-text{
+  color: #fff;
+  font-size: 10px;
+  margin: auto;
+  margin-right: 26px;
+
+}
+.hello_logo {
+  width: auto;
+  max-width: 50%;
+  height: auto;
+  max-height: 40%;
+  opacity: 0.6; /* Opacité de 60% */
+  position: fixed;
+  z-index: -1;
+  top: 59%;
+  display: flex;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Déplacer le logo de moitié de sa taille */
+}
+
+
+.title-video {
+  margin-bottom: 8px; /* Marge entre le titre et le texte */
+}
+
+/* Style pour le texte plus petit */
+.small-text {
+  font-size: 12px; /* Taille de police réduite */
+  color: #fff; /* Couleur du texte */
+}
+.box-p{
+  border: #1f1f1f solid 1px;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.box-p {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.box-p .textResultImage {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.copy-iconTextImage {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.copy-iconTextImage:hover {
+  color: #333;
+}
+
+.TitleImage_Text{
+  text-align: center;
+  color: #333;
+  line-height: 1.5;
+}

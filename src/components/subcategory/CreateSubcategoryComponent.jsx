@@ -57,7 +57,7 @@ const CreateSubcategoryComponent = () => {
           </div>
           <div className=" d-flex  align-items-center mt-5">
             <button className="btn btn-success d-flex  align-items-center me-2" onClick={handleCreateSubcategory}>Créer</button>
-            <Link to="/SubcategoryDetail" className="btn btn-secondary d-flex  align-items-center">Retour à SubcategoryDetail</Link>
+            <Link to="/updatesubCategory" className="btn btn-secondary d-flex  align-items-center">Liste des Subcategories</Link>
             <Link to="/dashboard" className="btn btn-secondary d-flex  align-items-center">Retour à Dashboard</Link>
           </div>
         </div>

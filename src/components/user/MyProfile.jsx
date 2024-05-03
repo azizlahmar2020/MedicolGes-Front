@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate , Link} from 'react-router-dom';
-import { FaUser, FaTransgender, FaBirthdayCake, FaCog,FaComments } from 'react-icons/fa';
+import { FaUser, FaTransgender, FaBirthdayCake, FaCog,FaComments,FaUniversity,FaBriefcase } from 'react-icons/fa';
 import Navbar from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
@@ -118,6 +118,24 @@ function MyProfile() {
                                         </div>
                                         <div className="col-sm-9">
                                             {user.birthdate}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <h6 className="mb-0"><FaBriefcase className="mr-2" />Job</h6>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            {user.job}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <h6 className="mb-0"><FaUniversity className="mr-2" />Institution</h6>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            {user.institution}
                                         </div>
                                     </div>
                                     {/* Add other user information fields as needed */}

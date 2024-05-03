@@ -12,20 +12,21 @@
 /* Styles pour le conteneur principal */
 .chat-window {
   margin-top: 5px;
-  width: 100%;
-  height: 100% ;
-  position: fixed;
+  width: auto;
+  height: auto ;
+  position: relative;
   border: 1px solid #ccc;
   justify-content: right;
   display: flex;
-  position:relative;
   flex-direction: column;
  
   bottom: 1.4%;
 
 /*  background-color: #A6D7ED;
 */
-background: linear-gradient(0deg, #a2bdd2 0%, #1d759a 100%);}
+background: linear-gradient(0deg, #a2bdd2 0%, #1d759a 100%);
+
+}
 
 /* Styles pour l'en-tête */
 .chat-header {
@@ -48,6 +49,7 @@ background: linear-gradient(0deg, #a2bdd2 0%, #1d759a 100%);}
   border-radius: 0px 20px 0px 20px  ;
 
 }
+
 
 .header-container {
   display: flex;

@@ -6,15 +6,35 @@
   border-radius: 15px;
   background-color: #ffffff; /* White background */
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
-  width: 100% !important;
+  width: 80% !important;
+}
+.openBot{
+  position: fixed;
+	right: -300px;
+	width: 300px;
+	height: auto;
+	line-height: 46px;
+	font-size: 14px;
+	background: #fff;
+	text-align: left;
+	color: #333;
+	top: 50%;
+	transform:translateY(-50%);
+	box-shadow: -4px 0px 5px #00000036;
+	color: #fff;
+	z-index: 9999;
+	padding:20px 30px 30px 30px;
+	-webkit-transition:all 0.4s ease;
+	-moz-transition:all 0.4s ease;
+	transition:all 0.4s ease;
 }
 
 .chatpage {
   background-color: #ffffff; /* White background */
-  margin-left: 9px;
+  margin-left: 25px;
   position: flex;
   
-  width: 100%;
+  width: 94%;
   height: 100% !important;
 }
 
