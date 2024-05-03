@@ -50,7 +50,7 @@ function ShowProjects() {
     
         <div className="main-content d-flex justify-content-center align-items-center">
             <div className="vh-100 overflow-auto">
-                <div className="w-75 bg-white rounded p-3" style={{ backgroundColor: '#088fad' }}>
+                <div className="w-75 bg-white rounded p-3" style={{ backgroundColor: '#088fad',marginTop:'70px',marginLeft:'300px' }}>
     
                     {/* React-toastify container */}
                     <ToastContainer position="top-right" autoClose={3000} />
@@ -81,7 +81,7 @@ function ShowProjects() {
                                         <button onClick={() => handleDelete(project._id, project.nom)} className="btn btn-danger btn-sm mr-1" style={{color :'red'}}>
                                             <FaTrash /> 
                                         </button>
-                                        <Link to={`/showProject/${project._id}`} className="btn btn-primary btn-sm"style={{color :'#088fad'}}>
+                                        <Link to={`/showProjectback/${project._id}`} className="btn btn-primary btn-sm"style={{color :'#088fad'}}>
                                             <FaEye/>
                                         </Link>
                                     </td>

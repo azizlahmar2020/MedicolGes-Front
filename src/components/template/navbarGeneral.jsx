@@ -29,22 +29,23 @@ const Navbar = () => {
                                         <ul className="nav menu">
                                             <li className={location.pathname === '/index' ? 'active' : ''}><a href="/index">Home <i className="icofont-rounded-down"></i></a>
                                             </li>
-                                            
+                                            <li className={location.pathname === '/feedback' ? 'active' : ''}><a href="/feedback">Feedback</a></li>
                                             <li className={location.pathname === '/projects' ? 'active' : ''}><a href="#">Projects <i className="icofont-rounded-down"></i></a>
                                                 <ul className="dropdown">
-                                                    <li><a href="404.html">Browse project</a></li>
-                                                    <li><a href="404.html">Ask for participation</a></li>
+                                                    <li><a href="/login">Browse project</a></li>
+                                                    <li><a href="/login">Ask for participation</a></li>
                                                 </ul>
                                             </li>
                                             <li className={location.pathname === '/forms' ? 'active' : ''}><a href="#">Forms <i className="icofont-rounded-down"></i></a>
                                                 <ul className="dropdown">
-                                                    <li><a href="blog-single.html">Browse Forms</a></li>
-                                                    <li><a href="blog-single.html">Answer a form</a></li>
+                                                    <li><a href="/login">Browse Forms</a></li>
+                                                    <li><a href="/login">Answer a form</a></li>
                                                 </ul>
                                             </li>
                                             <li className={location.pathname === '/feedback' ? 'active' : ''}><a href="/feedback">Feedback</a></li>
                                             <li className={location.pathname === '/aboutus' ? 'active' : ''}><a href="/aboutus">About Us</a></li>
                                             <li className={location.pathname === '/medinews/1' ? 'active' : ''}><a href="/medinews/1">News</a></li>
+
                                         </ul>
                                     </nav>
                                 </div>

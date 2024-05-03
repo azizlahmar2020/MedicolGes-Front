@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import Lin
 import LogoM from '../../assets/img/namem.png'; // Adjust image import path
 import Logo from '../../assets/img/logom.png'; // Adjust image import path
 import { FaSignOutAlt } from 'react-icons/fa'; // Import the logout icon from react-icons/fa
+import axios from 'axios'; // Import axios for making HTTP requests
 
 const NavbarSub = () => {
     const location = useLocation(); // Get current location
@@ -80,18 +81,26 @@ const NavbarSub = () => {
                                 <div className="main-menu">
                                     <nav className="navigation">
                                         <ul className="nav menu">
-                                            <li className={activeItem === '/homeprojects' ? 'active' : ''}>
-                                                <Link to="/homeprojects" onClick={() => handleClick('/homesub')}>Home <i className="icofont-rounded-down"></i></Link>
+                                            <li className={activeItem === '/homesub' ? 'active' : ''}>
+                                                <Link to="/homesub" onClick={() => handleClick('/homesub')}>Home <i className="icofont-rounded-down"></i></Link>
                                             </li>
                                             <li className={activeItem === '/myprofile' ? 'active' : ''}>
-                                                <Link to="/myprofile" onClick={() => handleClick('/myprofile')}>My profile</Link>
+                                                <Link to="/myprofile" onClick={() => handleClick('/myprofile')}>Profile</Link>
                                             </li>
                                             <li className={activeItem === '/listprofiles' ? 'active' : ''}>
                                                 <Link to="/listprofiles" onClick={() => handleClick('/listprofiles')}>Members</Link>
                                             </li>
                                             <li className={activeItem === '/projectfront' ? 'active' : ''}>
-                                                <Link to="/projectfront" onClick={() => handleClick('/homeprojects')}>My projects</Link>
+                                                <Link to="/projectfront" onClick={() => handleClick('/homeprojects')}>Projects</Link>
                                             </li>
+                                            <li className={activeItem === '/rdv' ? 'active' : ''}>
+                                                <Link to="/rdv" onClick={() => handleClick('/rdv')}>Appointments</Link>
+                                            </li>
+                                            <li className={activeItem === '/feed' ? 'active' : ''}>
+                                                <Link to="/feed" onClick={() => handleClick('/feed')}>Feed</Link>
+                                            </li>
+                                           
+
 
                                         </ul>
                                     </nav>

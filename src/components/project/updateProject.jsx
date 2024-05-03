@@ -5,8 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FaFileAlt, FaTasks, FaUser, FaCog, FaCheckCircle, FaTrash } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';  // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css';  // Import the default styles for react-toastify
-import Footer from "/src/components/template/footer";
-import NavbarSub from '../template/navbarSubadmin';
+import Sidebar from "../backend/sidebar";
 function UpdateProject() {
     const { projectId } = useParams();
     const [project, setProject] = useState({
@@ -87,9 +86,15 @@ function UpdateProject() {
 
     return (
         <div>
-            <NavbarSub/>
+        <link rel="icon" href="images/fevicon.png" type="image/png" />
+  <link rel="stylesheet" href="../../../src/components/backend/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../src/components/backend/style.css" />
+  <link rel="stylesheet" href="../../../src/components/backend/css/responsive.css" />
+  <link rel="stylesheet" href="../../../src/components/backend/css/colors.css" />
+  <link rel="stylesheet" href="../../../src/components/backend/css/bootstrap-select.css" />
+  <link rel="stylesheet" href="../../../src/components/backend/css/custom.css" />            <Sidebar/>
             <div className="main-content d-flex justify-content-center align-items-center">
-                <div className=" vh-100 overflow-auto">
+                <div className=" vh-100 overflow-auto" style={{ marginTop:'150px'}}>
                     <div className="w-100 bg-white rounded p-3">
                         <h2>Update Project</h2>
                         <form>
@@ -117,7 +122,6 @@ function UpdateProject() {
                     </div>
                 </div>
             </div>
-            <Footer/>
         </div>
     );
 }

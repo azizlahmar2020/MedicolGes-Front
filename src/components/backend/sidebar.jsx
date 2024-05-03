@@ -1,5 +1,54 @@
-import React from "react";
+import React, { useState,useEffect } from 'react';
+import {  useNavigate } from 'react-router-dom'; // Import Link, useLocation, and useNavigate
+import { FaSignOutAlt } from 'react-icons/fa'; // Import the logout icon from react-icons/fa
+import axios from 'axios'; // Import axios for making HTTP requests
+
 function Sidebar() {
+   const [userName, setUserName] = useState('');
+   const [userLastName, setUserLastName] = useState('');
+   const [userImage, setUserImage] = useState('');
+   const navigate = useNavigate(); // Initialize navigate function
+
+   useEffect(() => {
+      const fetchProfile = async () => {
+          try {
+              const token = sessionStorage.getItem('token');
+              console.log('Token:', token); // Log the token for debugging
+              if (!token) {
+                  navigate('/login');
+                  return;
+              }
+
+              const response = await axios.get('http://localhost:3001/auth/myprofile', {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              });
+
+              console.log('Response status:', response.status);
+              console.log('Response data:', response.data);
+
+              // Assuming the response data structure contains user name and image URL
+              setUserName(response.data.name); // Set user name
+              setUserLastName(response.data.lastname); // Set user name
+              setUserImage(response.data.profileImage); // Set user image URL
+          } catch (error) {
+              console.log('Error:', error.message);
+              if (error.response && error.response.status === 401) {
+                  // Unauthorized, redirect to login
+                  navigate('/login');
+              }
+          }
+      };
+      fetchProfile();
+  }, [navigate]);
+
+  
+    // Function to handle logout
+    const handleLogout = () => {
+      sessionStorage.removeItem('token'); // Clear session token
+      navigate('/index'); // Redirect to index page
+  };
 
   return (
     <div>
@@ -22,7 +71,15 @@ function Sidebar() {
 <div className="sidebar_blog_2">
 <div className="heading1 margin_0">
   <h4>General</h4>
-
+  <div className="user-info" style={{ display: 'flex', alignItems: 'right' }}>
+                    {userImage && <img src={`http://localhost:3001/profiles/${userImage}`} alt="Profile" style={{ width: '60px', height: '60px', borderRadius: '50%', marginTop: '10px', marginRight: '10px' }} />}
+                    <span className="user-name">      
+                    <p style={{color:'white',marginTop:'20px'}}> {userName} {userLastName}</p>
+                    </span>
+                    <div className="logout-icon" onClick={handleLogout} style={{ cursor: 'pointer', marginLeft: '10px',marginTop:'6px' }}>
+                    <FaSignOutAlt size={20} />
+                </div>
+                </div>
 </div>
    <ul className="list-unstyled components">
       <li className="active">
@@ -31,18 +88,18 @@ function Sidebar() {
       </li>
       <li><a href="/showProjects"><i className="fa fa-clock-o orange_color"></i> <span>Projects</span></a></li>
       
-      <li><a href="tables.html"><i className="fa fa-table purple_color2"></i> <span>Categories</span></a></li>
+      <li><a href="/CreateCategory"><i className="fa fa-table purple_color2"></i> <span>Categories</span></a></li>
       <li>
-         <a href="#apps" ><i className="fa fa-object-group white_color"></i> <span>SubCategories</span></a>
-         
+         <a href="/CreateSubcategory" ><i className="fa fa-object-group white_color"></i> <span>SubCategories</span></a>
+
       </li>
       <li>
          <a href="/submissions" ><i className="fa fa-book white_color"></i> <span>Feedbacks</span></a>
          
       </li>
-      <li><a href="map.html"><i className="fa fa-map purple_color2"></i> <span>Institutions</span></a></li>
+      <li><a href="/createInstitution"><i className="fa fa-map purple_color2"></i> <span>Institutions</span></a></li>
+
       <li><a href="/showUsers"><i className="fa fa-user pink_color"></i> <span>Users</span></a></li>
-      <li><a href="settings.html"><i className="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
    </ul>
 </div>
 </nav>

@@ -1,9 +1,7 @@
 import React from "react";
-import Navbar from "./navbarSubadmin";
 import Footer from "./footer";
-import NavbarSub from "./navbarSubadmin";
 import NavbarParticipant from "./navbarParticipant";
-function HomeSub() {
+function HomeParticipant() {
   return (
     <div>
 	<link rel="stylesheet" type="text/css" href="assets/style.css" />
@@ -705,4 +703,4 @@ function HomeSub() {
   );
 }
 
-export default HomeSub;
+export default HomeParticipant;

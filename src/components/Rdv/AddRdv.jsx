@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Button, Form, Alert } from 'react-bootstrap'; // Importer Alert depuis react-bootstrap
 import { toast } from 'react-toastify'; 
 import axiosInstance from '../../axiosInstance';
-
+import './ajoutRdv.css';
 function AjoutRdv({ handleAjoutRdv, id }) {
   const [date, setDate] = useState('');
   const [heure, setHeure] = useState('');
@@ -98,7 +98,7 @@ function AjoutRdv({ handleAjoutRdv, id }) {
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={handleAddRdv}>
+        <Button id="add-rdv-button" variant="primary" onClick={handleAddRdv} style={{paddingTop:'5px'}}>
           Ajouter
         </Button>
       </Form>

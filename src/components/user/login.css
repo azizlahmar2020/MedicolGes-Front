@@ -9,3 +9,16 @@
     transform: translateY(-50%);
     cursor: pointer;
 }
+.login .col-lg-4 {
+    /* Add your custom styles here */
+    display: flex;
+    align-items: center;
+}
+
+/* Adjust the size of the login image */
+.login .img-fluid {
+    /* Add your custom styles here */
+    margin-top: -510px !important;
+    margin-right: -561px !important; /* Adjust the margin to control the spacing */
+}
+

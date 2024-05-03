@@ -6,7 +6,8 @@ import NavbarSub from "../template/navbarSubadmin";
 import Footer from "../template/footer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus, faCalendarAlt, faEnvelope, faCheck,faTimes} from '@fortawesome/free-solid-svg-icons';
-function EditProfile() {
+import NavbarParticipant from "../template/navbarParticipant";
+function EditPatientProfile() {
     const { id } = useParams();
     const [name, setName] = useState("");
     const [lastname, setLastname] = useState("");
@@ -68,7 +69,7 @@ function EditProfile() {
     return (
         <div>
 
-        <NavbarSub />
+        <NavbarParticipant />
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-3">
@@ -117,13 +118,13 @@ function EditProfile() {
                                 </div>                    
                                 {error && <div className="alert alert-danger">{error}</div>}
                                 <div className="d-grid gap-2 d-flex justify-content-between">
-    <button type="submit" className="btn rounded-pill" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white',marginTop:'15px' }}>
+    <button type="submit" className="btn btn-success rounded-pill" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
         <span style={{ marginRight: '5px' }}>
             <FontAwesomeIcon icon={faCheck} />
         </span>
         Update
     </button>
-    <Link to="/myprofile" className="btn btn-outline-secondary rounded-pill mt-3"style={{ backgroundColor: '#c1121f', width:'170px', height:'38px',color:'white',paddingTop:'5px',fontSize:'18px' }}>
+    <Link to="/profilePatient" className="btn btn-outline-secondary rounded-pill mt-3"style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white' }}>
         <span style={{ marginRight: '5px' }}>
             <FontAwesomeIcon icon={faTimes} />
         </span>
@@ -141,4 +142,4 @@ function EditProfile() {
 );
 }
 
-export default EditProfile;
+export default EditPatientProfile;

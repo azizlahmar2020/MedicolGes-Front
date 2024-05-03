@@ -24,7 +24,7 @@ const CreateCategoryComponent = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-3">
+        <div className="col-md-3 p-0">
           <Sidebar />
         </div>
         <div className="col-md-9 mt-5">
@@ -34,7 +34,7 @@ const CreateCategoryComponent = () => {
           <button className="btn btn-success mt-5" type="button" onClick={handleCreateCategory} style={{ height: 'calc(2.25rem + 12px)' }}>Créer</button>
         </div>
           <Link to="/dashboard" className="btn btn-secondary mr-2">Retour au dashboard</Link>
-          <Link to="/CategoryDetail" className="btn btn-secondary">Retour à CategoryDetail</Link>
+          <Link to="/UpdateCategory" className="btn btn-secondary">voir la liste des categories</Link>
         </div>
       </div>
     </div>

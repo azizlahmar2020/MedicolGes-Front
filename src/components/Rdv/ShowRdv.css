@@ -120,4 +120,10 @@
     box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
     margin: 0 auto; /* Centrer horizontalement */
   }
+  .buttons-container {
+    margin-top: 20px;
+    margin-left: 55px;
+    display: flex; /* Use flexbox to align buttons horizontally */
+    gap: 10px; /* Add some space between buttons */
+  }
   
