@@ -61,10 +61,12 @@ function HomeSub() {
                                     <i className="fa fa-ambulance"></i>
                                 </div>
                                 <div className="single-content">
-                                    <span>Lorem Amet</span>
-                                    <h4>Emergency Cases</h4>
-                                    <p>Lorem ipsum sit amet consectetur adipiscing elit. Vivamus et erat in lacus convallis sodales.</p>
-                                    <a href="#">LEARN MORE<i className="fa fa-long-arrow-right"></i></a>
+                                    <span>Browse projects</span>
+                                    <h4>Projects</h4>
+                                    <p>Browse various projects made by different doctors and project initiators and have the 
+                                        chane to participate in one.
+                                    </p>
+                                    <a href="#">TAKE ME THERE<i className="fa fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -76,10 +78,12 @@ function HomeSub() {
                                     <i className="icofont-prescription"></i>
                                 </div>
                                 <div className="single-content">
-                                    <span>Fusce Porttitor</span>
-                                    <h4>Doctors Timetable</h4>
-                                    <p>Lorem ipsum sit amet consectetur adipiscing elit. Vivamus et erat in lacus convallis sodales.</p>
-                                    <a href="#">LEARN MORE<i className="fa fa-long-arrow-right"></i></a>
+                                    <span>Explore forms</span>
+                                    <h4>Forms</h4>
+                                    <p>Take a look at the trending forms that can help doctors and project initatiors to have a more 
+                                        accurate diagnosis.
+                                    </p>
+                                    <a href="#">TAKE ME THERE<i className="fa fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>

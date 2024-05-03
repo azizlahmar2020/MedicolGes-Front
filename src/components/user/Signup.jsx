@@ -2,40 +2,52 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useNavigate, useLocation } from "react-router-dom";
-import Navbar from '../template/navbarGeneral'; // Adjust the path as per your project structure
-import Footer from '/src/components/template/footer'; // Adjust the path as per your project structure
+import Navbar from "../template/navbarGeneral";
+import Footer from "../template/footer";
+
 import './signup.css';
 
-
 function Signup() {
-    const [name, setName] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [gender, setGender] = useState("male"); // Default value set to male
-    const [birthdate, setBirthdate] = useState("");
+    const [userData, setUserData] = useState({
+        name: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        gender: "male", // Default value set to male
+        birthdate: "",
+    });
     const [profileImage, setProfileImage] = useState(null); // State to store the selected profile image
-    const [error, setError] = useState("");
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const location = useLocation();
     const role = location.pathname.split('/').pop();
 
+    const validate = () => {
+        let tempErrors = {};
+        tempErrors.name = userData.name ? "" : "This field is required.";
+        tempErrors.lastname = userData.lastname ? "" : "This field is required.";
+        tempErrors.email = /\S+@\S+\.\S+/.test(userData.email) ? "" : "Email is not valid.";
+        tempErrors.password = userData.password.length >= 8 ? "" : "Password must be at least 8 characters long.";
+        tempErrors.confirmPassword = userData.password === userData.confirmPassword ? "" : "Passwords do not match.";
+        tempErrors.birthdate = userData.birthdate ? "" : "This field is required.";
+
+        setErrors(tempErrors);
+        return Object.values(tempErrors).every(x => x === "");
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserData({ ...userData, [name]: value });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        }
-        
+        if (!validate()) return;
+
         const formData = new FormData();
-        formData.append('name', name);
-        formData.append('lastname', lastname);
-        formData.append('email', email);
-        formData.append('password', password);
-        formData.append('gender', gender);
-        formData.append('birthdate', birthdate);
-        formData.append('profileImage', profileImage); // Append the selected profile image to the form data
+        Object.keys(userData).forEach(key => formData.append(key, userData[key]));
+        if (profileImage) formData.append('profileImage', profileImage);
 
         try {
             const result = await axios.post(`http://localhost:3001/auth/register/${role}`, formData, {
@@ -47,77 +59,83 @@ function Signup() {
             navigate('/login');
         } catch (err) {
             if (err.response && err.response.status === 409) {
-                setError("Email already exists");
+                setErrors(prev => ({ ...prev, global: "Email already exists" }));
             } else {
                 console.log(err);
-                setError("An error occurred. Please try again later.");
+                setErrors(prev => ({ ...prev, global: "An error occurred. Please try again later." }));
             }
         }
     };
 
     return (
-        <div>
-            <Navbar />
-            <section className="signup">
+        <section className="signup">
+            <div>
                 <link rel="stylesheet" type="text/css" href="/css/signup.css" />
                 <div className="container">
                     <div className="signup-content">
                         <div className="signup-form">
-                            <h2 className="form-title">Sign up <i className="zmdi zmdi-account-add"></i></h2>
                             <form onSubmit={handleSubmit} className="register-form" id="register-form">
+                                {/* Name and Lastname */}
                                 <div className="form-group">
                                     <div className="name-group">
-                                        <input type="text" name="name" id="name" placeholder="Your Name" onChange={(e) => setName(e.target.value)} />
-                                        <input type="text" name="lastname" id="lastname" placeholder="Your Lastname" onChange={(e) => setLastname(e.target.value)} />
+                                        <input type="text" name="name" placeholder="Your Name" value={userData.name} onChange={handleChange} />
+                                        {errors.name && <p className="error">{errors.name}</p>}
+                                        <input type="text" name="lastname" placeholder="Your Lastname" value={userData.lastname} onChange={handleChange} />
+                                        {errors.lastname && <p className="error">{errors.lastname}</p>}
                                     </div>
                                 </div>
+                                {/* Email */}
                                 <div className="form-group">
-                                    <input type="email" name="email" id="email" placeholder="Your Email" onChange={(e) => setEmail(e.target.value)} />
+                                    <input type="email" name="email" placeholder="Your Email" value={userData.email} onChange={handleChange} />
+                                    {errors.email && <p className="error">{errors.email}</p>}
                                 </div>
+                                {/* Password and Confirm Password */}
                                 <div className="form-group">
-                                    <input type="password" name="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                                    <input type="password" name="password" placeholder="Password" value={userData.password} onChange={handleChange} />
+                                    {errors.password && <p className="error">{errors.password}</p>}
+                                    <input type="password" name="confirmPassword" placeholder="Repeat your password" value={userData.confirmPassword} onChange={handleChange} />
+                                    {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
                                 </div>
+                                {/* Gender Selection */}
                                 <div className="form-group">
-                                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Repeat your password" onChange={(e) => setConfirmPassword(e.target.value)} />
+                                    <label>Gender</label>
+                                    <select name="gender" value={userData.gender} onChange={handleChange} style={{ width: '100%', padding: '3px', fontSize: '16px' }} className="select-gender">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
                                 </div>
+                                {/* Birthdate */}
                                 <div className="form-group">
-                                    <label htmlFor="gender">Gender:</label>
-                                    <div className="radio-group">
-                                        <label>
-                                            <input type="radio" name="gender" value="male" checked={gender === "male"} onChange={(e) => setGender(e.target.value)} />
-                                            Male
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="gender" value="female" checked={gender === "female"} onChange={(e) => setGender(e.target.value)} />
-                                            Female
-                                        </label>
-                                    </div>
+                                    <label>Birthdate</label>
+                                    <input type="date" name="birthdate" value={userData.birthdate} onChange={handleChange} />
+                                    {errors.birthdate && <p className="error">{errors.birthdate}</p>}
                                 </div>
+                                {/* Profile Image Upload */}
                                 <div className="form-group">
-                                    <label htmlFor="birthdate">Birth Date:</label>
-                                    <input type="date" name="birthdate" id="birthdate" onChange={(e) => setBirthdate(e.target.value)} />
+                                    <label>Profile Image</label>
+                                    <input type="file" name="profileImage" onChange={(e) => setProfileImage(e.target.files[0])} />
                                 </div>
-                                <div className="form-group">
-                                    <label htmlFor="profileImage">Profile Picture:</label>
-                                    <input type="file" name="profileImage" id="profileImage" onChange={(e) => setProfileImage(e.target.files[0])} />
-                                </div>
+                                {/* Error message */}
+                                {errors.global && <p className="error global-error">{errors.global}</p>}
+                                {/* Submit Button */}
                                 <div className="form-group form-button">
-                                    <input type="submit"  id="signup" className="form-submit-reg" value="Register" />
+                                    <input type="submit" name="signup" className="form-submit-reg" value="Register" />
                                 </div>
                             </form>
                         </div>
                         <div className="signup-image">
                             <figure>
-                                <img src="/images/register.jpg" alt="sign up image" />
+                                <img src="/images/register.jpg" alt="sign up" />
                             </figure>
                             <Link to="/login" className="signup-image-link">I am already a member</Link>
                         </div>
-
                     </div>
                 </div>
-            </section>
-            <Footer />
-        </div>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+        </section>
     );
 }
 

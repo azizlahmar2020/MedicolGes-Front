@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import de FontAwesome
-import { faArrowRight, faRandom } from '@fortawesome/free-solid-svg-icons'; // Import des icônes
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faRandom } from '@fortawesome/free-solid-svg-icons';
 
-import "./style.css"; // Import du fichier CSS externe
+import "./videostyle.css"; // Import du fichier CSS avec les styles spécifiques à la vidéo call
 
 const Home = () => {
   const [roomCode, setRoomCode] = useState("");
@@ -38,7 +38,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative h-screen ">
+    <div className="video-call-section relative h-screen">
       <div className="hero-info">
         <div className="borderrr flex flex-col items-center justify-center pb-8">
           <h1 className="title-video">Meet App</h1>
@@ -46,12 +46,10 @@ const Home = () => {
 
         <form onSubmit={submitCode} className="enter-code-form">
           <div className="flex flex-col justify-center items-center">
-          <img src='../../../public/images/3915274.png'></img>
-
+            <img src='../../../public/images/3915274.png'></img>
             <label className="enter-code-label">
               Enter Room Code
             </label>
-           
             <input
               type="text"
               required
@@ -79,7 +77,6 @@ const Home = () => {
           <p> {generatedCode}</p>
         </div>
       </div>
-
     </div>
   );
 };

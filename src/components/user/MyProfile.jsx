@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
-import { FaUser, FaTransgender, FaBirthdayCake, FaCog } from 'react-icons/fa';
-import NavbarSub from "/src/components/template/navbarSubadmin";
+import { useNavigate , Link} from 'react-router-dom';
+import { FaUser, FaTransgender, FaBirthdayCake, FaCog,FaComments } from 'react-icons/fa';
+import Navbar from "/src/components/template/navbarSubadmin";
 import Footer from "/src/components/template/footer";
 import NavbarSub from "../template/navbarSubadmin";
-import './myprofile.css';
 
 function MyProfile() {
     const [user, setUser] = useState(null);
@@ -22,7 +21,6 @@ function MyProfile() {
                     navigate('/login');
                     return;
                 }
-
                 try {
                     // Log request headers before making the request
                     console.log('Request headers before fetch:', {
@@ -54,7 +52,7 @@ function MyProfile() {
         };
 
         fetchProfile();
-    }, [navigate]);
+    }, []);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -80,18 +78,18 @@ function MyProfile() {
                                             <h4>{user.name} {user.lastname}</h4>
                                             <p className="text-secondary mb-1">{user.role}</p>
                                             <p className="text-muted font-size-sm">{user.email}</p>
-                                            {user.role === "sub-admin" && (
-                                                <button className="btn btn-outline-primary" onClick={() => navigate('/projectfront')} style={{backgroundColor:'#2b8c7b', color:'white', width:'200px', height:'40px', borderRadius:'5px', borderColor:'white'}}>Projects</button>
-                                            )}
-                                                <button className="btn btn-outline-primary" style={{backgroundColor:'#2b8c7b', color:'white', width:'100px', height:'40px', borderRadius:'5px', borderColor:'white'}}>Chat</button>
+                                            <Link to={`/editProfile/${user._id}`} className="btn mr-2" style={{ backgroundColor: '#0C8CAC', width:'170px', height:'38px',color:'white',paddingTop:'5px' }}>
+                                                    <FaCog className="mr-2" />Settings
+                                                </Link>
+                                                <Link to={`/ChatBox/${user._id}_self/${user._id}`} className="btn mr-2" style={{ backgroundColor: '#2b8c7b', width:'170px', height:'38px',color:'white',paddingTop:'5px' }}>
+    <FaComments className="mr-2" />Chat
+</Link>
+                                           </div>
 
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                         <div className="col-md-8">
                             {/* Card with user details */}
                             <div className="card mb-3" style={{ backgroundColor: 'white', padding: '155px', borderRadius: '10px' }}>
@@ -111,46 +109,29 @@ function MyProfile() {
                                         </div>
                                         <div className="col-sm-9">
                                             {user.gender}
-
-                                        </div>
-                                        <hr />
-                                        <div className="row">
-                                            <div className="col-sm-3">
-                                                <h6 className="mb-0"><FaTransgender className="mr-2" />Gender</h6>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                {user.gender}
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div className="row">
-                                            <div className="col-sm-3">
-                                                <h6 className="mb-0"><FaBirthdayCake className="mr-2" />Birthdate</h6>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                {user.birthdate}
-                                            </div>
                                         </div>
                                     </div>
-                                    
+                                    <hr />
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <h6 className="mb-0"><FaBirthdayCake className="mr-2" />Birthdate</h6>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            {user.birthdate}
+                                        </div>
+                                    </div>
                                     {/* Add other user information fields as needed */}
-
                                 </div>
-                                            {/* "Edit Profile" button */}
                             </div>
-                            
                             {/* Cards with project status */}
                             {/* Include logic to display project status based on user's data */}
-
                         </div>
-
-
                     </div>
                 </div>
-                
             </div>
-            <Footer />
         </div>
+                <Footer/> </div>
+
     );
 }
 

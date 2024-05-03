@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+
+import React, { useState,useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import Link, useLocation, and useNavigate
 import LogoM from '../../assets/img/namem.png'; // Adjust image import path
 import Logo from '../../assets/img/logom.png'; // Adjust image import path
+import { FaSignOutAlt } from 'react-icons/fa'; // Import the logout icon from react-icons/fa
+import axios from 'axios'; // Import axios for making HTTP requests
 
 const NavbarSub = () => {
     const location = useLocation(); // Get current location
     const [activeItem, setActiveItem] = useState(location.pathname); // Initialize active menu item with current pathname
     const navigate = useNavigate(); // Initialize navigate function
+    const [userName, setUserName] = useState('');
+    const [userLastName, setUserLastName] = useState('');
+    const [userImage, setUserImage] = useState('');
 
     // Function to handle click on menu items
     const handleClick = (path) => {
@@ -19,6 +25,40 @@ const NavbarSub = () => {
         sessionStorage.removeItem('token'); // Clear session token
         navigate('/index'); // Redirect to index page
     };
+    
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const token = sessionStorage.getItem('token');
+                console.log('Token:', token); // Log the token for debugging
+                if (!token) {
+                    navigate('/login');
+                    return;
+                }
+
+                const response = await axios.get('http://localhost:3001/auth/myprofile', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response data:', response.data);
+
+                // Assuming the response data structure contains user name and image URL
+                setUserName(response.data.name); // Set user name
+                setUserLastName(response.data.lastname); // Set user name
+                setUserImage(response.data.profileImage); // Set user image URL
+            } catch (error) {
+                console.log('Error:', error.message);
+                if (error.response && error.response.status === 401) {
+                    // Unauthorized, redirect to login
+                    navigate('/login');
+                }
+            }
+        };
+        fetchProfile();
+    }, [navigate]);
 
     return (
         <header className="header">
@@ -41,30 +81,41 @@ const NavbarSub = () => {
                                 <div className="main-menu">
                                     <nav className="navigation">
                                         <ul className="nav menu">
-                                            <li className={activeItem === '/homeprojects' ? 'active' : ''}>
-                                                <Link to="/homeprojects" onClick={() => handleClick('/homesub')}>Home <i className="icofont-rounded-down"></i></Link>
+                                            <li className={activeItem === '/homesub' ? 'active' : ''}>
+                                                <Link to="/homesub" onClick={() => handleClick('/homesub')}>Home <i className="icofont-rounded-down"></i></Link>
                                             </li>
                                             <li className={activeItem === '/myprofile' ? 'active' : ''}>
-                                                <Link to="/myprofile" onClick={() => handleClick('/myprofile')}>My profile</Link>
+                                                <Link to="/myprofile" onClick={() => handleClick('/myprofile')}>Profile</Link>
                                             </li>
                                             <li className={activeItem === '/listprofiles' ? 'active' : ''}>
                                                 <Link to="/listprofiles" onClick={() => handleClick('/listprofiles')}>Members</Link>
                                             </li>
                                             <li className={activeItem === '/projectfront' ? 'active' : ''}>
-                                                <Link to="/projectfront" onClick={() => handleClick('/homeprojects')}>My projects</Link>
+                                                <Link to="/projectfront" onClick={() => handleClick('/homeprojects')}>Projects</Link>
                                             </li>
+                                            <li className={activeItem === '/rdv' ? 'active' : ''}>
+                                                <Link to="/rdv" onClick={() => handleClick('/rdv')}>Appointments</Link>
+                                            </li>
+                                            <li className={activeItem === '/feed' ? 'active' : ''}>
+                                                <Link to="/feed" onClick={() => handleClick('/feed')}>Feed</Link>
+                                            </li>
+                                           
+
 
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div className="col-lg-2 col-12">
-                                <div className="get-quote">
-                                    {/* Logout Button */}
-                                    <button onClick={handleLogout} className="btn-logout" style={{width:'150px', height:'40px', marginTop:'10px', 
-                                    backgroundColor:'#0B8FAD',color:'white', borderRadius:'20px'}}>Logout</button>
-
-                                </div>
+                                        <div className="user-info" style={{ display: 'flex', alignItems: 'right' }}>
+                    {userImage && <img src={`http://localhost:3001/profiles/${userImage}`} alt="Profile" style={{ width: '60px', height: '60px', borderRadius: '50%', marginTop: '10px', marginRight: '10px' }} />}
+                    <span className="user-name">      
+                    <Link to="/myprofile">{userName} {userLastName}</Link>
+                    </span>
+                    <div className="logout-icon" onClick={handleLogout} style={{ cursor: 'pointer', marginLeft: '10px' }}>
+                    <FaSignOutAlt size={20} />
+                </div>
+                </div>
                             </div>
                         </div>
                     </div>

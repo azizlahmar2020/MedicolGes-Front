@@ -1,19 +1,20 @@
 /* userprofiles.css */
-.custom-chat-button {
+.custom-rdv-button {
     /* Add styles for the custom chat button */
     /* Example: */
-    background-color: #007bff !important;
-    color: #fff;
-    border: none;
+    color: #0B8FA8;
+    background-color: transparent !important;
+    border: none !important;
     padding-left: 0%;
-    border-radius: 5px;
-    font-size: 20px;
-    width: 200px !important;
+    font-size: 25px; /* Increase font size */
+    margin-left: 80px; /* Add margin to separate it from the chat icon */
+    margin-top: -42px;
   }
-  
-  .custom-chat-button:hover {
-    background-color: #0056b3;
-    color: #fff;
-  }
- 
+  .custom-rdv-button:hover {
+    /* No hover effect */
+    background-color: transparent !important;
+}
 
+    .btn-link{
+      padding-right: 50px;
+    }
