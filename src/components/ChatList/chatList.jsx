@@ -96,18 +96,20 @@ const ChatList = ({ userRooms, joinRoomWithUser, unreadConversations ,socket,use
         <ul className='user-list'>
           {filteredUserRooms.map((userId, index) => (
             <li key={index} className={`user-list-item ${isUnread(userId) ? 'unread' : ''}`} onClick={() => { joinRoomWithUser(userId); setNotifUsers(prevState => ({ ...prevState, [userId]: false })) }}>
+
               <div className="message-info">
                 {userData[userId] && (
                   <>
-                    {notifUsers[userId] && ( // Vérifie si l'utilisateur a des messages non lus
-                      <div className='notifa' style={{ backgroundColor: 'red' }}> Not</div>
+                   {notifUsers[userId] && ( // Vérifie si l'utilisateur a des messages non lus
+                      <div className='notifa' style={{ backgroundColor: 'red', borderRadius:'50%',width:'10px',height:'10px',marginTop:'-35px' }}> </div>
                     )}
                     <img src={`http://localhost:3001/profiles/${userData[userId].profileImage}`} alt="Profile" className="user-image" />
                     <div className="message-details">
                       <div className={`message-username ${isUnread(userId) ? 'unread' : ''}`}>
-                        {userData[userId].name}
+                        {userData[userId].name}{userData[userId].lastName}
                       </div>
                     </div>
+                    
                   </>
                 )}
               </div>
