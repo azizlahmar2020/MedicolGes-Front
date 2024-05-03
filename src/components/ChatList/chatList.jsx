@@ -6,13 +6,51 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Footer from "/src/components/template/footer";
 
-const ChatList = ({ userRooms, joinRoomWithUser, unreadConversations }) => {
+const ChatList = ({ userRooms, joinRoomWithUser, unreadConversations ,socket,username}) => {
   const [userData, setUserData] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
+  const [notifUsers, setNotifUsers] = useState({});
 
   const isUnread = (userId) => {
     return unreadConversations.includes(userId);
   };
+
+  useEffect(() => {
+    // Récupérer les notifications sauvegardées lors du montage du composant
+    const savedNotifUsers = JSON.parse(localStorage.getItem('notifUsers'));
+    if (savedNotifUsers) {
+      setNotifUsers(savedNotifUsers);
+    }
+
+    // Nettoyer le stockage lors du démontage du composant
+    return () => {
+      localStorage.removeItem('notifUsers');
+    };
+  }, []);
+
+  useEffect(() => {
+    // Sauvegarder les notifications lorsqu'elles sont mises à jour
+    localStorage.setItem('notifUsers', JSON.stringify(notifUsers));
+  }, [notifUsers]);
+
+  useEffect(() => {
+    const receiveMessage = (data) => {
+      if (data.author !== username) {
+        setNotifUsers(prevState => ({
+          ...prevState,
+          [data.author]: true
+        }));
+      }
+    };
+
+    if (socket) {
+      socket.on("receive_message", receiveMessage);
+
+      return () => {
+        socket.off("receive_message", receiveMessage);
+      };
+    }
+  }, [socket, username]);
 
   useEffect(() => {
     const fetchUser = async (userId) => {
@@ -55,19 +93,23 @@ const ChatList = ({ userRooms, joinRoomWithUser, unreadConversations }) => {
       </div>
       <div className='Liste'>
         <h4 className='conv'> Conversation: </h4>
-        <ul className='user-list'> {/* Ajouter la classe pour la barre de défilement */}
+        <ul className='user-list'>
           {filteredUserRooms.map((userId, index) => (
-            <li key={index} className={`user-list-item ${isUnread(userId) ? 'unread' : ''}`} onClick={() => joinRoomWithUser(userId)}>
+            <li key={index} className={`user-list-item ${isUnread(userId) ? 'unread' : ''}`} onClick={() => { joinRoomWithUser(userId); setNotifUsers(prevState => ({ ...prevState, [userId]: false })) }}>
+
               <div className="message-info">
                 {userData[userId] && (
                   <>
+                   {notifUsers[userId] && ( // Vérifie si l'utilisateur a des messages non lus
+                      <div className='notifa' style={{ backgroundColor: 'red', borderRadius:'50%',width:'10px',height:'10px',marginTop:'-35px' }}> </div>
+                    )}
                     <img src={`http://localhost:3001/profiles/${userData[userId].profileImage}`} alt="Profile" className="user-image" />
                     <div className="message-details">
                       <div className={`message-username ${isUnread(userId) ? 'unread' : ''}`}>
-                        {userData[userId].name}
+                        {userData[userId].name}{userData[userId].lastName}
                       </div>
-                      {/* Ajoutez d'autres détails du message ici si nécessaire */}
                     </div>
+                    
                   </>
                 )}
               </div>
@@ -83,6 +125,8 @@ ChatList.propTypes = {
   userRooms: PropTypes.array.isRequired,
   joinRoomWithUser: PropTypes.func.isRequired,
   unreadConversations: PropTypes.array.isRequired,
+  socket: PropTypes.object,
+  username: PropTypes.string.isRequired,
 };
 
 export default ChatList;

@@ -8,6 +8,8 @@ import Sidebar from "../backend/sidebar";
 function ShowUsers(){
     const [users, setUsers]= useState([]);
     const [sessionId, setSessionId] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filterRole, setFilterRole] = useState('');
 
     useEffect(() => {
         const fetchSessionId = async () => {
@@ -57,35 +59,82 @@ function ShowUsers(){
     };
     const updateUserRole = (userId) => {
         const userToUpdate = users.find(user => user._id === userId);
-        
-        if (userToUpdate.role !== "participant") {
-          // Do not update role if the current role is not "participant"
-          return;
+    
+        // Determine the new role based on the current role
+        let newRole;
+        if (userToUpdate.role === "participant") {
+            newRole = "coordinator";
+        } else if (userToUpdate.role === "coordinator") {
+            newRole = "participant";
+        } else {
+            // If the role is neither participant nor coordinator, do not update
+            return;
         }
-        
-        const newRole = "coordinator";
-      
+    
         axios.put(`http://localhost:3001/users/updateUserRole/${userId}`, { newRole })
-          .then(response => {
-            // Update the role in the local state (users array)
-            const updatedUsers = users.map(user =>
-              user._id === userId ? { ...user, role: newRole } : user
-            );
-            setUsers(updatedUsers);
-            console.log("Role updated in the server"); // Optional: Log a message indicating the role update
-          })
-          .catch(err => console.log(err));
-      };
+            .then(response => {
+                // Update the role in the local state (users array)
+                const updatedUsers = users.map(user =>
+                    user._id === userId ? { ...user, role: newRole } : user
+                );
+                setUsers(updatedUsers); // Assuming setUsers updates the state
+                console.log("Role updated to " + newRole); // Log the new role
+            })
+            .catch(err => console.log(err));
+    };
+    
+     // Filter users based on search query and role
+     const filteredUsers = users.filter(user =>
+        (user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.lastname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        (filterRole === '' || user.role === filterRole)
+    );
+
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const handleRoleFilter = (role) => {
+        setFilterRole(role);
+    };
+    const clearFilters = () => {
+        setFilterRole('');
+    };
     return (
         <div>
-        <Sidebar /> {/* Include the Sidebar component */}
-        <div className="main-content ">
-            <div className="w-100 vh-100 overflow-auto">
-                <div className=" bg-white rounded p-3" style={{ backgroundColor: '#088fad',marginTop:'70px',marginLeft:'300px' }}>
+            <Sidebar /> {/* Include the Sidebar component */}
+            <div className="main-content ">
+                <div className="w-100 vh-100 overflow-auto">
+                    <div className=" bg-white rounded p-3" style={{ backgroundColor: '#088fad', marginTop: '70px', marginLeft: '300px' }}>
                         <div className="white_shd full margin_bottom_30">
-                           
                             <div className="table_section ">
                                 <div className="table-responsive-sm">
+                                    <div className="search-container">
+                                        <input
+                                            type="text"
+                                            placeholder="Search..."
+                                            value={searchQuery}
+                                            onChange={handleSearch}
+                                        />
+                                    </div>
+                                    <div className="role-filter" style={{ marginTop: '20px', marginBottom: '20px', display: 'flex'}}>
+                                        <label style={{ marginRight: '30px',fontSize: '16px'}}>Show Only:</label>
+                                        <label style={{ fontSize: '16px', marginRight: '10px' }}>
+                                            <input type="checkbox" checked={filterRole === 'participant'} onChange={() => handleRoleFilter('participant')} />
+                                            Participant
+                                        </label>
+                                        <label style={{ fontSize: '16px', marginRight: '10px' }}>
+                                            <input type="checkbox" checked={filterRole === 'coordinator'} onChange={() => handleRoleFilter('coordinator')} />
+                                            Coordinator
+                                        </label>
+                                        <label style={{ fontSize: '16px', marginRight: '10px' }}>
+                                            <input type="checkbox" checked={filterRole === 'sub-admin'} onChange={() => handleRoleFilter('sub-admin')} />
+                                            Sub-admin
+                                        </label>
+                                        <button onClick={clearFilters} style={{ marginLeft: '10px', padding: '5px 10px', backgroundColor: '#f44336', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Clear</button>
+                                    </div>
+
                                     <table className="table">
                                         <thead>
                                             <tr>
@@ -93,28 +142,26 @@ function ShowUsers(){
                                                 <th>Email</th>
                                                 <th>Gender</th>
                                                 <th>Action</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {users.map((user) => (
+                                            {filteredUsers.map((user) => (
                                                 <tr key={user._id}>
                                                     <td style={{ maxWidth: '50px' }}>
-                                                        {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%',marginRight:'5px' }} />}
-                                                         {user.name} {user.lastname}
+                                                        {user.profileImage && <img src={`http://localhost:3001/profiles/${user.profileImage}`} alt="Profile" style={{ width: '80px', height: '80px', borderRadius: '50%', marginRight: '5px' }} />}
+                                                        {user.name} {user.lastname}
                                                     </td>
                                                     <td style={{ maxWidth: '60px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.email}</td>
                                                     <td>{user.gender}</td>
-                                                    <td style={{ maxWidth: '60px'}}>
+                                                    <td style={{ maxWidth: '60px' }}>
                                                         {(user.role === "participant" || user.role === "coordinator") && (
-                                                            <button className="btn btn-primary" onClick={() => updateUserRole(user._id)}>
-                                                                {user.role === "participant" ? "Coordinator" : "Undo"}
+                                                            <button className="btn btn-primary" onClick={() => updateUserRole(user._id)} style={{ backgroundColor: 'grey' }}>
+                                                                {user.role === "participant" ? "Make Coordinator" : "Make Participant"}
                                                             </button>
                                                         )}
-                                                    
-                                                        <Link to={`/updateProfile/${user._id}`} className="btn btn-success mr-2" style={{color:'white'}}><FaEdit /></Link>
-                                                        <button className="btn btn-danger" onClick={() => deleteUser(user._id)} style={{color:'red'}}><FaTrash /></button>
-                                                        </td>
+                                                        <Link to={`/updateProfile/${user._id}`} className="btn btn-success mr-2" style={{ color: 'white' }}><FaEdit /></Link>
+                                                        <button className="btn btn-danger" onClick={() => deleteUser(user._id)} style={{ color: 'white' }}><FaTrash /></button>
+                                                    </td>
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -126,8 +173,6 @@ function ShowUsers(){
                 </div>
             </div>
         </div>
-    
     );
 }
-
 export default ShowUsers;

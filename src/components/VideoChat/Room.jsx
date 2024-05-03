@@ -81,7 +81,7 @@ function RoomCall() {
     return (
       <>
         <NavbarSub />
-        <div ref={meeting} style={{ width: "98,9vw", height: "100vh" , justifyContent:"center"}}></div>
+        <div ref={meeting} style={{ width: "98,9vw", height: "100vh" }}></div>
         <Footer />
       </>
     );

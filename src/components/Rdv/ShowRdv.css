@@ -121,9 +121,19 @@
     margin: 0 auto; /* Centrer horizontalement */
   }
   .buttons-container {
-    margin-top: 20px;
-    margin-left: 55px;
+    margin-top: 5px;
+    margin-bottom: 2px !important;
     display: flex; /* Use flexbox to align buttons horizontally */
+    
+    align-self: center;
     gap: 10px; /* Add some space between buttons */
+  }
+  .participate-btn {
+    background-color: #4c6cd4; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
   }
   

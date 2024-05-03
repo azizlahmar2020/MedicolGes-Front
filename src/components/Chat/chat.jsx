@@ -5,8 +5,14 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import EmojiPicker from 'emoji-picker-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CameraFill } from 'react-bootstrap-icons';
-import Modal from 'react-modal';
+import { Modal } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import ChatBot from '../ChatBot/ChatWindow'; 
+import TextImage from '../ChatBot/Convert';
+import { ToastContainer, toast } from "react-toastify";
+
 
 function Chat({ socket, username, room  , user2 }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -16,6 +22,75 @@ function Chat({ socket, username, room  , user2 }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [userData, setUserData] = useState(null);
+  const [imageText, setImageText] = useState(false);
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [NotNumberNotif, setNotNumberNotif] = useState(0);
+
+
+  // Fonction pour ouvrir le chatbot
+  const openChatbot = () => setIsChatbotOpen(true);
+
+  // Fonction pour fermer le chatbot
+  const closeChatbot = () => setIsChatbotOpen(false);
+  const handleCloseModal = () => {
+      setIsChatbotOpen(false);
+  };  
+
+
+
+  // Fonction pour ouvrir le chatbot
+
+   const openImageText = (imageUrl) => {
+    setSelectedImage(imageUrl);
+    setImageText(true);
+  };
+
+  const closeImageText = () => setImageText(false);
+
+  const handleImageTextClose = () => {
+    setSelectedImage('');
+    setImageText(false);
+  };
+  
+  
+
+  const notifyWithFullName = async (userId, message) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/users/getUserFullName/${userId}`);
+        const response1 = await axios.get(`http://localhost:3001/users/getUserImage/${userId}`);
+        console.log('de', response1, '')
+        const fullName = response.data.fullName;
+        console.log(userId)
+        if (fullName) {
+            const notificationContent = (
+                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <img src={`http://localhost:3001/profiles/${response1.data.profileImage}`} style={{ height: '100px', width: '100px', borderRadius: '50%' }} alt="Profile" className="user-image" />
+                  <div className="notification__avatar">
+                    <h5>{`${fullName}`} : </h5>
+                    <span style={{ marginLeft: '10px' ,maxHeight:'200px'}}>{` ${message}`}</span>
+                </div></div>
+            );
+
+            toast.success(notificationContent, {
+                position: 'bottom-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+        } else {
+            toast.error('Failed to get user full name.');
+        }
+    } catch (error) {
+        console.error('Error notifying with full name:', error);
+        toast.error('Failed to notify with user full name.');
+    }
+};
+
 
   // Fonction pour remplacer les URL dans le texte par des liens HTML
   const replaceURLsWithLinks = (text) => {
@@ -51,18 +126,14 @@ function Chat({ socket, username, room  , user2 }) {
         time: `${new Date().getHours()}:${new Date().getMinutes()}`,
       };
 
-      if (socket) {
-        socket.emit("send_message", messageData);
-      }
-
-      setMessageList((list) => [...list, messageData]);
+      socket.emit("send_message", messageData);
+      setMessageList((prevMessages) => [...prevMessages, messageData]);
       setCurrentMessage("");
-      setIsTyping(false); 
+      setIsTyping(false);
     } else {
       alert("Please enter a message");
     }
   };
-
   const handleFileChange = (event) => {
     const file = event.target.files[0];
 
@@ -100,10 +171,19 @@ function Chat({ socket, username, room  , user2 }) {
     const receiveMessage = (data) => {
       setMessageList((list) => [...list, data]);
       const chatBody = document.getElementById("chat-body");
+      if (data.author !== username) {
+
+        notifyWithFullName(data.author,data.message);
+
+        console.log('htaaa', data.author)
+    
+    
+    }
       chatBody.scrollTop = chatBody.scrollHeight;
     };
-
+      console.log('socket','')
     if (socket) {
+
       socket.on("receive_message", receiveMessage);
 
       socket.on("typing", (data) => {
@@ -162,6 +242,7 @@ function Chat({ socket, username, room  , user2 }) {
 
     fetchUser();
   }, [username]);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -181,6 +262,7 @@ function Chat({ socket, username, room  , user2 }) {
 
   return (
     <>
+    
       <div className="chat-window">
       <div className="chat-header">
   {userData && (
@@ -208,13 +290,23 @@ function Chat({ socket, username, room  , user2 }) {
                       {messageContent.message ? (
                         <p dangerouslySetInnerHTML={{ __html: replaceURLsWithLinks(messageContent.message) }} style={{color:'white'}}></p>
                       ) : (
-                        <img
-                          className="image"
-                          src={messageContent.image}
-                          style={{ width: '400px', height: '300px' }}
-                          alt="Received Image"
-                          onClick={() => openModal(messageContent.image)}
-                        />
+                        <>                    
+                         <img
+                  className="image"
+                  src={messageContent.image}
+                  style={{ width: '400px', height: '300px' }}
+                  alt="Received Image"
+                  onClick={() => openModal(messageContent.image)}
+                />
+                <FontAwesomeIcon
+                  icon={faEye}
+                  style={{ margin: '8px', cursor: 'pointer' }}
+                  onClick={() => openImageText(messageContent.image)}
+                />
+     
+</>
+
+
                       )}
                     </div>
                     <div className="message-meta">
@@ -263,16 +355,55 @@ function Chat({ socket, username, room  , user2 }) {
                 <CameraFill size={24} />
               </label>
             </div>
+            <ul className="pro-features">
+                {/* Bouton pour ouvrir le chatbot */}
+                <a className="get-pro" onClick={openChatbot}>Ask me</a>
+                <li className="big-title">Pro Version Available on Themeforest</li>
+                <li className="title">Pro Version Features</li>
+                <li>2+ premade home pages</li>
+                <li>20+ html pages</li>
+                <li>Color Plate With 12+ Colors</li>
+                <li>Sticky Header / Sticky Filters</li>
+                <li>Working Contact Form With Google Map</li>
+
+                {/* Composant ChatBot */}
+                <Modal style={{border:'none'}} show={isChatbotOpen} onHide={handleCloseModal}>
+                    
+                 
+                        <ChatBot closeChatbot={closeChatbot} />
+                  
+                </Modal>
+            </ul>
+      {/* Modèle de chatbot */}
+      {/* <Modal
+        isOpen={isChatbotOpen}
+        onRequestClose={toggleChatbot}
+        contentLabel="Chatbot Modal"
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
+          },
+          content: {
+            overflow: "hidden",
+            zIndex:"999"
+          },
+        }}
+      >
+        <ChatBot closeChatbot={toggleChatbot} />
+      </Modal> */}
             <div className="button">
               <button onClick={sendMessage} className="send-button">&#9658;</button>
             </div>
           </div>
         </div>
       </div>
-
+      <Modal style={{ border: 'none' }} show={imageText} onHide={handleImageTextClose}>
+        {selectedImage && <TextImage ImageUrl={selectedImage} />}
+      </Modal>
+      
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
+        show={modalIsOpen}
+        onHide={closeModal}
         contentLabel="Image Viewer"
         style={{
           overlay: {
@@ -290,6 +421,7 @@ function Chat({ socket, username, room  , user2 }) {
       >
         <img src={selectedImage} alt="Selected" style={{ width: '100%', height: '100%' }} />
       </Modal>
+      <ToastContainer />
     </>
   );
 }

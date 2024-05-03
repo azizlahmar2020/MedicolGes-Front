@@ -36,7 +36,6 @@ import MediNews from './components/pages/medinews';
 import HomeVideo from './components/VideoChat/HomeVideo';
 import Room from './components/VideoChat/Room';
 import Rdv from './components/Rdv/ShowRdv';
-import RdvPatient from './components/Rdv/showRdvPatient';
 import CreateInstitutionForm from './components/institution/CreateInstitutionForm';
 import UpdateInstitutionForm from './components/institution/UpdateInsitutionForm';
 import SingleInstitutionDetail from './components/institution/SingleInstitutionDetail';
@@ -46,6 +45,7 @@ import UpdateCategoryComponent from './components/category/UpdateCategoryCompone
 import SubcategoryDetailComponent from './components/subcategory/SubcategoryDetailComponent';
 import CreateSubcategoryComponent from './components/subcategory/CreateSubcategoryComponent';
 import UpdateSubcategoryComponent from './components/subcategory/updatesubcategory'
+import ChatWinDowBot from "./components/ChatBot/ChatWindow";
 
 import './components/feedback/custom.css';
 import ProfilePatient from './components/user/ProfilePatient';
@@ -53,7 +53,8 @@ import MembersForPatient from './components/user/MembersForPatient';
 import EditPatientProfile from './components/user/editPatientProfile';
 import FeedPatient from './components/feed/feedPatient';
 import ShowProjBack from './components/project/showProjBack';
-
+import EmailVerify from './components/user/EmailVerify';
+import Converte from './components/ChatBot/Convert.jsx';
 function App() {
   return (
     <Provider store={store}>
@@ -93,14 +94,13 @@ function App() {
           <Route path='/Video' element={<HomeVideo />} />
           <Route path='/room/:roomID' element={<Room />} />
           <Route path='/rdv' element={<Rdv />} />
-          <Route path='/rdvPatient' element={<RdvPatient />} />
           <Route path="/createInstitution" element={<CreateInstitutionForm />} />
           <Route path="/updateInstitution" element={<UpdateInstitutionForm />} />
-           <Route path="/singleInstitution/:id" element={<SingleInstitutionDetail />} /> 
-          <Route path="/CategoryDetail/:id" element={<CategoryDetailComponent />} />
+          <Route path="/singleInstitution/:id" element={<SingleInstitutionDetail />} /> 
+          <Route path="/CategoryDetail" element={<CategoryDetailComponent />} />
           <Route path="/CreateCategory" element={<CreateCategory />} />
           <Route path="/UpdateCategory" element={<UpdateCategoryComponent />} />
-          <Route path="/SubcategoryDetail/:id" element={<SubcategoryDetailComponent />} />
+          <Route path="/SubcategoryDetail" element={<SubcategoryDetailComponent />} />
           <Route path="/CreateSubcategory" element={<CreateSubcategoryComponent />} />
           <Route path="/updatesubcategory" element={< UpdateSubcategoryComponent/>} />
           <Route path='/profilePatient' element={<ProfilePatient />} />
@@ -108,9 +108,10 @@ function App() {
           <Route path='/editPatientProfile/:id' element={<EditPatientProfile />} />
           <Route path='/feedPatient' element={<FeedPatient />} />
           <Route path='/showProjectback/:projectId' element={<ShowProjBack />} />
-
-          
+          <Route path="/auth/:id/verify-email/:token" element={<EmailVerify />} />
           <Route path='/ChatBoxParticipant/:idsession/:iduserselection' element={<ChatBoxParticipant />} />
+          <Route path='/chatbot' element={<ChatWinDowBot />} />
+          <Route path='/cnv' element={<Converte />} />
         </Routes>
       </BrowserRouter>
     </Provider>

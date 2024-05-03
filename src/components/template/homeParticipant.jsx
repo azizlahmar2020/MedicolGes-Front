@@ -1,26 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "./footer";
 import NavbarParticipant from "./navbarParticipant";
+import { Modal } from "react-bootstrap";
+import ChatBot from '../ChatBot/ChatWindow'; 
+
 function HomeParticipant() {
+    
+    const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+
+    // Fonction pour ouvrir le chatbot
+    const openChatbot = () => setIsChatbotOpen(true);
+
+    // Fonction pour fermer le chatbot
+    const closeChatbot = () => setIsChatbotOpen(false);
+    const handleCloseModal = () => {
+        setIsChatbotOpen(false);
+    };
   return (
     <div>
 	<link rel="stylesheet" type="text/css" href="assets/style.css" />
     
     
     <ul className="pro-features">
-        <a className="get-pro" href="#">Get Pro</a>
-        <li className="big-title">Pro Version Available on Themeforest</li>
-        <li className="title">Pro Version Features</li>
-        <li>2+ premade home pages</li>
-        <li>20+ html pages</li>
-        <li>Color Plate With 12+ Colors</li>
-        <li>Sticky Header / Sticky Filters</li>
-        <li>Working Contact Form With Google Map</li>
-        <div className="button">
-            <a href="http://preview.themeforest.net/item/mediplus-medical-and-doctor-html-template/full_screen_preview/26665910?_ga=2.145092285.888558928.1591971968-344530658.1588061879" target="_blank" className="btn">Pro Version Demo</a>
-            <a href="https://themeforest.net/item/mediplus-medical-and-doctor-html-template/26665910" target="_blank" className="btn">Buy Pro Version</a>
-        </div>
-    </ul>
+                {/* Bouton pour ouvrir le chatbot */}
+                <a className="get-pro" onClick={openChatbot}>Ask me</a>
+                <li className="big-title">Pro Version Available on Themeforest</li>
+                <li className="title">Pro Version Features</li>
+                <li>2+ premade home pages</li>
+                <li>20+ html pages</li>
+                <li>Color Plate With 12+ Colors</li>
+                <li>Sticky Header / Sticky Filters</li>
+                <li>Working Contact Form With Google Map</li>
+
+                {/* Composant ChatBot */}
+                <Modal  show={isChatbotOpen} onHide={handleCloseModal} >
+                    
+                 
+                        <ChatBot closeChatbot={closeChatbot} />
+                  
+                </Modal>
+            </ul>
 <div>
     <NavbarParticipant/>
 </div>
