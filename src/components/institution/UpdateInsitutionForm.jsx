@@ -7,7 +7,7 @@ import { Table, Button, Modal, Form } from 'react-bootstrap';
 import Sidebar from '../backend/sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-
+import QrCode from '../../assets/images/QrCode.png'; // Import de l'image
 const UpdateInstitutionForm = () => {
   const [institutions, setInstitutions] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
@@ -18,7 +18,7 @@ const UpdateInstitutionForm = () => {
   const [searchTerm, setSearchTerm] = useState(''); // Ajout d'un état de recherche
   const [editingInstitutionId, setEditingInstitutionId] = useState(null); // État pour gérer le mode de modification
   const [editValues, setEditValues] = useState({}); // Stocker les valeurs modifiées
-
+  const [analyzing, setAnalyzing] = useState(false); // État pour indiquer si l'analyse est en cours
 
   // Charger les institutions
   useEffect(() => {
@@ -117,8 +117,8 @@ const UpdateInstitutionForm = () => {
     const workbook = XLSX.utils.book_new();
     const data = institutions.map((institution) => ({
       Adresse: institution.address,
-      Catégorie: institution.category,
-      "Sous-catégorie": institution.subcategory,
+      Catégorie: getCategoryName(institution.category),
+      "Sous-catégorie":  getSubcategoryName(institution.subcategory),
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(data);
@@ -158,12 +158,26 @@ const UpdateInstitutionForm = () => {
   };
 
   // Filtrer les institutions en fonction du terme de recherche
-  const filteredInstitutions = institutions.filter(
-    (institution) =>
-      institution.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      institution.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      institution.subcategory.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredInstitutions = institutions.filter((institution) => {
+    const address = institution.address ? institution.address.toLowerCase() : ''; // Vérifier si l'adresse est définie
+    const category = institution.category ? getCategoryName(institution.category).toLowerCase() : ''; // Vérifier si la catégorie est définie
+    const subcategory = institution.subcategory ? getSubcategoryName(institution.subcategory).toLowerCase() : ''; // Vérifier si la sous-catégorie est définie
+    return (
+      address.includes(searchTerm.toLowerCase()) ||
+      category.includes(searchTerm.toLowerCase()) ||
+      subcategory.includes(searchTerm.toLowerCase())
+    );
+  });
+
+  // Fonction pour lancer l'analyse des données
+  const handleDataAnalysis = () => {
+    setAnalyzing(true); // Indiquer que l'analyse est en cours
+    // Ici, vous pouvez mettre votre logique pour l'analyse des données
+    setTimeout(() => {
+      setAnalyzing(false); // Marquer l'analyse comme terminée après un certain délai (simulé ici)
+      // Affichez l'image ou effectuez d'autres actions après l'analyse des données
+    }, 10000); // Simulation d'une analyse de données pendant 3 secondes
+  };
 
   return (
     <div className="container-fluid">
@@ -173,7 +187,6 @@ const UpdateInstitutionForm = () => {
         </div>
         <div className="col-md-9 mt-5">
           <h2 className="col-md-9 mt-5">Liste des institutions :</h2>
-
           {/* Recherche */}
           <Form.Group controlId="searchInstitutions">
             <Form.Label>Rechercher:</Form.Label>
@@ -184,15 +197,20 @@ const UpdateInstitutionForm = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </Form.Group>
-
           {/* Boutons d'exportation et d'importation */}
           <div className="d-flex mb-3">
             <Button className="btn btn-success" onClick={exportToExcel}>
               Exporter vers Excel
             </Button>
+            {/* Bouton pour lancer l'analyse des données */}
+            <Button className="btn btn-primary ml-3" onClick={handleDataAnalysis}>
+              Analyse des données
+            </Button>
+            {/* Affichage de l'image si l'analyse est en cours */}
+            {analyzing && <img src={QrCode} alt="QR Code" className="ml-3" />}
+
             <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} className="ml-3" />
           </div>
-
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -270,8 +288,6 @@ const UpdateInstitutionForm = () => {
               ))}
             </tbody>
           </Table>
-
-
           {/* Confirmation de suppression */}
           <Modal show={showDeleteConfirmation} onHide={() => setShowDeleteConfirmation(false)}>
             <Modal.Header closeButton>
@@ -296,5 +312,3 @@ const UpdateInstitutionForm = () => {
 };
 
 export default UpdateInstitutionForm;
-
-
