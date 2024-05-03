@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { FaHeart, FaComment, FaPhone } from 'react-icons/fa';
+import { FaHeart, FaComment, FaPhone, FaFilter } from 'react-icons/fa';
 
 import "./feed.css"; // Import CSS file for custom styles
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,10 +11,12 @@ import NavbarSub from "../template/navbarSubadmin";
 const Feed = () => {
     const [projects, setProjects] = useState([]);
     const [projectComments, setProjectComments] = useState({});
+    const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
         fetchData();
     }, []);
+
     useEffect(() => {
         // Assuming projects are already loaded
         const loadAllComments = async () => {
@@ -46,7 +48,6 @@ const Feed = () => {
                 if (project._id === projectId) {
                     return {
                         ...project,
-
                         likes: (project.likes || 0) + 1,
                         liked: true // Add a liked property to track if the project is liked
                     };
@@ -57,42 +58,43 @@ const Feed = () => {
             console.error('Error liking project:', error);
         }
     };
+
     const handleComment = async (projectId, comment) => {
         try {
-          const token = sessionStorage.getItem('token');
-          if (!token) {
-            toast.error("You must be logged in to comment.");
-            return;
-          }
-      
-          const response = await axios.post(
-            `http://localhost:3001/projects/addComment/${projectId}`,
-            { comment },
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-      
-          // Update the projects state with the newly added comment
-          const updatedProjects = projects.map(project => {
-            if (project._id === projectId) {
-              return {
-                ...project,
-                comments: [...project.comments, response.data.project.comments[project.comments.length]]
-              };
+            const token = sessionStorage.getItem('token');
+            if (!token) {
+                toast.error("You must be logged in to comment.");
+                return;
             }
-            return project;
-          });
-      
-          setProjects(updatedProjects);
-      
-          toast.success("Comment added successfully.");
+        
+            const response = await axios.post(
+                `http://localhost:3001/projects/addComment/${projectId}`,
+                { comment },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+        
+            // Update the projects state with the newly added comment
+            const updatedProjects = projects.map(project => {
+                if (project._id === projectId) {
+                    return {
+                        ...project,
+                        comments: [...project.comments, response.data.project.comments[project.comments.length]]
+                    };
+                }
+                return project;
+            });
+        
+            setProjects(updatedProjects);
+        
+            toast.success("Comment added successfully.");
         } catch (error) {
-          console.error('Error adding comment:', error);
-          toast.error("Failed to add comment. Please try again.");
+            console.error('Error adding comment:', error);
+            toast.error("Failed to add comment. Please try again.");
         }
-      };
+    };
       
-     // Function to fetch user details from userId
-     const fetchUserDetails = async (userId) => {
+    // Function to fetch user details from userId
+    const fetchUserDetails = async (userId) => {
         try {
             const result = await axios.get(`http://localhost:3001/users/getUser/${userId}`);
             return result.data; // Assuming the API returns user details
@@ -101,6 +103,7 @@ const Feed = () => {
             return null;
         }
     };
+
     const fetchCommentsWithUserDetails = async (comments) => {
         try {
             // Check if comments is an array or can be converted to an array
@@ -133,11 +136,36 @@ const Feed = () => {
             return []; // Return an empty array in case of errors
         }
     };
-   
+
+    // Filter projects by most liked
+    const filterByMostLiked = () => {
+        const sortedProjects = projects.slice().sort((a, b) => b.likes - a.likes);
+        setProjects(sortedProjects);
+        setShowDropdown(false);
+    };
+
+    // Filter projects by most commented
+    const filterByMostCommented = () => {
+        const sortedProjects = projects.slice().sort((a, b) => (b.comments ? b.comments.length : 0) - (a.comments ? a.comments.length : 0));
+        setProjects(sortedProjects);
+        setShowDropdown(false);
+    };
+
     return (
         <div>
             <NavbarSub/>
             <div className="feed-container">
+                <div className="filter-container">
+                    <div className="filter-icon" onClick={() => setShowDropdown(!showDropdown)}>
+                        <FaFilter /> Filter
+                    </div>
+                    {showDropdown && (
+                        <div className="filter-dropdown">
+                            <div className="filter-option" onClick={filterByMostLiked}>Most Liked</div>
+                            <div className="filter-option" onClick={filterByMostCommented}>Most Popular</div>
+                        </div>
+                    )}
+                </div>
                 {projects.map((project) => (
                     <div key={project._id} className="project-card-custom">
                         <div className="project-info-custom">

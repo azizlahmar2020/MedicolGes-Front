@@ -147,3 +147,45 @@
 .comment-card .comment-content {
   flex-grow: 1;
 }
+/* feed.css */
+
+/* Filter container */
+.filter-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Filter icon */
+.filter-icon {
+  background-color: transparent;
+  color: #0e90ae;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left:1020px !important ;
+}
+
+/* Filter dropdown */
+.filter-dropdown {
+  position: absolute;
+  top: 40px; /* Adjust the distance from the icon */
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+/* Filter options */
+.filter-option {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Hover effect for filter options */
+.filter-option:hover {
+  background-color: #f2f2f2;
+}
+
+/* feed.css */
+

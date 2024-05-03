@@ -1,7 +1,7 @@
 import React from "react";
 import { Page, Text, View, Document, StyleSheet, Image } from "@react-pdf/renderer";
 import { FaAlignLeft, FaCode, FaUser } from "react-icons/fa";
-import logo from "../../assets/img/logomedicol.png";
+import logo from "../../assets/img/logom.png";
 import descriptionImg from "../../assets/img/description.png";
 import responsableImg from "../../assets/img/respo.png";
 import nomImg from "../../assets/img/nom.png";
@@ -25,9 +25,8 @@ const styles = StyleSheet.create({
     height: 80,
     marginBottom: 5,
     marginTop: 10,
-    position:"center",
-    marginLeft : 40
-
+    position: "center",
+    marginLeft: 20
   },
   section: {
     margin: 10,
@@ -38,10 +37,10 @@ const styles = StyleSheet.create({
     boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
   },
   header: {
-    textAlign:"center",
+    textAlign: "center",
     fontSize: 20,
     marginBottom: 40,
-    marginTop:60,
+    marginTop: 60,
     marginLeft: 60,
     color: "#333333"
   },
@@ -52,8 +51,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,
-    fontSize:16,
-    marginLeft : 40
+    fontSize: 16,
+    marginLeft: 40
 
   },
   value: {
@@ -61,8 +60,8 @@ const styles = StyleSheet.create({
     color: "#333333",
     flexDirection: "row",
     alignItems: "center",
-    fontSize:14,
-    marginLeft : 60
+    fontSize: 14,
+    marginLeft: 60
 
   },
   icon: {
@@ -85,10 +84,8 @@ const ProjectPdf = ({ projectDetails }) => (
       <View style={styles.section}>
         <View style={styles.logoContainer}>
           <Image src={logo} style={styles.logo} />
-          <View style={styles.titleContainer}>
-            <Text style={styles.header}>Project {projectDetails.nom} Details</Text>
-          </View>
         </View>
+        <Text style={styles.header}>Project {projectDetails.nom} Details</Text>
         <View style={styles.content}>
           <View style={styles.tableRow}>
             <Text style={[styles.label, styles.icon]}><Image src={nomImg} style={styles.img} /> Name : </Text>

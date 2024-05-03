@@ -52,8 +52,8 @@ const Navbar = () => {
                             </div>
                             <div className="col-lg-2 col-12">
                                 <div className="get-quote">
-                                    <a href="appointment.html" className="btn" style={{backgroundColor:'#0E90AE',marginTop:'12px', fontSize:'18px',
-                                    borderRadius:'4px', width:'200px', height:'40px', paddingTop:'5px', marginLeft:'-14px'}}>Book Appointment</a>
+                                    <a href="/self-diagnosis" className="btn" style={{backgroundColor:'#0E90AE',marginTop:'8px', fontSize:'18px',
+                                    borderRadius:'4px', width:'200px', height:'40px', paddingTop:'5px', marginLeft:'-14px'}}>Explore Symptoms</a>
                                 </div>
                             </div>
                         </div>
